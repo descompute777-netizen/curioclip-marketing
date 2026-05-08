@@ -1,0 +1,32 @@
+1
+00:00:00,000 --> 00:00:04,299
+Metió su mano en plomo fundido a 327 grados Celsius.
+
+2
+00:00:04,299 --> 00:00:09,700
+Esto parece imposible, pero un fenómeno físico llamado Efecto Leidenfrost lo hace posible.
+
+3
+00:00:09,700 --> 00:00:16,899
+Cuando mojas tu mano con agua y la introduces rápidamente, la humedad crea una barrera de vapor que te protege por una fracción de segundo.
+
+4
+00:00:16,899 --> 00:00:21,900
+Es el mismo principio por el que una gota de agua, baila, sobre una sartén caliente.
+
+5
+00:00:21,900 --> 00:00:25,400
+Importante, esto solo funciona por milisegundos.
+
+6
+00:00:25,400 --> 00:00:29,600
+Intentarlos sin conocimiento puede causar quemaduras de tercer grado.
+
+7
+00:00:29,700 --> 00:00:31,900
+La física es increíble.
+
+8
+00:00:31,900 --> 00:00:34,399
+¿Qué experimento quieres que explique?
+

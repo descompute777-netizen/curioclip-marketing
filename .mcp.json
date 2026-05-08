@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "description": "Pensamiento Secuencial — razonamiento estructurado paso a paso"
+    },
+    "context7": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@upstash/context7-mcp"],
+      "description": "Context7 — documentación actualizada de librerías para LLMs"
+    },
+    "composio-tiktok": {
+      "type": "sse",
+      "url": "https://mcp.composio.dev/composio/mcp?apiKey=ck_NcIb61zkczdt9WOrGTYQ",
+      "description": "Composio MCP — TikTok (requiere conectar TikTok en app.composio.dev/settings/connected_accounts)"
+    },
+    "tiktok-ads-pipeboard": {
+      "type": "sse",
+      "url": "https://tiktok-ads.mcp.pipeboard.co/",
+      "description": "TikTok Ads MCP via Pipeboard — campañas y analytics de ads"
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "project": {
+    "name": "CurioClip — Agencia Marketing IA",
+    "version": "1.0.0",
+    "goal": "0 → 10K seguidores + 100K reproducciones en 90 días",
+    "account_name": "CurioClip",
+    "platform_primary": "TikTok",
+    "platform_secondary": "Facebook"
+  },
+  "placeholders": {
+    "NOMBRE_CUENTA": "CurioClip",
+    "NICHO": "Curiosidades, datos curiosos, sabías que, cultura general — espectro amplio",
+    "IDIOMA": "Español (LATAM + España)",
+    "AUDIENCIA": "13-35 años, curiosos, scroll-heavy, buscadores de entretenimiento educativo rápido",
+    "TONO": "Asombroso, rápido, visual, hook instantáneo — 'No vas a creer esto'",
+    "PRESUPUESTO_USD": "0 (hasta primer viral 100K+ o 5K seguidores)",
+    "FECHA_INICIO": "2026-05-06"
+  },
+  "engines": {
+    "mirofish": {
+      "enabled": true,
+      "repo": "https://github.com/666ghj/MiroFish",
+      "default_agent_count": 2000,
+      "default_simulation_hours": 72,
+      "llm_backend": "gemini-2.5-flash (via OpenAI-compatible endpoint)",
+      "llm_configured": true,
+      "role": "Simulación social — predice propagación y viralidad"
+    },
+    "visualeyes": {
+      "enabled": true,
+      "url": "https://visualeyes.design",
+      "cost": "FREE",
+      "role": "Eye-tracking simulado — predice atención por frame (reemplaza TRIBE v2)",
+      "replaces": "TRIBE v2 (licencia NC incompatible + requiere GPU pesada)"
+    },
+    "microsoft_clarity": {
+      "enabled": true,
+      "url": "https://clarity.microsoft.com",
+      "cost": "FREE",
+      "role": "Heatmaps post-publicación + validación de predicciones"
+    },
+    "tiktok_analytics": {
+      "enabled": true,
+      "cost": "FREE (cuenta Pro)",
+      "role": "Retención real segundo-a-segundo + calibración del V-Score"
+    },
+    "miro": {
+      "enabled": true,
+      "api_token": "<<<PENDIENTE>>>",
+      "board_id": "<<<PENDIENTE>>>",
+      "role": "Dashboard visual de estrategia y simulación"
+    },
+    "meta_ads_mcp": {
+      "enabled": true,
+      "url": "https://mcp.facebook.com/ads",
+      "status": "beta_publica",
+      "lanzado": "29 abril 2026",
+      "herramientas": 29,
+      "auth": "OAuth_Meta_Business_Suite",
+      "cost": "Gratis (beta)",
+      "role": "Campanas Meta Ads + publicacion organica + insights. M5 PUBLISH + M6 LEARN.",
+      "api_token": "<<<PENDIENTE>>>",
+      "server": "src/mcp_servers/meta_ads_server.py"
+    },
+    "tiktok_mcp": {
+      "enabled": true,
+      "providers": ["Composio", "Pipeboard"],
+      "status": "API keys configuradas — pendiente conectar TikTok OAuth en Composio dashboard",
+      "composio_api_key": "CONFIGURADA (ver .env)",
+      "composio_mcp_url": "https://mcp.composio.dev/composio/mcp",
+      "pipeboard_mcp_url": "https://tiktok-ads.mcp.pipeboard.co/",
+      "tiktok_oauth_pending": true,
+      "accion_requerida": "Ir a app.composio.dev/settings/connected_accounts → conectar TikTok",
+      "role": "Analytics TikTok (M1 DISCOVER + M6 LEARN) + Content Posting (M5 PUBLISH)",
+      "server": "src/mcp_servers/tiktok_mcp_server.py"
+    },
+    "higgsfield": {
+      "enabled": false,
+      "url": "https://higgsfield.ai",
+      "status": "REAL — lanzado abril 2026",
+      "api_key": "<<<PENDIENTE>>>",
+      "role": "Generacion de video AI (text-to-video, image-to-video). M3 PRODUCE.",
+      "cost": "Consultar en higgsfield.ai/pricing",
+      "fallback": "CapCut (gratis, manual) o FFmpeg (script via Claude Code)",
+      "server": "src/mcp_servers/higgsfield_server.py"
+    },
+    "canva_mcp": {
+      "enabled": true,
+      "status": "REAL — conectado nativo en Claude",
+      "role": "Thumbnails, posts, assets visuales. M3 PRODUCE.",
+      "cost": "Incluido en plan Claude"
+    }
+  },
+  "vscore": {
+    "weights": {
+      "visualeyes_attention": 0.35,
+      "mirofish_spread": 0.3,
+      "mirofish_sentiment": 0.2,
+      "hook_rate_predicted": 0.15
+    },
+    "thresholds": {
+      "green": 8.0,
+      "yellow": 6.0,
+      "red_below": 6.0
+    },
+    "note": "TRIBE v2 reemplazado por VisualEyes (gratis, sin licencia NC, funcional)"
+  },
+  "sprint": {
+    "duration_days": 7,
+    "videos_per_sprint_initial": 5,
+    "videos_per_sprint_target": 10,
+    "daily_standup_time": "09:00",
+    "sprint_start_day": "Monday",
+    "sprint_close_day": "Friday"
+  },
+  "pipeline": {
+    "nivel_autonomia": 3,
+    "umbral_minimo_score": 60,
+    "discovery_days_lookback": 7,
+    "calibrated_after_n_videos": 20,
+    "nota": "Nivel 3 = Claude produce drafts + agenda en pausa. Usuario aprueba con 1 clic."
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "lastUpdated": "2026-05-08",
+  "weeks": [
+    {
+      "id": "semana_01",
+      "label": "Semana 1 (Sprint 1)",
+      "dateRange": "2026-05-06 → 2026-05-12",
+      "avgVScore": 7.88,
+      "days": [
+        {
+          "dayName": "Lunes",
+          "date": "2026-05-12",
+          "subNicheTheme": "Comparación absurda",
+          "slots": [
+            {
+              "time": "12:30",
+              "platform": "TikTok",
+              "subNiche": "Comparación",
+              "title": "V2: Bacterias vs Galaxia",
+              "status": "draft",
+              "vScore": null,
+              "day": "Lunes",
+              "caption": "Tu cuerpo tiene 38 BILLONES de bacterias — más que estrellas en la Vía Láctea.",
+              "hashtags": ["#cuerpohumano", "#ciencia", "#bacterias", "#galaxia", "#datoscuriosos", "#curioclip"],
+              "thumbnail": null
+            }
+          ]
+        },
+        {
+          "dayName": "Martes",
+          "date": "2026-05-13",
+          "subNicheTheme": "Sabías que",
+          "slots": [
+            {
+              "time": "19:30",
+              "platform": "TikTok",
+              "subNiche": "Sabías que",
+              "title": "V1: Medusa Inmortal",
+              "status": "draft",
+              "vScore": null,
+              "day": "Martes",
+              "caption": "Existe un animal en el océano que es literalmente INMORTAL — la Turritopsis dohrnii.",
+              "hashtags": ["#sabiasque", "#curiosidades", "#medusa", "#inmortal", "#ciencia", "#curioclip"],
+              "thumbnail": null
+            }
+          ]
+        },
+        {
+          "dayName": "Miércoles",
+          "date": "2026-05-14",
+          "subNicheTheme": "Misterio sin resolver",
+          "slots": [
+            {
+              "time": "20:00",
+              "platform": "TikTok",
+              "subNiche": "Misterio",
+              "title": "V3: Señal Radio Rusa UVB-76",
+              "status": "draft",
+              "vScore": null,
+              "day": "Miércoles",
+              "caption": "Esta señal lleva 50 AÑOS sonando y nadie sabe por qué — UVB-76.",
+              "hashtags": ["#misterio", "#sinresolver", "#rusia", "#radio", "#datoscuriosos", "#curioclip"],
+              "thumbnail": null
+            }
+          ]
+        },
+        {
+          "dayName": "Jueves",
+          "date": "2026-05-15",
+          "subNicheTheme": "Cultura WTF",
+          "slots": [
+            {
+              "time": "12:30",
+              "platform": "TikTok",
+              "subNiche": "Cultura",
+              "title": "V4: Leyes Absurdas del Mundo",
+              "status": "draft",
+              "vScore": null,
+              "day": "Jueves",
+              "caption": "En Pocatello, Idaho es ILEGAL no sonreír en público.",
+              "hashtags": ["#leyesabsurdas", "#paises", "#cultura", "#datoscuriosos", "#curioclip"],
+              "thumbnail": null
+            }
+          ]
+        },
+        {
+          "dayName": "Viernes",
+          "date": "2026-05-09",
+          "subNicheTheme": "Ciencia WTF",
+          "slots": [
+            {
+              "time": "20:00",
+              "platform": "TikTok",
+              "subNiche": "Ciencia WTF",
+              "title": "V5: Plomo Fundido (Efecto Leidenfrost)",
+              "status": "published",
+              "vScore": 7.88,
+              "decision": "🟡 YELLOW → GO",
+              "day": "Viernes",
+              "caption": "Sabias que puedes meter la mano en METAL LIQUIDO sin quemarte? El efecto Leidenfrost crea una barrera de vapor que te protege por una fraccion de segundo.",
+              "hashtags": ["#ciencia", "#fisica", "#datoscuriosos", "#sabiasque", "#curioclip", "#experimento"],
+              "thumbnail": "/thumbnails/V5_thumbnail.png",
+              "predictedMetrics": { "hookRate": 75, "saveRate": 6, "shareRate": 6 },
+              "realMetrics": { "views": 29, "likes": 0, "saves": 0 }
+            }
+          ]
+        },
+        { "dayName": "Sábado", "date": "2026-05-10", "subNicheTheme": "Recap", "slots": [] },
+        { "dayName": "Domingo", "date": "2026-05-11", "subNicheTheme": "Best of", "slots": [] }
+      ]
+    },
+    {
+      "id": "semana_02",
+      "label": "Semana 2 (Sprint 2)",
+      "dateRange": "2026-05-13 → 2026-05-19",
+      "avgVScore": 0,
+      "days": [
+        {
+          "dayName": "Lunes",
+          "date": "2026-05-13",
+          "subNicheTheme": "Ciencia WTF",
+          "slots": [
+            {
+              "time": "12:30",
+              "platform": "TikTok",
+              "subNiche": "Ciencia WTF",
+              "title": "Slot pendiente — Outlier Cloning Sprint 2",
+              "status": "pending",
+              "vScore": null,
+              "day": "Lunes",
+              "caption": null,
+              "hashtags": [],
+              "thumbnail": null
+            },
+            {
+              "time": "19:30",
+              "platform": "TikTok",
+              "subNiche": "Comparación",
+              "title": "Slot pendiente — Outlier Cloning Sprint 2",
+              "status": "pending",
+              "vScore": null,
+              "day": "Lunes",
+              "caption": null,
+              "hashtags": [],
+              "thumbnail": null
+            }
+          ]
+        },
+        {
+          "dayName": "Martes",
+          "date": "2026-05-14",
+          "subNicheTheme": "Misterio",
+          "slots": [
+            {
+              "time": "12:30",
+              "platform": "TikTok",
+              "subNiche": "Misterio",
+              "title": "Slot pendiente",
+              "status": "pending",
+              "vScore": null, "day": "Martes", "caption": null, "hashtags": [], "thumbnail": null
+            },
+            {
+              "time": "20:00",
+              "platform": "TikTok",
+              "subNiche": "Sabías que",
+              "title": "Slot pendiente",
+              "status": "pending",
+              "vScore": null, "day": "Martes", "caption": null, "hashtags": [], "thumbnail": null
+            }
+          ]
+        },
+        {
+          "dayName": "Miércoles",
+          "date": "2026-05-15",
+          "subNicheTheme": "Datos imposibles",
+          "slots": [
+            {
+              "time": "13:00",
+              "platform": "TikTok",
+              "subNiche": "Datos",
+              "title": "Slot pendiente",
+              "status": "pending",
+              "vScore": null, "day": "Miércoles", "caption": null, "hashtags": [], "thumbnail": null
+            },
+            {
+              "time": "20:30",
+              "platform": "TikTok",
+              "subNiche": "Datos",
+              "title": "Slot pendiente",
+              "status": "pending",
+              "vScore": null, "day": "Miércoles", "caption": null, "hashtags": [], "thumbnail": null
+            }
+          ]
+        },
+        {
+          "dayName": "Jueves",
+          "date": "2026-05-16",
+          "subNicheTheme": "Cultura WTF",
+          "slots": [
+            {
+              "time": "12:30",
+              "platform": "TikTok",
+              "subNiche": "Cultura",
+              "title": "Slot pendiente",
+              "status": "pending",
+              "vScore": null, "day": "Jueves", "caption": null, "hashtags": [], "thumbnail": null
+            },
+            {
+              "time": "20:00",
+              "platform": "TikTok",
+              "subNiche": "Leyes WTF",
+              "title": "Slot pendiente",
+              "status": "pending",
+              "vScore": null, "day": "Jueves", "caption": null, "hashtags": [], "thumbnail": null
+            }
+          ]
+        },
+        {
+          "dayName": "Viernes",
+          "date": "2026-05-17",
+          "subNicheTheme": "Comparación absurda",
+          "slots": [
+            {
+              "time": "13:00",
+              "platform": "TikTok",
+              "subNiche": "Comparación",
+              "title": "Slot pendiente",
+              "status": "pending",
+              "vScore": null, "day": "Viernes", "caption": null, "hashtags": [], "thumbnail": null
+            },
+            {
+              "time": "20:30",
+              "platform": "TikTok",
+              "subNiche": "Ciencia WTF",
+              "title": "Slot pendiente",
+              "status": "pending",
+              "vScore": null, "day": "Viernes", "caption": null, "hashtags": [], "thumbnail": null
+            }
+          ]
+        },
+        {
+          "dayName": "Sábado",
+          "date": "2026-05-18",
+          "subNicheTheme": "Recap / lifestyle",
+          "slots": [
+            {
+              "time": "11:00",
+              "platform": "TikTok",
+              "subNiche": "Recap",
+              "title": "Slot pendiente",
+              "status": "pending",
+              "vScore": null, "day": "Sábado", "caption": null, "hashtags": [], "thumbnail": null
+            }
+          ]
+        },
+        {
+          "dayName": "Domingo",
+          "date": "2026-05-19",
+          "subNicheTheme": "Best-of semana",
+          "slots": [
+            {
+              "time": "20:30",
+              "platform": "TikTok",
+              "subNiche": "Best of",
+              "title": "Slot pendiente",
+              "status": "pending",
+              "vScore": null, "day": "Domingo", "caption": null, "hashtags": [], "thumbnail": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

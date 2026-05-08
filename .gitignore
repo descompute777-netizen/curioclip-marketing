@@ -1,0 +1,74 @@
+# Secrets — NUNCA commitear
+.env
+.env.local
+**/.env
+**/.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.pytest_cache/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+dist/
+.vercel
+.turbo
+
+# Build outputs
+*.log
+.DS_Store
+Thumbs.db
+
+# Videos generados (pesados — usar Cloudflare R2 a futuro)
+**/SOURCE/source*.mp4
+**/SOURCE/broll_*.mp4
+**/SOURCE/golden_clip_raw.mp4
+**/OUTPUT/V*_final.mp4
+
+# Audio descargados
+**/audios_generados/*.mp3
+**/audios_generados/*.wav
+
+# Test artifacts
+*.png
+!**/thumbnails/*.png
+!**/OUTPUT/*_thumbnail.png
+!web/public/**
+
+# Whisper / IA models cache
+~/.cache/whisper/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+desktop.ini
+
+# Vendor heavy folders (third-party repos)
+vendor/MiroFish/.git/
+vendor/MiroFish/frontend/node_modules/
+vendor/MiroFish/backend/__pycache__/
+
+# Test scripts
+test_*.py
+check_*.py
+*.tmp
+*_test.png
+
+# Claude artifacts
+.agents/
+chrome-curioclip/
+
+# Subs temporales generados por ffmpeg
+subs_v5.srt
+subs_v5.ass

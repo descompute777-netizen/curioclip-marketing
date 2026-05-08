@@ -1,0 +1,49 @@
+name: Analytics + Calibration (every 2h)
+
+on:
+  schedule:
+    # Cada 2 horas (00, 02, 04, ..., 22 UTC)
+    - cron: '0 */2 * * *'
+  workflow_dispatch: {}  # permite trigger manual
+
+jobs:
+  analytics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Pull latest analytics state
+        env:
+          # Estas keys se cargan desde GitHub Secrets — configurar en el repo
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          # Nota: este workflow corre sin Chrome Bridge. Para analytics reales
+          # necesita TikTok API o que el usuario haga sync manual.
+          # Por ahora: solo procesa el estado existente y genera reportes.
+          python src/pipeline/calibrate_predictor.py || echo "Calibration skipped"
+        continue-on-error: true
+
+      - name: Generate weekly report
+        run: |
+          python src/pipeline/generate_weekly_report.py || echo "Report skipped"
+        continue-on-error: true
+
+      - name: Commit changes
+        run: |
+          git config user.name "CurioClip Bot"
+          git config user.email "bot@curioclip.local"
+          git add obsidian_vault/50_Analitica/ obsidian_vault/60_Aprendizaje/ web/data/ 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "chore: analytics + calibration update [skip ci]"
+          git push || echo "Push skipped (no permission or no changes)"

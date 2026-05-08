@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-video*)",
+      "Bash(npx create-video@latest*)",
+      "Bash(npx claude-mem*)",
+      "Bash(npx -y @modelcontextprotocol/server-sequential-thinking*)",
+      "Bash(npx -y @upstash/context7-mcp*)",
+      "Bash(agent-browser*)",
+      "Bash(yt-dlp*)",
+      "Bash(ffmpeg*)",
+      "Bash(graphify*)",
+      "Bash(python src/*)",
+      "Bash(python -m src.*)"
+    ]
+  },
+  "extraKnownMarketplaces": {
+    "superpowers": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": {
+    "superpowers@superpowers": true,
+    "superpowers-chrome@superpowers": true
+  }
+}

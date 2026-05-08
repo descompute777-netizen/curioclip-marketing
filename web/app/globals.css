@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  background: #0A0A0A;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.glow {
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.15);
+}
+
+.gradient-bg {
+  background: radial-gradient(ellipse at top, #1a1a2e 0%, #0a0a0a 60%);
+}
+
+.scrollbar-curio::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollbar-curio::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+.scrollbar-curio::-webkit-scrollbar-thumb {
+  background: #FFD700;
+  border-radius: 4px;
+}
