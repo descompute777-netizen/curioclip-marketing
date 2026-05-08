@@ -1,0 +1,5 @@
+{
+  "$schema": "https://agent-browser.dev/schema.json",
+  "headed": true,
+  "defaultTimeout": 30000
+}

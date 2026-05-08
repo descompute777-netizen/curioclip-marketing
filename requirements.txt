@@ -1,0 +1,10 @@
+# CurioClip — Agencia Marketing IA
+# Dependencias del proyecto principal
+
+requests>=2.31.0
+
+# Para MiroFish backend (self-hosted):
+# cd vendor/MiroFish/backend && pip install -r requirements.txt
+
+# NOTA: tribev2 NO se instala (licencia Non-Commercial incompatible)
+# Reemplazado por VisualEyes (gratis) + src/mcp_servers/visualeyes_server.py
