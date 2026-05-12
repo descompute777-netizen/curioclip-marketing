@@ -1,0 +1,7 @@
+vendor/
+obsidian_vault/
+src/
+config/
+*.pyc
+__pycache__/
+.env
