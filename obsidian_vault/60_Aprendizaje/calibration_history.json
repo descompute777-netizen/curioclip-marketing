@@ -1,0 +1,12 @@
+{
+  "runs": [
+    {
+      "timestamp": "2026-05-14T21:21:03.473841+00:00",
+      "status": "no_real_data_yet",
+      "n_simulations": 1,
+      "note": "Esperando primeros snapshots reales de TikTok analytics."
+    }
+  ],
+  "weights_history": [],
+  "current_weights": null
+}
