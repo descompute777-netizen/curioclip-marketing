@@ -13,9 +13,10 @@ VIDEO_CONFIG = {
     "voiceover": "V3_RadioRusa.mp3",
     "output_dir": str(SEMANA / "MIERCOLES" / "OUTPUT"),
 
-    # B-roll CC0 — términos: radio static, russia aerial, abandoned military building, mystery
+    # B-roll CC0 — fix analytics-scientist: frame 0 debe ser edificio misterioso,
+    # NO pantalla de radio estática (discrepancia visual-textual reduce VE_attention)
     "broll_plan": [
-        {"seg": "0-4",  "id": "5177397",  "duration": 4.0, "desc": "Radio estática — hook"},
+        {"seg": "0-4",  "id": "4666752",  "duration": 4.0, "desc": "Edificio abandonado oscuro — hook visual fuerte"},
         {"seg": "4-9",  "id": "3178847",  "duration": 5.0, "desc": "Mapa Rusia edificio"},
         {"seg": "9-15", "id": "4666752",  "duration": 6.0, "desc": "Edificio abandonado misterioso"},
         {"seg": "15-21","id": "5177397",  "duration": 6.0, "desc": "Interceptación de voz"},
