@@ -75,22 +75,56 @@ def main():
         page.screenshot(path="tiktok_after_upload.png", full_page=False)
         print("[OK] Screenshot post-upload: tiktok_after_upload.png")
 
-        # 4. Buscar el campo de caption
+        # 4. Buscar el campo de caption con selectors robustos
         print("[CAPTION] Llenando caption...")
-        try:
-            # TikTok caption es contenteditable div
-            caption_field = page.locator("[data-text='Add caption'], [contenteditable='true']").first
-            caption_field.wait_for(state="visible", timeout=10000)
-            caption_field.click()
-            time.sleep(1)
-            page.keyboard.press("Control+A")
-            page.keyboard.press("Delete")
-            time.sleep(0.5)
-            page.keyboard.type(CAPTION, delay=15)
-            time.sleep(2)
-            print("[OK] Caption llenado")
-        except Exception as e:
-            print(f"[WARN caption] {e}")
+        CAPTION_SELECTORS = [
+            ".DraftEditor-root [contenteditable='true']",
+            "[contenteditable='true'][data-contents='true']",
+            ".notranslate[contenteditable='true']",
+            "[placeholder*='caption' i]",
+            "[placeholder*='descripcion' i]",
+            "[contenteditable='true']",
+        ]
+        caption_filled = False
+        for selector in CAPTION_SELECTORS:
+            try:
+                field = page.locator(selector).first
+                field.wait_for(state="visible", timeout=5000)
+                field.scroll_into_view_if_needed()
+                field.click()
+                time.sleep(0.8)
+                # Limpiar con triple-click (selecciona todo el texto del campo)
+                field.click(click_count=3)
+                page.keyboard.press("Delete")
+                time.sleep(0.3)
+                # Escribir el caption en chunks para evitar timeouts
+                chunks = CAPTION.split("\n")
+                for i, chunk in enumerate(chunks):
+                    page.keyboard.type(chunk, delay=12)
+                    if i < len(chunks) - 1:
+                        page.keyboard.press("Shift+Enter")
+                        time.sleep(0.1)
+                time.sleep(1.5)
+                # Verificar que se escribio algo
+                filled = field.input_value() or field.inner_text()
+                if filled and len(filled.strip()) > 10:
+                    print(f"[OK] Caption llenado con selector: {selector}")
+                    caption_filled = True
+                    break
+                else:
+                    print(f"[RETRY] Selector {selector} no produjo texto, intentando siguiente...")
+            except Exception as e:
+                print(f"[TRY] {selector}: {e}")
+                continue
+
+        if not caption_filled:
+            print("[WARN caption] No se pudo inyectar caption automaticamente.")
+            print()
+            print("=" * 60)
+            print("ACCION MANUAL REQUERIDA — copia y pega este caption:")
+            print("=" * 60)
+            print(CAPTION)
+            print("=" * 60)
 
         page.screenshot(path="tiktok_ready_to_post.png", full_page=False)
         print("[OK] LISTO PARA PUBLICAR — screenshot: tiktok_ready_to_post.png")

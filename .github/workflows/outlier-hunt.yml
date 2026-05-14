@@ -1,0 +1,46 @@
+name: Outlier Cloning Dominical
+
+on:
+  schedule:
+    # Cada domingo 20:03 UTC — busca outliers para la semana siguiente
+    - cron: '3 20 * * 0'
+  workflow_dispatch: {}   # trigger manual también
+
+jobs:
+  outlier-hunt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic httpx
+
+      - name: Run Outlier Hunter Agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python scripts/autonomous/outlier_hunt.py
+
+      - name: Commit research outputs
+        run: |
+          git config user.name "CurioClip-Bot"
+          git config user.email "bot@curioclip.ai"
+          git add obsidian_vault/20_Investigacion/ obsidian_vault/30_Contenido/cola/
+          if git diff --staged --quiet; then
+            echo "No hay cambios"
+          else
+            git commit -m "feat(auto): Outlier Cloning [$(date +%Y-%m-%d)] [skip ci]"
+            git push
+          fi

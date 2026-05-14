@@ -1,0 +1,53 @@
+name: Sprint Semanal Autónomo
+
+on:
+  schedule:
+    # Cada lunes 09:07 UTC (evitar :00 para no chocar con picos de API)
+    - cron: '7 9 * * 1'
+  workflow_dispatch:
+    inputs:
+      sprint_override:
+        description: 'Sprint number override (optional)'
+        required: false
+
+jobs:
+  weekly-sprint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write   # necesario para git push
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install anthropic httpx
+
+      - name: Run Weekly Sprint Agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scripts/autonomous/weekly_sprint.py
+
+      - name: Commit vault changes
+        run: |
+          git config user.name "CurioClip-Bot"
+          git config user.email "bot@curioclip.ai"
+          git add obsidian_vault/
+          if git diff --staged --quiet; then
+            echo "No hay cambios para commitear"
+          else
+            git commit -m "feat(auto): Sprint semanal [$(date +%Y-%m-%d)] [skip ci]"
+            git push
+          fi

@@ -44,23 +44,42 @@ tags: [moc, indice, master]
 
 - **Meta:** 0 → 10K seguidores + 100K reproducciones
 - **Plazo:** 90 días (inicio: 2026-05-06, fin: 2026-08-03)
-- **Sprint actual:** 1 (Producción y Publicación — semana 2026-05-06/12)
-- **V-Score promedio:** Pendiente calibración (≥20 publicaciones)
-- **Videos en pipeline:** 5 guiones listos | V5 en producción (brief_V5.md)
-- **Publicación #1:** V5 Plomo Fundido → Viernes 2026-05-09, 20:00 CDMX
+- **Sprint actual:** 2 (semana 2026-05-13/19) — Pipeline cloud autónomo ACTIVO
+- **V-Score promedio:** Pendiente calibración (≥20 publicaciones reales)
+- **Videos producidos:** V5 ✅ publicado | V1-V4 en producción automatizada
+- **Sistema cloud:** GitHub Actions activo (weekly-sprint + outlier-hunt + analytics)
+- **CronJobs activos:** 3 (métricas diarias 10:07 | sprint lunes 09:03 | outlier domingo 20:03)
+
+## Automatización Cloud (2026-05-14)
+
+| Workflow | Trigger | Función |
+|---------|---------|--------|
+| `weekly-sprint.yml` | Lunes 09:07 UTC | weekly-orchestrator genera plan + 25 guiones |
+| `outlier-hunt.yml` | Domingo 20:03 UTC | outlier-hunter Fases 1-5 + cola de guiones |
+| `analytics.yml` | Cada 2h (07min) | calibración predictor + métricas diarias |
 
 ## Metodología Core
 
 - [[outlier_cloning]] — Protocolo Outlier Cloning 5 fases — Modo A (contenido original)
 - [[clip_mining]] — Pipeline Clip Mining multi-plataforma — Modo B (clips virales reales)
 - [[calendario_editorial]] — Horarios 2026 + regla "publicar 10-30 min antes del pico"
-- [[SEMANAS/SEMANA_01_2026-05-06_a_2026-05-12/BRIEFING_SEMANAL]] — Briefing semana activa
+- [[SEMANAS/SEMANA_01_2026-05-06_a_2026-05-12/BRIEFING_SEMANAL]] — Briefing Sprint 1
+- [[SEMANAS/SEMANA_02_2026-05-13_a_2026-05-19/BRIEFING_SEMANAL]] — Briefing Sprint 2 ← ACTIVO
 
-## Documentos Clave Sprint 1
+## Pipeline de Producción Automática
 
-- [[brief_V5]] — Brief completo de producción V5 (plomo fundido)
-- [[V5_plomo_vscore]] — V-Score heurístico 7.97/10 YELLOW → GO
-- [[compliance_V5_2026-05-06]] — Compliance: APROBADO CON CONDICIÓN
-- [[log_2026-05-06]] — Package de publicación manual V5
-- [[competidores]] — Matriz de 10 competidores del nicho
-- [[trend_2026-05-06]] — Tendencias algorítmicas y timing 2026
+- `src/pipeline/auto_editor_generic.py` — Editor genérico (generaliza V5)
+- `src/pipeline/produce_all.py` — Produce V1-V4 en secuencia
+- `configs/v{1-4}_*.py` — Configuraciones por video
+- `scripts/autonomous/weekly_sprint.py` — Agente cloud lunes
+- `scripts/autonomous/outlier_hunt.py` — Agente cloud domingo
+- `scripts/autonomous/daily_metrics.py` — Agente cloud cada 2h
+
+## Documentos Clave Sprint 1 → Sprint 2
+
+- [[brief_V5]] — Brief V5 (plomo fundido) — PRODUCIDO ✅
+- [[V5_plomo_vscore]] — V-Score 7.88/10 YELLOW → GO ✅ PUBLICADO
+- [[compliance_V5_2026-05-07_AUTO]] — Compliance APROBADO FULL ✅
+- [[sprint1_estado_completo]] — Pipeline 95% automatizado ✅
+- [[competidores]] — Matriz 10 competidores del nicho
+- Agentes Sprint 2 corriendo: outlier-hunter + analytics-scientist + viral-strategist + audience-psychologist
