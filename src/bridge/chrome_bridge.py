@@ -53,6 +53,7 @@ def launch_chrome():
         CHROME_PATH,
         f"--remote-debugging-port={CDP_PORT}",
         f"--user-data-dir={PROFILE_DIR}",
+        "--remote-allow-origins=*",
         "--no-first-run",
         "--no-default-browser-check",
         "https://www.tiktok.com/",
