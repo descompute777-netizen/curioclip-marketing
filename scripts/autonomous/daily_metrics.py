@@ -1,110 +1,107 @@
 """
-Agente Autónomo — Métricas Diarias + M6 LEARN
-================================================
-Llamado por GitHub Actions (mejorado en analytics.yml) cada 2h.
-Lee el estado actual → analytics-scientist analiza → actualiza vault.
-
-Requiere:
-  ANTHROPIC_API_KEY
+Agente Autónomo — Métricas Diarias
+====================================
+GitHub Actions: cada 2h (mejorado de analytics.yml).
+Motor: Gemini 2.5-Flash GRATIS.
 """
-import os
-import sys
-import datetime
+import os, sys, datetime
 from pathlib import Path
-
-try:
-    import anthropic
-except ImportError:
-    os.system("pip install anthropic -q")
-    import anthropic
 
 ROOT = Path(__file__).parent.parent.parent
 VAULT = ROOT / "obsidian_vault"
 AGENTS_DIR = ROOT / ".claude" / "agents"
+TODAY = datetime.date.today().isoformat()
+NOW = datetime.datetime.now().strftime("%Y-%m-%d %H:%M UTC")
+
+
+def call_llm(system: str, user: str, max_tokens: int = 4096) -> str:
+    gemini_key = os.environ.get("GEMINI_API_KEY")
+    if gemini_key:
+        try:
+            from openai import OpenAI
+            client = OpenAI(
+                api_key=gemini_key,
+                base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+            )
+            resp = client.chat.completions.create(
+                model="gemini-2.5-flash",
+                max_tokens=max_tokens,
+                messages=[{"role": "system", "content": system}, {"role": "user", "content": user}]
+            )
+            return resp.choices[0].message.content
+        except Exception as e:
+            print(f"[GEMINI] Falló: {e} → Anthropic fallback...")
+
+    anthropic_key = os.environ.get("ANTHROPIC_API_KEY")
+    if anthropic_key:
+        import anthropic
+        client = anthropic.Anthropic(api_key=anthropic_key)
+        resp = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=max_tokens,
+            system=system,
+            messages=[{"role": "user", "content": user}]
+        )
+        return resp.content[0].text
+
+    return f"[SIN LLM] Snapshot vacío — {NOW}"
 
 
 def read_analytics_state() -> str:
-    """Lee snapshots de métricas existentes."""
     parts = []
-
     analitica = VAULT / "50_Analitica"
     if analitica.exists():
-        snapshots = sorted(analitica.glob("*.md"))[-5:]
+        snapshots = sorted(analitica.glob("*.md"), reverse=True)[:3]
         for s in snapshots:
-            parts.append(f"=== {s.name} ===\n" + s.read_text(encoding="utf-8")[:1000])
+            parts.append(f"=== {s.name} ===\n{s.read_text(encoding='utf-8')[:800]}")
 
-    vscore_files = list((VAULT / "30_Contenido" / "simulaciones").glob("*vscore*.md")) \
-        if (VAULT / "30_Contenido" / "simulaciones").exists() else []
-    for v in vscore_files[-3:]:
-        parts.append(f"=== {v.name} ===\n" + v.read_text(encoding="utf-8")[:800])
+    vscore_dir = VAULT / "30_Contenido" / "simulaciones"
+    if vscore_dir.exists():
+        for v in sorted(vscore_dir.glob("*vscore*.md"), reverse=True)[:4]:
+            parts.append(f"=== {v.name} ===\n{v.read_text(encoding='utf-8')[:400]}")
 
-    return "\n\n".join(parts)[:6000]
+    pub_dir = VAULT / "40_Publicacion" / "logs"
+    if pub_dir.exists():
+        for p in sorted(pub_dir.glob("*.md"), reverse=True)[:2]:
+            parts.append(f"=== {p.name} ===\n{p.read_text(encoding='utf-8')[:400]}")
+
+    return "\n\n".join(parts)[:5000]
 
 
 def main():
-    today = datetime.date.today().isoformat()
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-    print(f"[START] Daily Metrics — {now}")
+    print(f"[START] Daily Metrics — {NOW}")
 
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        print("[SKIP] ANTHROPIC_API_KEY no configurada — generando snapshot vacío")
-        snapshot_path = VAULT / "50_Analitica" / f"{today}_auto.md"
-        snapshot_path.write_text(
-            f"---\nfecha: {today}\nagente: auto\nestado: sin_api_key\n---\n\n"
-            f"# Snapshot {today}\n\n> ANTHROPIC_API_KEY no configurada en GitHub Secrets.\n"
-            f"> Configurar en: github.com/repo/settings/secrets/actions\n",
-            encoding="utf-8"
-        )
-        return
-
-    client = anthropic.Anthropic(api_key=api_key)
     state = read_analytics_state()
-
     agent_file = AGENTS_DIR / "analytics-scientist.md"
-    if agent_file.exists():
-        system = agent_file.read_text(encoding="utf-8")
-        if "---" in system:
-            parts = system.split("---", 2)
-            system = parts[2].strip() if len(parts) >= 3 else system
-    else:
-        system = (
-            "Eres el analytics-scientist de CurioClip. Analizas métricas de TikTok/Facebook, "
-            "calculas V-Score, calibras el predictor y generas insights accionables."
-        )
+    system = agent_file.read_text(encoding="utf-8").split("---", 2)[-1].strip() \
+        if agent_file.exists() else (
+        "Eres el analytics-scientist de CurioClip. Analizas métricas de TikTok/Facebook, "
+        "calculas V-Score, calibras el predictor y generas insights accionables. "
+        "DISCLAIMER: margen de error ±15% hasta calibración (≥20 publicaciones)."
+    )
 
-    prompt = (
-        f"Análisis diario — {now}.\n\n"
-        f"Estado actual del vault (métricas y V-Scores existentes):\n{state}\n\n"
+    user = (
+        f"Análisis diario — {NOW}\n\n"
+        f"Estado vault:\n{state}\n\n"
         f"Genera:\n"
-        f"1. Snapshot de métricas del día (con los datos disponibles, indicar si son estimados)\n"
-        f"2. Estado de calibración del predictor V-Score\n"
-        f"3. Análisis M6 LEARN si hay videos publicados hace 24h o 72h\n"
+        f"1. Snapshot del día (datos disponibles, indica si son estimados)\n"
+        f"2. Estado calibración V-Score\n"
+        f"3. M6 LEARN si hay videos publicados hace 24h/72h\n"
         f"4. 3 insights accionables para el próximo contenido\n"
-        f"5. Alertas si algún KPI está por debajo del target\n\n"
-        f"IMPORTANTE: Si no hay datos reales de TikTok API disponibles, "
-        f"indicarlo claramente y basar análisis en predicciones V-Score existentes."
+        f"5. Alertas si KPIs por debajo de target\n\n"
+        f"Si no hay datos TikTok API: basar en predicciones V-Score y notar claramente."
     )
 
-    print(f"[API] Llamando analytics-scientist...")
-    response = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=4096,
-        system=system,
-        messages=[{"role": "user", "content": prompt}]
-    )
+    content = call_llm(system, user)
 
-    content = response.content[0].text
-
-    # Guardar snapshot diario
-    snapshot_path = VAULT / "50_Analitica" / f"{today}_auto.md"
+    snapshot_path = VAULT / "50_Analitica" / f"{TODAY}_auto.md"
     snapshot_path.write_text(
-        f"---\nfecha: {today}\nagente: analytics-scientist-cloud\nestado: auto\n---\n\n"
-        + content,
+        f"---\nfecha: {TODAY}\nhora: {NOW}\nagente: analytics-scientist-cloud\n"
+        f"motor: gemini-2.5-flash\nestado: auto\n---\n\n{content}",
         encoding="utf-8"
     )
-    print(f"[OK] Snapshot: {snapshot_path}")
-    print(f"[DONE] Daily metrics completado.")
+    print(f"[OK] Snapshot: {snapshot_path.name}")
+    print("[DONE] Daily metrics completado.")
 
 
 if __name__ == "__main__":

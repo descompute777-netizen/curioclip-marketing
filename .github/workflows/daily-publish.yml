@@ -1,0 +1,63 @@
+name: TikTok Daily Publisher
+
+# Publica en TikTok según el calendario editorial CurioClip.
+# Horarios CDMX → UTC (CDMX = UTC-6):
+#   Lun 12:00 CDMX = 18:00 UTC | Mar 19:00 CDMX = 01:00 UTC (+1d)
+#   Mié 20:00 CDMX = 02:00 UTC (+1d) | Jue 12:00 CDMX = 18:00 UTC
+#   Vie 20:00 CDMX = 02:00 UTC (+1d) | Sáb 12:00 CDMX = 18:00 UTC
+#   Dom 20:00 CDMX = 02:00 UTC (+1d)
+
+on:
+  schedule:
+    - cron: '0 18 * * 1'    # Lunes 12:00 CDMX
+    - cron: '0 1 * * 3'     # Martes 19:00 CDMX
+    - cron: '0 2 * * 4'     # Miércoles 20:00 CDMX
+    - cron: '0 18 * * 4'    # Jueves 12:00 CDMX
+    - cron: '0 2 * * 6'     # Viernes 20:00 CDMX
+    - cron: '0 18 * * 6'    # Sábado 12:00 CDMX
+    - cron: '0 2 * * 0'     # Domingo 20:00 CDMX
+  workflow_dispatch:
+    inputs:
+      force_guion_id:
+        description: 'Forzar publicación de un guión específico (ej: G04)'
+        required: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install composio-openai openai requests
+
+      - name: Publish to TikTok
+        env:
+          COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/autonomous/publish_tiktok.py
+
+      - name: Commit schedule update
+        run: |
+          git config user.name "CurioClip-Bot"
+          git config user.email "bot@curioclip.ai"
+          git add obsidian_vault/40_Publicacion/
+          if git diff --staged --quiet; then
+            echo "Sin cambios en schedule"
+          else
+            git commit -m "chore: published TikTok $(date +%Y-%m-%d-%H%M) [skip ci]"
+            git push
+          fi

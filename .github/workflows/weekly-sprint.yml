@@ -1,27 +1,30 @@
-name: Sprint Semanal Autónomo
+name: Sprint Semanal Autónomo — CurioClip
+
+# Motor: Gemini 2.5-Flash GRATIS (primario) | Anthropic Claude Haiku (fallback)
+# Pipeline completo: guiones → voiceover → video → GitHub Release → schedule TikTok
 
 on:
   schedule:
-    # Cada lunes 09:07 UTC (evitar :00 para no chocar con picos de API)
-    - cron: '7 9 * * 1'
+    - cron: '7 9 * * 1'    # Lunes 09:07 UTC
   workflow_dispatch:
     inputs:
-      sprint_override:
-        description: 'Sprint number override (optional)'
+      sprint_n:
+        description: 'Sprint number (optional override)'
         required: false
 
 jobs:
-  weekly-sprint:
+  sprint:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     permissions:
-      contents: write   # necesario para git push
+      contents: write
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Setup Python 3.11
         uses: actions/setup-python@v5
@@ -29,25 +32,82 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
-          pip install anthropic httpx
+          pip install openai anthropic edge-tts requests composio-openai static-ffmpeg
 
-      - name: Run Weekly Sprint Agent
+      - name: Install system dependencies (ffmpeg)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          ffmpeg -version | head -1
+
+      - name: Generate weekly scripts (Gemini FREE)
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           python scripts/autonomous/weekly_sprint.py
+
+      - name: Generate voiceovers (edge-tts GRATIS)
+        run: |
+          python scripts/autonomous/batch_voiceover.py || echo "Voiceover batch skipped"
+        continue-on-error: true
+
+      - name: Produce videos (ffmpeg + Pexels CC0)
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: |
+          python scripts/autonomous/cloud_produce.py || echo "Video production skipped"
+        continue-on-error: true
+
+      - name: Upload videos to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/autonomous/upload_release.py || echo "Release upload skipped"
+        continue-on-error: true
 
       - name: Commit vault changes
         run: |
           git config user.name "CurioClip-Bot"
           git config user.email "bot@curioclip.ai"
-          git add obsidian_vault/
+          git add obsidian_vault/ 2>/dev/null || true
           if git diff --staged --quiet; then
-            echo "No hay cambios para commitear"
+            echo "Sin cambios en vault"
           else
-            git commit -m "feat(auto): Sprint semanal [$(date +%Y-%m-%d)] [skip ci]"
+            git commit -m "feat(auto): Sprint semanal [$(date +%Y-%m-%d)] — Gemini [skip ci]"
             git push
           fi
+
+  # Job separado: analytics post-sprint
+  analytics:
+    runs-on: ubuntu-latest
+    needs: sprint
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install openai anthropic
+
+      - name: Daily metrics
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/autonomous/daily_metrics.py
+
+      - name: Commit analytics
+        run: |
+          git config user.name "CurioClip-Bot"
+          git config user.email "bot@curioclip.ai"
+          git add obsidian_vault/50_Analitica/ 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "chore: analytics Monday [skip ci]" && git push || true
