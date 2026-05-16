@@ -1,0 +1,27 @@
+
+============================================================
+AUTO-EDITOR: V1
+============================================================
+[WARN] SRT no encontrado: C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\30_Contenido\audios_generados\V1_Medusa.srt — subtítulos omitidos
+
+--- PASO 1: DESCARGAR B-ROLL ---
+  [SKIP] broll_4666749.mp4 ya existe
+  [SKIP] broll_6981032.mp4 ya existe
+  [SKIP] broll_4666752.mp4 ya existe
+  [SKIP] broll_3571264.mp4 ya existe
+  [SKIP] broll_4666749.mp4 ya existe
+
+--- PASO 2: COMPOSICIÓN FFMPEG ---
+  [FFMPEG] V1_final.mp4...
+  [OK] V1_final.mp4 → 9518 KB
+
+--- PASO 3: THUMBNAIL ---
+  [OK] V1_thumbnail.png
+
+============================================================
+COMPLETADO: V1
+  Video:     C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\SEMANAS\SEMANA_02_2026-05-13_a_2026-05-19\MARTES\OUTPUT\V1_final.mp4
+  Thumbnail: C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\SEMANAS\SEMANA_02_2026-05-13_a_2026-05-19\MARTES\OUTPUT\V1_thumbnail.png
+============================================================
+
+RESULT: C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\SEMANAS\SEMANA_02_2026-05-13_a_2026-05-19\MARTES\OUTPUT\V1_final.mp4

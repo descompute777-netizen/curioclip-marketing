@@ -162,7 +162,7 @@ def produce_video(cfg: dict) -> Path | None:
         filter_parts.append(
             f"[{i}:v]trim=duration={clip['duration']},setpts=PTS-STARTPTS,"
             f"scale={W}:{H}:force_original_aspect_ratio=increase,"
-            f"crop={W}:{H}[v{i}]"
+            f"crop={W}:{H},setsar=1[v{i}]"
         )
         concat_inputs.append(f"[v{i}]")
 
