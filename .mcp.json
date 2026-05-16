@@ -1,5 +1,15 @@
 {
   "mcpServers": {
+    "playwright": {
+      "command": "cmd",
+      "args": ["/c", "npx", "@playwright/mcp@latest", "--cdp-endpoint", "http://localhost:9222"],
+      "description": "Playwright MCP — Browser automation conectado al Chrome con sesiones activas (TikTok, Composio, Pexels). Permite click, fill, navigate, screenshot via accessibility tree."
+    },
+    "playwright-standalone": {
+      "command": "cmd",
+      "args": ["/c", "npx", "@playwright/mcp@latest", "--browser", "chrome", "--user-data-dir", "C:/Users/Nick/AppData/Local/chrome-curioclip"],
+      "description": "Playwright MCP standalone — Chrome con el perfil CurioClip (login guardado). Usar si la sesión CDP cae."
+    },
     "sequential-thinking": {
       "command": "cmd",
       "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
