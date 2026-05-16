@@ -1,0 +1,114 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e8]:
+      - link "TikTok for Developers" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - img "TikTok for Developers" [ref=e10]
+      - generic [ref=e12]:
+        - button [ref=e13] [cursor=pointer]:
+          - img [ref=e15]
+        - button [ref=e17] [cursor=pointer]:
+          - img [ref=e18]
+    - main [ref=e20]:
+      - img [ref=e23]
+    - contentinfo [ref=e28]:
+      - generic [ref=e29]:
+        - img "TikTok for Developers" [ref=e30]
+        - navigation [ref=e32]:
+          - generic [ref=e33]:
+            - generic [ref=e35]: Products
+            - generic [ref=e37]:
+              - list [ref=e38]:
+                - listitem [ref=e39]:
+                  - link "Share Kit" [ref=e40] [cursor=pointer]:
+                    - /url: /products/share-kit/
+                - listitem [ref=e41]:
+                  - link "Login Kit" [ref=e42] [cursor=pointer]:
+                    - /url: /products/login-kit/
+                - listitem [ref=e43]:
+                  - link "Content Posting API" [ref=e44] [cursor=pointer]:
+                    - /url: /products/content-posting-api/
+                - listitem [ref=e45]:
+                  - link "Research API" [ref=e46] [cursor=pointer]:
+                    - /url: /products/research-api/
+                - listitem [ref=e47]:
+                  - link "Display API" [ref=e48] [cursor=pointer]:
+                    - /url: /doc/display-api-get-started/
+              - list [ref=e49]:
+                - listitem [ref=e50]:
+                  - link "Embed Videos" [ref=e51] [cursor=pointer]:
+                    - /url: /doc/embed-videos/
+                - listitem [ref=e52]:
+                  - link "Data Portability API" [ref=e53] [cursor=pointer]:
+                    - /url: /products/data-portability-api/
+                - listitem [ref=e54]:
+                  - link "Green Screen Kit" [ref=e55] [cursor=pointer]:
+                    - /url: /products/share-kit#green-screen
+                - listitem [ref=e56]:
+                  - link "Commercial Content API" [ref=e57] [cursor=pointer]:
+                    - /url: /products/commercial-content-api
+          - generic [ref=e58]:
+            - generic [ref=e60]: Other platforms
+            - list [ref=e62]:
+              - listitem [ref=e63]:
+                - link "TikTok Embeds" [ref=e64] [cursor=pointer]:
+                  - /url: https://www.tiktok.com/embed
+              - listitem [ref=e65]:
+                - link "TikTok for Business" [ref=e66] [cursor=pointer]:
+                  - /url: https://www.tiktok.com/business
+              - listitem [ref=e67]:
+                - link "Advertise on TikTok" [ref=e68] [cursor=pointer]:
+                  - /url: https://www.tiktok.com/business/&attr_source=tt_official_site&attr_medium=tt_official_site_guidance
+              - listitem [ref=e69]:
+                - link "TikTok Creative Center" [ref=e70] [cursor=pointer]:
+                  - /url: https://ads.tiktok.com/business/creativecenter/
+              - listitem [ref=e71]:
+                - link "TikTok.com" [ref=e72] [cursor=pointer]:
+                  - /url: https://www.tiktok.com
+          - generic [ref=e73]:
+            - generic [ref=e75]: Company
+            - list [ref=e77]:
+              - listitem [ref=e78]:
+                - link "About TikTok" [ref=e79] [cursor=pointer]:
+                  - /url: https://www.tiktok.com/about
+              - listitem [ref=e80]:
+                - link "Newsroom" [ref=e81] [cursor=pointer]:
+                  - /url: https://newsroom.tiktok.com
+              - listitem [ref=e82]:
+                - link "Contact" [ref=e83] [cursor=pointer]:
+                  - /url: https://www.tiktok.com/about/contact
+              - listitem [ref=e84]:
+                - link "Careers" [ref=e85] [cursor=pointer]:
+                  - /url: https://careers.tiktok.com
+              - listitem [ref=e86]:
+                - link "ByteDance" [ref=e87] [cursor=pointer]:
+                  - /url: https://www.bytedance.com
+              - listitem [ref=e88]:
+                - link "Transparency Center" [ref=e89] [cursor=pointer]:
+                  - /url: https://www.tiktok.com/transparency
+      - generic [ref=e90]:
+        - generic [ref=e91]: © 2026 TikTok
+        - link "Terms of Service" [ref=e92] [cursor=pointer]:
+          - /url: https://www.tiktok.com/legal/page/global/tik-tok-developer-terms-of-service/en
+        - link "Privacy Policy" [ref=e93] [cursor=pointer]:
+          - /url: https://www.tiktok.com/legal/page/global/partner-privacy-policy/en
+        - link "Resources & Legal" [ref=e94] [cursor=pointer]:
+          - /url: "#site-footer"
+  - generic:
+    - generic:
+      - button "Open chat support" [ref=e95]:
+        - generic [ref=e96]:
+          - img "AI Assistant"
+      - dialog:
+        - banner:
+          - generic:
+            - img
+            - heading [level=4]: AI Assistant
+          - button:
+            - generic:
+              - img
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - img

@@ -1,0 +1,173 @@
+
+############################################################
+# PRODUCIENDO V2...
+############################################################
+
+============================================================
+AUTO-EDITOR: V2
+============================================================
+[WARN] SRT no encontrado: C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\30_Contenido\audios_generados\V2_Bacterias.srt — subtítulos omitidos
+
+--- PASO 1: DESCARGAR B-ROLL ---
+  [DL] https://www.pexels.com/download/video/3129671/ -> broll_3129671.mp4
+  [OK] 20282 KB
+  [DL] https://www.pexels.com/download/video/5377700/ -> broll_5377700.mp4
+  [OK] 32239 KB
+  [DL] https://www.pexels.com/download/video/3214460/ -> broll_3214460.mp4
+  [OK] 1025 KB
+  [SKIP] broll_3129671.mp4 ya existe
+  [SKIP] broll_5377700.mp4 ya existe
+
+--- PASO 2: COMPOSICIÓN FFMPEG ---
+  [FFMPEG] V2_final.mp4...
+  [OK] V2_final.mp4 → 3035 KB
+
+--- PASO 3: THUMBNAIL ---
+  [OK] V2_thumbnail.png
+
+============================================================
+COMPLETADO: V2
+  Video:     C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\SEMANAS\SEMANA_02_2026-05-13_a_2026-05-19\LUNES\OUTPUT\V2_final.mp4
+  Thumbnail: C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\SEMANAS\SEMANA_02_2026-05-13_a_2026-05-19\LUNES\OUTPUT\V2_thumbnail.png
+============================================================
+
+
+############################################################
+# PRODUCIENDO V1...
+############################################################
+
+============================================================
+AUTO-EDITOR: V1
+============================================================
+[WARN] SRT no encontrado: C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\30_Contenido\audios_generados\V1_Medusa.srt — subtítulos omitidos
+
+--- PASO 1: DESCARGAR B-ROLL ---
+  [DL] https://www.pexels.com/download/video/4666749/ -> broll_4666749.mp4
+  [OK] 1705 KB
+  [DL] https://www.pexels.com/download/video/6981032/ -> broll_6981032.mp4
+  [OK] 239 KB
+  [DL] https://www.pexels.com/download/video/4666752/ -> broll_4666752.mp4
+  [OK] 350 KB
+  [DL] https://www.pexels.com/download/video/3571264/ -> broll_3571264.mp4
+  [OK] 54724 KB
+  [SKIP] broll_4666749.mp4 ya existe
+
+--- PASO 2: COMPOSICIÓN FFMPEG ---
+  [FFMPEG] V1_final.mp4...
+  [FAIL] ffmpeg exit 4294967274
+sidian_vault\SEMANAS\SEMANA_02_2026-05-13_a_2026-05-19\MARTES\SOURCE\broll_4666749.mp4':
+  Duration: N/A, bitrate: N/A
+  Stream #4:0: Video: mjpeg (Progressive), yuvj420p(pc, bt470bg/unknown/unknown), 4608x3456 [SAR 72:72 DAR 4:3], 25 fps, 25 tbr, 25 tbn
+[mp3 @ 0000021d513fa740] Estimating duration from bitrate, this may be inaccurate
+Input #5, mp3, from 'C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\30_Contenido\audios_generados\V1_Medusa.mp3':
+  Duration: 00:00:29.45, start: 0.000000, bitrate: 48 kb/s
+  Stream #5:0: Audio: mp3 (mp3float), 24000 Hz, mono, fltp, 48 kb/s
+Stream mapping:
+  Stream #0:0 (mjpeg) -> trim:default
+  Stream #1:0 (mjpeg) -> trim:default
+  Stream #2:0 (mjpeg) -> trim:default
+  Stream #3:0 (h264) -> trim:default
+  Stream #4:0 (mjpeg) -> trim:default
+  drawtext:default -> Stream #0:0 (libx264)
+  Stream #5:0 -> #0:1 (mp3 (mp3float) -> aac (native))
+Press [q] to stop, [?] for help
+[Parsed_concat_20 @ 0000021d68d7fa80] Input link in0:v0 parameters (size 1080x1920, SAR 2953920:2953867) do not match the corresponding output link in0:v0 parameters (1080x1920, SAR 1:1)
+[Parsed_concat_20 @ 0000021d68d7fa80] Failed to configure output pad on Parsed_concat_20
+[fc#0 @ 0000021d4f556ac0] Error reinitializing filters!
+[fc#0 @ 0000021d4f556ac0] Task finished with error code: -22 (Invalid argument)
+[fc#0 @ 0000021d4f556ac0] Terminating thread with return code -22 (Invalid argument)
+[vost#0:0/libx264 @ 0000021d51720d00] [enc:libx264 @ 0000021d5114afc0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0000021d51720d00] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0000021d51720d00] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0000021d4f59f2c0] Nothing was written into output file, because at least one of its streams received no packets.
+frame=    0 fps=0.0 q=0.0 Lsize=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:01.25    
+[aac @ 0000021d514962c0] Qavg: 64541.078
+Conversion failed!
+
+
+############################################################
+# PRODUCIENDO V3...
+############################################################
+
+============================================================
+AUTO-EDITOR: V3
+============================================================
+[WARN] SRT no encontrado: C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\30_Contenido\audios_generados\V3_RadioRusa.srt — subtítulos omitidos
+
+--- PASO 1: DESCARGAR B-ROLL ---
+  [DL] https://www.pexels.com/download/video/4666752/ -> broll_4666752.mp4
+  [OK] 350 KB
+  [DL] https://www.pexels.com/download/video/3178847/ -> broll_3178847.mp4
+  [FAIL] HTTP 404 para video_id=3178847
+  [WARN] Omitiendo segmento 4-9 — descarga fallida
+  [SKIP] broll_4666752.mp4 ya existe
+  [DL] https://www.pexels.com/download/video/5177397/ -> broll_5177397.mp4
+  [FAIL] HTTP 404 para video_id=5177397
+  [WARN] Omitiendo segmento 15-21 — descarga fallida
+  [DL] https://www.pexels.com/download/video/3178847/ -> broll_3178847.mp4
+  [FAIL] HTTP 404 para video_id=3178847
+  [WARN] Omitiendo segmento 21-25 — descarga fallida
+  [DL] https://www.pexels.com/download/video/5177397/ -> broll_5177397.mp4
+  [FAIL] HTTP 404 para video_id=5177397
+  [WARN] Omitiendo segmento 25-28 — descarga fallida
+
+--- PASO 2: COMPOSICIÓN FFMPEG ---
+  [FFMPEG] V3_final.mp4...
+  [OK] V3_final.mp4 → 111 KB
+
+--- PASO 3: THUMBNAIL ---
+  [OK] V3_thumbnail.png
+
+============================================================
+COMPLETADO: V3
+  Video:     C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\SEMANAS\SEMANA_02_2026-05-13_a_2026-05-19\MIERCOLES\OUTPUT\V3_final.mp4
+  Thumbnail: C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\SEMANAS\SEMANA_02_2026-05-13_a_2026-05-19\MIERCOLES\OUTPUT\V3_thumbnail.png
+============================================================
+
+
+############################################################
+# PRODUCIENDO V4...
+############################################################
+
+============================================================
+AUTO-EDITOR: V4
+============================================================
+[WARN] SRT no encontrado: C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\30_Contenido\audios_generados\V4_LeyesAbsurdas.srt — subtítulos omitidos
+
+--- PASO 1: DESCARGAR B-ROLL ---
+  [DL] https://www.pexels.com/download/video/3571264/ -> broll_3571264.mp4
+  [OK] 54724 KB
+  [DL] https://www.pexels.com/download/video/3129671/ -> broll_3129671.mp4
+  [OK] 20282 KB
+  [DL] https://www.pexels.com/download/video/3178847/ -> broll_3178847.mp4
+  [FAIL] HTTP 404 para video_id=3178847
+  [WARN] Omitiendo segmento 8-13 — descarga fallida
+  [SKIP] broll_3571264.mp4 ya existe
+  [SKIP] broll_3129671.mp4 ya existe
+
+--- PASO 2: COMPOSICIÓN FFMPEG ---
+  [FFMPEG] V4_final.mp4...
+  [OK] V4_final.mp4 → 15074 KB
+
+--- PASO 3: THUMBNAIL ---
+  [OK] V4_thumbnail.png
+
+============================================================
+COMPLETADO: V4
+  Video:     C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\SEMANAS\SEMANA_02_2026-05-13_a_2026-05-19\JUEVES\OUTPUT\V4_final.mp4
+  Thumbnail: C:\Users\Nick\Desktop\AGENCIA DE MARKETING\obsidian_vault\SEMANAS\SEMANA_02_2026-05-13_a_2026-05-19\JUEVES\OUTPUT\V4_thumbnail.png
+============================================================
+
+
+============================================================
+PRODUCCIÓN COMPLETADA en 251s
+============================================================
+  ✅ V2: OK
+  ❌ V1: FAIL
+  ✅ V3: OK
+  ✅ V4: OK
+
+Próximo paso:
+  1. Revisar videos en obsidian_vault/SEMANAS/SEMANA_02_*/*/OUTPUT/
+  2. Ejecutar: python -m src.bridge.chrome_bridge launch
+  3. Subir cada video a TikTok Studio con publish_v5.py (adaptar ruta)

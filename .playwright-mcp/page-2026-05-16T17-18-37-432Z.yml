@@ -1,0 +1,136 @@
+- generic [active] [ref=e1]:
+  - main [ref=e3]:
+    - button "Toggle Sidebar" [ref=e5] [cursor=pointer]:
+      - img
+      - generic [ref=e6]: Toggle Sidebar
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - navigation "breadcrumb" [ref=e12]:
+          - list [ref=e13]:
+            - listitem [ref=e14]:
+              - link "Auth Configs" [ref=e15] [cursor=pointer]:
+                - /url: /descompute777_workspace/descompute777_workspace_first_project/auth-configs
+            - listitem [ref=e16]:
+              - img [ref=e17]
+            - listitem [ref=e19]:
+              - link "tiktok-meyelc" [disabled] [ref=e20]
+        - generic [ref=e21]:
+          - generic [ref=e22]:
+            - generic [ref=e23]:
+              - link "tiktok" [ref=e24] [cursor=pointer]:
+                - /url: /descompute777_workspace/descompute777_workspace_first_project/toolkits/tiktok
+                - img "tiktok" [ref=e26]
+              - generic [ref=e27]:
+                - generic [ref=e28]:
+                  - heading "tiktok-meyelc" [level=1] [ref=e29]
+                  - button [ref=e30] [cursor=pointer]:
+                    - img
+                - link "tiktok" [ref=e31] [cursor=pointer]:
+                  - /url: /descompute777_workspace/descompute777_workspace_first_project/toolkits/tiktok
+            - generic [ref=e32]:
+              - button "Connect Account" [ref=e33] [cursor=pointer]:
+                - img
+                - text: Connect Account
+              - link "Manage Config" [ref=e34] [cursor=pointer]:
+                - /url: /descompute777_workspace/descompute777_workspace_first_project/auth-configs/ac_zehMCGYPXa3C/manage
+                - button "Manage Config" [ref=e35]:
+                  - img
+                  - text: Manage Config
+              - button [ref=e36] [cursor=pointer]:
+                - img
+          - generic [ref=e37]:
+            - generic [ref=e38]:
+              - generic [ref=e39]: Status
+              - generic [ref=e40]: Enabled
+              - generic [ref=e41]: OAuth2
+            - generic [ref=e42]:
+              - generic [ref=e43]: Management
+              - generic [ref=e44]:
+                - img
+                - text: Custom
+            - generic:
+              - generic [ref=e45]: ID
+              - generic:
+                - generic: ac_zehMCGYPXa3C
+                - button [ref=e46] [cursor=pointer]:
+                  - img
+            - generic [ref=e47]:
+              - generic [ref=e48]: Created
+              - generic [ref=e49]: May 15, 2026
+      - tablist [ref=e51]:
+        - tab "Connected Accounts" [selected] [ref=e52]
+        - tab "Active Triggers" [ref=e53]
+      - tabpanel "Connected Accounts" [ref=e54]:
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - img [ref=e60]
+            - textbox "Search..." [ref=e63]
+          - generic [ref=e64]:
+            - img [ref=e65]
+            - generic [ref=e68]: "Auth Config:"
+            - generic [ref=e69]: ac_zehMCGYPXa3C
+          - combobox [ref=e70]:
+            - generic [ref=e71]: Status
+            - img
+          - combobox [ref=e72]:
+            - generic [ref=e73]: Newest first
+            - img
+        - table [ref=e76]:
+          - rowgroup [ref=e77]:
+            - row "Account ID User ID Triggers Status Connected" [ref=e78]:
+              - columnheader "Account ID" [ref=e79]
+              - columnheader "User ID" [ref=e80]
+              - columnheader "Triggers" [ref=e81]
+              - columnheader "Status" [ref=e82]
+              - columnheader "Connected" [ref=e83]
+              - columnheader [ref=e84]
+          - rowgroup [ref=e85]:
+            - row
+            - row "ca_l9ug_upOQA3p curioclip 0 Initializing 3m ago" [ref=e86]:
+              - cell "ca_l9ug_upOQA3p" [ref=e87]:
+                - generic [ref=e88]:
+                  - code [ref=e89]: ca_l9ug_upOQA3p
+                  - button [ref=e90] [cursor=pointer]:
+                    - img
+              - cell "curioclip" [ref=e91]:
+                - generic [ref=e92]:
+                  - code [ref=e93]: curioclip
+                  - link [ref=e94] [cursor=pointer]:
+                    - /url: /descompute777_workspace/descompute777_workspace_first_project/users/curioclip
+                    - img
+              - cell "0" [ref=e95]:
+                - generic [ref=e96]:
+                  - img [ref=e97]
+                  - text: "0"
+              - cell "Initializing" [ref=e99]:
+                - generic [ref=e100]: Initializing
+              - cell "3m ago" [ref=e101]:
+                - generic [ref=e102]: 3m ago
+              - cell [ref=e103]:
+                - button [ref=e104] [cursor=pointer]:
+                  - img
+            - row "ca_er2t7i6Oq57T curioclip 0 Dropped 22h ago" [ref=e105]:
+              - cell "ca_er2t7i6Oq57T" [ref=e106]:
+                - generic [ref=e107]:
+                  - code [ref=e108]: ca_er2t7i6Oq57T
+                  - button [ref=e109] [cursor=pointer]:
+                    - img
+              - cell "curioclip" [ref=e110]:
+                - generic [ref=e111]:
+                  - code [ref=e112]: curioclip
+                  - link [ref=e113] [cursor=pointer]:
+                    - /url: /descompute777_workspace/descompute777_workspace_first_project/users/curioclip
+                    - img
+              - cell "0" [ref=e114]:
+                - generic [ref=e115]:
+                  - img [ref=e116]
+                  - text: "0"
+              - cell "Dropped" [ref=e118]:
+                - generic [ref=e120]: Dropped
+              - cell "22h ago" [ref=e121]:
+                - generic [ref=e122]: 22h ago
+              - cell [ref=e123]:
+                - button [ref=e124] [cursor=pointer]:
+                  - img
+  - region "Notifications alt+T"
+  - alert [ref=e125]

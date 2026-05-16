@@ -1,0 +1,165 @@
+- generic:
+  - generic:
+    - main:
+      - generic:
+        - button:
+          - img
+          - generic: Toggle Sidebar
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - navigation:
+                  - list:
+                    - listitem:
+                      - link:
+                        - /url: /descompute777_workspace/descompute777_workspace_first_project/auth-configs
+                        - text: Auth Configs
+                    - listitem:
+                      - img
+                    - listitem:
+                      - link [disabled]: tiktok-meyelc
+                - generic:
+                  - generic:
+                    - generic:
+                      - link:
+                        - /url: /descompute777_workspace/descompute777_workspace_first_project/toolkits/tiktok
+                        - generic:
+                          - img
+                      - generic:
+                        - generic:
+                          - heading [level=1]: tiktok-meyelc
+                          - button:
+                            - img
+                        - link:
+                          - /url: /descompute777_workspace/descompute777_workspace_first_project/toolkits/tiktok
+                          - text: tiktok
+                    - generic:
+                      - button:
+                        - img
+                        - text: Connect Account
+                      - link:
+                        - /url: /descompute777_workspace/descompute777_workspace_first_project/auth-configs/ac_zehMCGYPXa3C/manage
+                        - button:
+                          - img
+                          - text: Manage Config
+                      - button:
+                        - img
+                  - generic:
+                    - generic:
+                      - generic: Status
+                      - generic: Enabled
+                      - generic: OAuth2
+                    - generic:
+                      - generic: Management
+                      - generic:
+                        - img
+                        - text: Custom
+                    - generic: ID
+                    - button:
+                      - img
+                    - generic:
+                      - generic: Created
+                      - generic: May 15, 2026
+              - generic:
+                - tablist:
+                  - tab [selected]: Connected Accounts
+                  - tab: Active Triggers
+              - tabpanel:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                          - textbox:
+                            - /placeholder: Search...
+                        - generic:
+                          - img
+                          - generic: "Auth Config:"
+                          - generic: ac_zehMCGYPXa3C
+                        - combobox:
+                          - generic: Status
+                          - img
+                        - combobox:
+                          - generic: Newest first
+                          - img
+                - generic:
+                  - generic:
+                    - table:
+                      - rowgroup:
+                        - row:
+                          - columnheader: Account ID
+                          - columnheader: User ID
+                          - columnheader: Triggers
+                          - columnheader: Status
+                          - columnheader: Connected
+                          - columnheader
+                      - rowgroup:
+                        - row
+                        - row:
+                          - cell:
+                            - generic:
+                              - code: ca_er2t7i6Oq57T
+                              - button:
+                                - img
+                          - cell:
+                            - generic:
+                              - code: curioclip
+                              - link:
+                                - /url: /descompute777_workspace/descompute777_workspace_first_project/users/curioclip
+                                - img
+                          - cell:
+                            - generic:
+                              - img
+                              - text: "0"
+                          - cell:
+                            - generic:
+                              - generic: Dropped
+                          - cell:
+                            - generic: 22h ago
+                          - cell:
+                            - button:
+                              - img
+  - region "Notifications alt+T"
+  - alert
+  - button:
+    - img
+  - iframe [ref=e120]:
+    - generic [active] [ref=f9e1]:
+      - generic [ref=f9e4]:
+        - generic [ref=f9e6]:
+          - button [ref=f9e7]:
+            - img [ref=f9e8]
+          - generic [ref=f9e11]:
+            - heading "New conversation" [level=3] [ref=f9e12]
+            - paragraph [ref=f9e13]: AI agent
+        - generic [ref=f9e16]:
+          - img [ref=f9e19]
+          - paragraph [ref=f9e21]: Hi joan 👋
+          - paragraph [ref=f9e22]: How can I help you today?
+        - generic [ref=f9e24]:
+          - textbox "Ask anything..." [ref=f9e25]
+          - button "Send message" [disabled] [ref=f9e26]:
+            - img [ref=f9e27]
+        - link "Powered by Decimal" [ref=f9e30] [cursor=pointer]:
+          - /url: https://decimal.app
+      - alert [ref=f9e31]
+  - dialog "tiktok Connect Account" [ref=e122]:
+    - generic [ref=e124]:
+      - heading "tiktok Connect Account" [level=2] [ref=e125]:
+        - img "tiktok" [ref=e127]
+        - text: Connect Account
+      - paragraph [ref=e128]: Create a test connection for tiktok-meyelc
+    - generic [ref=e130]:
+      - generic [ref=e131]:
+        - generic [ref=e132]: User ID
+        - textbox "User ID" [active] [ref=e133]:
+          - /placeholder: Enter a user ID
+          - text: pg-test-cce4eb0b-4ba2-4f75-82bf-2039da0b8430
+        - paragraph [ref=e134]: The identifier for the user this connection belongs to.
+      - button "Connect" [ref=e135] [cursor=pointer]
+    - button "Close" [ref=e136]:
+      - img
+      - generic [ref=e137]: Close

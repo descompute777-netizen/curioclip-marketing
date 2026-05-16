@@ -1,0 +1,24 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - img [ref=e10]
+        - generic [ref=e23]:
+          - img [ref=e25]
+          - img "toolkit icon" [ref=e28]
+      - generic [ref=e29]:
+        - heading "Composio wants to connect" [level=1] [ref=e30]
+        - heading "to your Tiktok" [level=1] [ref=e31]
+    - generic [ref=e33]:
+      - paragraph [ref=e35]:
+        - text: Taking you to Tiktok
+        - text: Please authenticate to continue
+      - generic [ref=e36]:
+        - button "Continue to Tiktok" [ref=e38]:
+          - generic [ref=e39]: Continue to Tiktok
+        - link "Secured by Composio" [ref=e40] [cursor=pointer]:
+          - /url: https://composio.dev
+          - text: Secured by
+          - img [ref=e42]
+          - text: Composio
+  - region "Notifications alt+T"

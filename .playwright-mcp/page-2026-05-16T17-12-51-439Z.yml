@@ -1,0 +1,6 @@
+- generic [active] [ref=e1]:
+  - main [ref=e3]:
+    - button "Toggle Sidebar" [ref=e5] [cursor=pointer]:
+      - img
+      - generic [ref=e6]: Toggle Sidebar
+  - region "Notifications alt+T"
