@@ -1,0 +1,73 @@
+Tab URL: https://developers.tiktok.com/app/7640160757242218516/pending
+=== BUTTONS ===
+0: [Productos] ctx: ProductosDocumentosApoyoBlogPortal para desarrolladores
+1: [Portal para desarrolladores] ctx: ProductosDocumentosApoyoBlogPortal para desarrolladores
+2: [] ctx: ProductosDocumentosApoyoBlogPortal para desarrolladores
+3: [] ctx: ProductosDocumentosApoyoBlogPortal para desarrolladores
+4: [] ctx: 
+5: [] ctx: 
+6: [] ctx: CurioClip ProducciónSalvaderaPropiedades de URL
+7: [Producción] ctx: CurioClip ProducciónSalvadera
+8: [Salvadera] ctx: CurioClip ProducciónSalvadera
+9: [Propiedades de URL] ctx: CurioClip ProducciónSalvaderaPropiedades de URL
+10: [] ctx: CurioClip ProducciónSalvaderaPropiedades de URL
+11: [] ctx: CurioClip ProducciónSalvaderaPropiedades de URL
+12: [Borrador] ctx: ProducciónBorrador
+13: [Importar] ctx: ImportarAhorrarEnviar para revisión
+14: [Ahorrar] ctx: ImportarAhorrarEnviar para revisión
+15: [Enviar para revisión] ctx: ImportarAhorrarEnviar para revisión
+16: [] ctx: Categoría *
+17: [Subir] ctx: Subir
+18: [Agregar productos] ctx: Detalles de la aplicaciónCartas credencialesClave de cliente
+19: [Agregar ámbitos] ctx: Aún no hay ámbitos definidos. Añada ámbitos para configurar 
+20: [Registro de cambios] ctx: HistoriaRegistro de cambiosComentarios de la revisión Todo15
+21: [Comentarios de la revisión] ctx: HistoriaRegistro de cambiosComentarios de la revisión Todo15
+22: [Todo] ctx: Todo
+23: [Cerca] ctx: Cerca
+24: [] ctx: Valora esta traducciónTu opinión servirá para ayudar a mejor
+25: [] ctx: Valora esta traducciónTu opinión servirá para ayudar a mejor
+26: [] ctx: Asistente de IAHola,Soy el asistente de IA de la plataforma 
+27: [] ctx: Asistente de IAHola,Soy el asistente de IA de la plataforma 
+28: [Minijuego] ctx: Selecciona una categoría de pregunta para iniciar el chat:Mi
+29: [Cortometraje dramático] ctx: Selecciona una categoría de pregunta para iniciar el chat:Mi
+30: [Otros] ctx: Selecciona una categoría de pregunta para iniciar el chat:Mi
+31: [Contactar con soporte] ctx: Hola,Soy el asistente de IA de la plataforma para desarrolla
+32: [] ctx: 
+
+=== LINKS ===
+0: [] href: https://developers.tiktok.com/
+1: [Documentos] href: https://developers.tiktok.com/doc/overview
+2: [Apoyo] href: https://developers.tiktok.com/portal/support
+3: [Blog] href: https://developers.tiktok.com/blogs
+4: [] href: https://developers.tiktok.com/apps
+5: [Detalles de la aplicación] href: https://developers.tiktok.com/app/7640160757242218516/pending#app-details
+6: [Cartas credenciales] href: https://developers.tiktok.com/app/7640160757242218516/pending#credentials
+7: [Información básica] href: https://developers.tiktok.com/app/7640160757242218516/pending#basic-info
+8: [Reseña de la aplicación] href: https://developers.tiktok.com/app/7640160757242218516/pending#app-review
+9: [Productos] href: https://developers.tiktok.com/app/7640160757242218516/pending#products
+10: [Alcances] href: https://developers.tiktok.com/app/7640160757242218516/pending#scopes
+11: [Directrices para la revisión de aplicaciones] href: https://developers.tiktok.com/doc/app-review-guidelines
+12: [Kit para compartir] href: https://developers.tiktok.com/products/share-kit/
+13: [Kit de inicio de sesión] href: https://developers.tiktok.com/products/login-kit/
+14: [API de publicación de contenido] href: https://developers.tiktok.com/products/content-posting-api/
+15: [API de investigación] href: https://developers.tiktok.com/products/research-api/
+16: [API de visualización] href: https://developers.tiktok.com/doc/display-api-get-started/
+17: [Insertar vídeos] href: https://developers.tiktok.com/doc/embed-videos/
+18: [API de portabilidad de datos] href: https://developers.tiktok.com/products/data-portability-api/
+19: [Kit de pantalla verde] href: https://developers.tiktok.com/products/share-kit#green-screen
+20: [API de contenido comercial] href: https://developers.tiktok.com/products/commercial-content-api
+21: [Contenido incrustado de TikTok] href: https://www.tiktok.com/embed
+22: [TikTok para empresas] href: https://www.tiktok.com/business
+23: [Anúnciate en TikTok] href: https://www.tiktok.com/business/&attr_source=tt_official_site&attr_medium=tt_off
+24: [Centro Creativo de TikTok] href: https://ads.tiktok.com/business/creativecenter/
+25: [TikTok.com] href: https://www.tiktok.com/
+26: [Acerca de TikTok] href: https://www.tiktok.com/about
+27: [Sala de prensa] href: https://newsroom.tiktok.com/
+28: [Contacto] href: https://www.tiktok.com/about/contact
+29: [Carreras profesionales] href: https://careers.tiktok.com/
+30: [ByteDance] href: https://www.bytedance.com/
+31: [Centro de Transparencia] href: https://www.tiktok.com/transparency
+32: [Condiciones de servicio] href: https://www.tiktok.com/legal/page/global/tik-tok-developer-terms-of-service/en
+33: [política de privacidad] href: https://www.tiktok.com/legal/page/global/partner-privacy-policy/en
+34: [Recursos y Asuntos Legales] href: https://developers.tiktok.com/app/7640160757242218516/pending#site-footer
+35: [los Términos de servicio para desarrolladores de TikTok] href: https://www.tiktok.com/legal/tik-tok-developer-t

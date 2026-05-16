@@ -1,0 +1,129 @@
+Productos
+Documentos
+Apoyo
+Blog
+Portal para desarrolladores
+CurioClip
+Producción
+Salvadera
+Propiedades de URL
+Producción
+Borrador
+Detalles de la aplicación
+
+Cartas credenciales
+
+Información básica
+
+Reseña de la aplicación
+Productos
+Alcances
+Importar
+Ahorrar
+Enviar para revisión
+Detalles de la aplicación
+Cartas credenciales
+Clave de cliente
+•••••••••••••••••
+secreto del cliente
+•••••••••••••••••
+Información básica
+Icono de la aplicación *
+Esto se mostrará públicamente a los usuarios de TikTok.
+Requisitos:
+1024 px x 1024 px.
+Hasta 5 MB.
+Formatos JPEG, JPG o PNG.
+Nombre de la aplicación *
+Esto se mostrará a los usuarios de TikTok.
+9/50​ ​
+Categoría *
+Descripción *
+Describe qué hace tu sitio web o aplicación móvil y cómo funciona. Esta información se mostrará a los usuarios de TikTok.
+
+Ejemplos:
+Un sitio web que vende artículos para mascotas.
+Gestiona todo tu contenido en redes sociales desde un único lugar.
+0 / 120
+URL de los Términos de Servicio *
+Enlace a los Términos de Servicio oficiales de tu aplicación o sitio web.
+URL de la Política de Privacidad *
+Enlace a la política de privacidad oficial de su aplicación o sitio web.
+Plataformas  *
+Web
+De oficina
+Androide
+iOS
+Reseña de la aplicación
+Información requerida para el envío de la solicitud
+Consulte las  Directrices para la revisión de aplicaciones  para obtener más detalles.
+Explica cómo funciona cada producto y alcance dentro de tu aplicación o sitio web. Si envías una revisión, incluye los cambios en esta versión. *
+0 / 1000
+Sube al menos un vídeo de demostración que muestre el flujo completo de la integración con TikTok, de principio a fin. *
+Subir
+Formatos aceptados: mp4, mov
+Máximo 5 archivos, de hasta 50 MB cada uno.
+Por ejemplo, debería mostrar cómo se utilizan las funcionalidades de TikTok para desarrolladores, como Login Kit, Share Kit, Display API, Content Posting API y los ámbitos correspondientes.
+Si tu aplicación no ha sido aprobada previamente, deberás utilizar un entorno de pruebas (sandbox) en el Portal para desarrolladores para demostrar la integración.
+El vídeo de demostración debe mostrar el sitio web o la aplicación donde se integrarán las funciones.
+Todos los productos y visores seleccionados deben mostrarse claramente en el video. Si no necesita ciertos productos o visores, asegúrese de eliminarlos antes de la revisión. De lo contrario, se retrasará el resultado de la revisión.
+El vídeo debe mostrar claramente la interfaz de usuario y las interacciones del usuario.
+Si tiene intención de integrarlo con una aplicación web, asegúrese de que el dominio del sitio web que se muestra en el vídeo de demostración coincida con la URL del sitio web que proporcione.
+Si tiene intención de integrarlo con una aplicación móvil, el vídeo de demostración debería comenzar mostrando cómo se abre la aplicación.
+Productos
+Agregar productos
+Alcances
+Aún no hay ámbitos definidos. Añada ámbitos para configurar los permisos.
+Agregar ámbitos
+Historia
+Registro de cambios
+Comentarios de la revisión
+Todo
+15 de mayo de 2026, 14:04
+Aplicación creada
+Se agregó el nombre de la aplicación : CurioClip
+Por el desarrollador
+Productos
+Kit para compartir
+Kit de inicio de sesión
+API de publicación de contenido
+API de investigación
+API de visualización
+Insertar vídeos
+API de portabilidad de datos
+Kit de pantalla verde
+API de contenido comercial
+Otras plataformas
+Contenido incrustado de TikTok
+TikTok para empresas
+Anúnciate en TikTok
+Centro Creativo de TikTok
+TikTok.com
+Compañía
+Acerca de TikTok
+Sala de prensa
+Contacto
+Carreras profesionales
+ByteDance
+Centro de Transparencia
+© 2026 TikTok
+Condiciones de servicio
+política de privacidad
+Recursos y Asuntos Legales
+Asistente de IA
+
+Hola,
+
+Soy el asistente de IA de la plataforma para desarrolladores de TikTok. 🎉
+
+El bot de IA de TikTok para desarrolladores es un chatbot experimental. Pueden producirse errores y las respuestas no constituyen asesoramiento profesional. Evite compartir información confidencial o personal. Sus datos podrían compartirse con terceros para generar respuestas.
+
+Al interactuar con este bot de IA, aceptas los Términos de servicio para desarrolladores de TikTok y reconoces haber leído nuestra Política de privacidad.
+
+Selecciona una categoría de pregunta para iniciar el chat:
+Minijuego
+Cortometraje dramático
+Otros
+Contactar con soporte
+
+Las respuestas son generadas por IA. Es posible que se produzcan errores.

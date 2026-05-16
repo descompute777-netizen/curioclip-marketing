@@ -1,0 +1,9 @@
+Found Login Kit Add button: index 34
+Found Login Kit Add button: index 35
+Found Login Kit Add button: index 36
+Found Login Kit Add button: index 37
+Found Login Kit Add button: index 38
+
+Clicking Add for Login Kit (button 38)...
+Result: Clicked: [Add]
+After click: Added buttons: 0 | Add buttons: 5

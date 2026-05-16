@@ -1,0 +1,59 @@
+INPUT 0 [CurioClip]:
+  0=
+  1=Nombre de la aplicación * Esto se mostrará a los usuarios de TikTok.9/50​ ​
+  2=Nombre de la aplicación * Esto se mostrará a los usuarios de TikTok.9/50​ ​
+
+INPUT 1 [empty]:
+  0=0 / 120
+  1=Descripción * Describe qué hace tu sitio web o aplicación móvil y cómo funciona. Esta información se
+  2=Descripción * Describe qué hace tu sitio web o aplicación móvil y cómo funciona. Esta información se
+
+INPUT 2 [empty]:
+  0=
+  1=URL de los Términos de Servicio * Enlace a los Términos de Servicio oficiales de tu aplicación o sit
+  2=URL de los Términos de Servicio * Enlace a los Términos de Servicio oficiales de tu aplicación o sit
+
+INPUT 3 [empty]:
+  0=
+  1=URL de la Política de Privacidad * Enlace a la política de privacidad oficial de su aplicación o sit
+  2=URL de la Política de Privacidad * Enlace a la política de privacidad oficial de su aplicación o sit
+
+INPUT 4 [empty]:
+  0=0 / 1000
+  1=0 / 1000Please fill out the required field
+  2=0 / 1000Please fill out the required field
+
+INPUT 5 [empty]:
+  0=
+  1=
+  2=Add scopes
+
+INPUT 6 [empty]:
+  0=
+  1=
+  2=Texto originalValora esta traducciónTu opinión servirá para ayudar a mejorar el Traductor de Google
+
+INPUT 7 [empty]:
+  0=
+  1=
+  2=Texto originalValora esta traducciónTu opinión servirá para ayudar a mejorar el Traductor de Google
+
+INPUT 8 [empty]:
+  0=
+  1=
+  2=Texto originalValora esta traducciónTu opinión servirá para ayudar a mejorar el Traductor de Google
+
+INPUT 9 [empty]:
+  0=
+  1=
+  2=Texto originalValora esta traducciónTu opinión servirá para ayudar a mejorar el Traductor de Google
+
+INPUT 10 [empty]:
+  0=
+  1=
+  2=Texto originalValora esta traducciónTu opinión servirá para ayudar a mejorar el Traductor de Google
+
+INPUT 11 [empty]:
+  0=
+  1=
+  2=Las respuestas son generadas por IA. Es posible que se produzcan errores.

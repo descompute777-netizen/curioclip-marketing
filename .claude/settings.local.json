@@ -1,1 +1,15 @@
-{}
+{
+  "enabledMcpjsonServers": [
+    "sequential-thinking",
+    "context7",
+    "composio-tiktok",
+    "tiktok-ads-pipeboard",
+    "playwright",
+    "playwright-standalone"
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(python *)"
+    ]
+  }
+}

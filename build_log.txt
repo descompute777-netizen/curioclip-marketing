@@ -1,0 +1,26 @@
+Build Logs
+4s
+7 lines
+1
+CtrlF
+16:14:50.031 
+Running build in Washington, D.C., USA (East) – iad1
+16:14:50.032 
+Build machine configuration: 2 cores, 8 GB
+16:14:50.203 
+Cloning github.com/descompute777-netizen/curioclip-marketing (Branch: main, Commit: aa48e33)
+16:14:50.204 
+Previous build caches not available.
+16:14:51.072 
+Warning: Failed to fetch one or more git submodules
+16:14:51.072 
+Cloning completed: 869.000ms
+16:14:51.455 
+Running "vercel build"
+Deployment Summary
+Assigning Custom Domains
+feat: deploy infrastructure (GitHub repo + Vercel GitHub app installed) - aa48e3
+Go to Project
+Inspect Deployment
+Import a different Git Repository →
+Browse Templates →

@@ -1,0 +1,19 @@
+Modal 0: Asistente de IAHola,Soy el asistente de IA de la plataforma para desarrolladores de TikTok. 🎉El bot de IA de TikTok para desarrolladores es un chatbot experimental. Pueden producirse errores y las respuestas no constituyen asesoramiento profesional. Evite compartir información confidencial o personal. Sus datos podrían compartirse con terceros para generar respuestas.Al interactuar con este bot de IA, aceptas los Términos de servicio para desarrolladores de TikTok y reconoces haber leído nuestr
+---
+Modal 1: Add productsLogin KitGive users a quick and secure way to log in to your app or website with Login Kit.AddShare KitShare content from your app to the TikTok community with just one tap. Share kit makes it easy.AddContent Posting APIShare videos from your app either as a draft or a direct post to TikTok.Requires Login KitAddWebhooksGet real-time notifications for events on TikTok with lightweight subscriptions integrated to your app or website.Requires Login KitAddData Portability APIAllow users 
+---
+Overlay 0: Add productsLogin KitGive users a quick and secure way to log in to your app or website with Login Kit.AddShare KitShare content from your app to the TikTok community with just one tap. Share kit makes it easy.AddContent Posting APIShare videos from your app either as a draft or a direct post to Tik
+---
+Overlay 1: Add productsLogin KitGive users a quick and secure way to log in to your app or website with Login Kit.AddShare KitShare content from your app to the TikTok community with just one tap. Share kit makes it easy.AddContent Posting APIShare videos from your app either as a draft or a direct post to Tik
+---
+Overlay 2: 
+---
+Overlay 3: Add products
+---
+Checkbox 0 [unchecked]: label=Web ctx=
+---
+Checkbox 1 [unchecked]: label=De oficina ctx=
+---
+Checkbox 2 [unchecked]: label=Androide ctx=
+---
+Checkbox 3 [unchecked]: label=iOS ctx=

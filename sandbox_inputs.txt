@@ -1,0 +1,6 @@
+0: [empty] ctx=Texto originalValora esta traducciónTu opinión servirá para ayudar a mejorar el Traductor de Google
+1: [empty] ctx=Texto originalValora esta traducciónTu opinión servirá para ayudar a mejorar el Traductor de Google
+2: [empty] ctx=Texto originalValora esta traducciónTu opinión servirá para ayudar a mejorar el Traductor de Google
+3: [empty] ctx=Texto originalValora esta traducciónTu opinión servirá para ayudar a mejorar el Traductor de Google
+4: [empty] ctx=Texto originalValora esta traducciónTu opinión servirá para ayudar a mejorar el Traductor de Google
+5: [empty] ctx=Las respuestas son generadas por IA. Es posible que se produzcan errores.

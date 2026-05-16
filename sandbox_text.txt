@@ -1,0 +1,66 @@
+Products
+Docs
+Support
+Blog
+Developer Portal
+CurioClip
+Production
+Sandbox
+URL properties
+Production
+Draft
+App details
+
+Credentials
+
+Basic information
+
+App review
+Products
+Scopes
+Import
+Save
+Submit for review
+App details
+Credentials
+Client key
+•••••••••••••••••
+Client secret
+•••••••••••••••••
+Basic information
+App icon *
+This will be displayed publicly to TikTok users.
+Requirements:
+1024px x 1024px
+Up to 5MB
+JPEG, JPG, or PNG formats
+App name *
+This will be displayed to TikTok users
+9 / 50
+Category *
+Description *
+Describe what your website or mobile app does and how it works. This will be displayed to TikTok users.
+
+Examples:
+A website that sells pet supplies.
+Manage all your social media content in one place.
+0 / 120
+Terms of Service URL *
+Link to your app or website's official Terms of Service
+Privacy Policy URL *
+Link to your app or website's official privacy policy
+Platforms *
+Web
+Desktop
+Android
+iOS
+App review
+Required information for app submission
+Please review the App Review Guidelines for more details.
+Explain how each product and scope works within your app or website. If submitting a revision, include the changes in this version. *
+0 / 1000
+Upload at least one demo video that shows the complete end-to-end flow of the integration with TikTok. *
+Upload
+Accepted formats: mp4, mov
+Maximum 5 files, up to 50MB each
+For example, it should demonstrate how you use TikTok for Developers' capabilities, such as Login Kit, Share Kit, Display API, Content Posting API, and the rel

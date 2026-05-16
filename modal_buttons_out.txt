@@ -1,0 +1,7 @@
+btn0|text=|title=?|prev=
+btn1|text=Add|title=?|prev=Give users a quick and secure way to log in to you
+btn2|text=Add|title=?|prev=Share content from your app to the TikTok communit
+btn3|text=Add|title=?|prev=Share videos from your app either as a draft or a 
+btn4|text=Add|title=?|prev=Get real-time notifications for events on TikTok w
+btn5|text=Add|title=?|prev=Allow users to transfer from TikTok to your app. A
+btn6|text=Done|title=?|prev=Login KitGive users a quick and secure way to log 

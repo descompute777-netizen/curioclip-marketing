@@ -1,0 +1,40 @@
+0|Productos|ProductosDocumentosApoyoBlogPortal para desarrolladores
+1|Portal para desarrolladores|ProductosDocumentosApoyoBlogPortal para desarrolladores
+2||ProductosDocumentosApoyoBlogPortal para desarrolladores
+3||ProductosDocumentosApoyoBlogPortal para desarrolladores
+4||ProductosDocumentosApoyoBlogPortal para desarrolladores
+5||ProductosDocumentosApoyoBlogPortal para desarrolladores
+6||CurioClip ProducciónSalvaderaPropiedades de URLProducciónBorradorDetalles de la aplicaciónCartas cre
+7|Producción|CurioClip ProducciónSalvaderaPropiedades de URL
+8|Salvadera|CurioClip ProducciónSalvaderaPropiedades de URL
+9|Propiedades de URL|CurioClip ProducciónSalvaderaPropiedades de URLProducciónBorradorDetalles de la aplicaciónCartas cre
+10||CurioClip ProducciónSalvaderaPropiedades de URLProducciónBorradorDetalles de la aplicaciónCartas cre
+11||CurioClip ProducciónSalvaderaPropiedades de URLProducciónBorradorDetalles de la aplicaciónCartas cre
+12|Borrador|ProducciónBorrador
+13|Importar|ImportarAhorrarEnviar para revisiónDetalles de la aplicaciónCartas credencialesClave de cliente•••••
+14|Ahorrar|ImportarAhorrarEnviar para revisiónDetalles de la aplicaciónCartas credencialesClave de cliente•••••
+15|Enviar para revisión|ImportarAhorrarEnviar para revisiónDetalles de la aplicaciónCartas credencialesClave de cliente•••••
+16||Categoría *
+17|Subir|Subir
+18|Agregar productos|ImportarAhorrarEnviar para revisiónDetalles de la aplicaciónCartas credencialesClave de cliente•••••
+19|Agregar ámbitos|Aún no hay ámbitos definidos. Añada ámbitos para configurar los permisos.Agregar ámbitos
+20|Registro de cambios|HistoriaRegistro de cambiosComentarios de la revisión Todo15 de mayo de 2026, 14:04 Aplicación cread
+21|Comentarios de la revisión|HistoriaRegistro de cambiosComentarios de la revisión Todo15 de mayo de 2026, 14:04 Aplicación cread
+22|Todo|HistoriaRegistro de cambiosComentarios de la revisión Todo15 de mayo de 2026, 14:04 Aplicación cread
+23|Cerca|Cerca
+24||Texto originalValora esta traducciónTu opinión servirá para ayudar a mejorar el Traductor de Google
+25||Texto originalValora esta traducciónTu opinión servirá para ayudar a mejorar el Traductor de Google
+26||ProductosDocumentosApoyoBlogPortal para desarrolladoresCurioClip ProducciónSalvaderaPropiedades de U
+27||Asistente de IAHola,Soy el asistente de IA de la plataforma para desarrolladores de TikTok. 🎉El bot
+28|Minijuego|Hola,Soy el asistente de IA de la plataforma para desarrolladores de TikTok. 🎉El bot de IA de TikTo
+29|Cortometraje dramático|Hola,Soy el asistente de IA de la plataforma para desarrolladores de TikTok. 🎉El bot de IA de TikTo
+30|Otros|Hola,Soy el asistente de IA de la plataforma para desarrolladores de TikTok. 🎉El bot de IA de TikTo
+31|Contactar con soporte|Asistente de IAHola,Soy el asistente de IA de la plataforma para desarrolladores de TikTok. 🎉El bot
+32||Las respuestas son generadas por IA. Es posible que se produzcan errores.
+33||Add productsLogin KitGive users a quick and secure way to log in to your app or website with Login K
+34|Add|Login KitGive users a quick and secure way to log in to your app or website with Login Kit.AddShare 
+35|Add|Login KitGive users a quick and secure way to log in to your app or website with Login Kit.AddShare 
+36|Add|Login KitGive users a quick and secure way to log in to your app or website with Login Kit.AddShare 
+37|Add|Login KitGive users a quick and secure way to log in to your app or website with Login Kit.AddShare 
+38|Add|Login KitGive users a quick and secure way to log in to your app or website with Login Kit.AddShare 
+39|Done|Add productsLogin KitGive users a quick and secure way to log in to your app or website with Login K

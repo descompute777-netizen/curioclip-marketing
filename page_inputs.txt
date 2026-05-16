@@ -1,0 +1,19 @@
+0: type=file | placeholder= | label= | value=
+1: type=text | placeholder= | label=Nombre de la aplicación * | value=CurioClip
+2: type=textarea | placeholder= | label=Descripción * | value=
+3: type=text | placeholder= | label=URL de los Términos de Servicio * | value=
+4: type=text | placeholder= | label=URL de la Política de Privacidad * | value=
+5: type=checkbox | placeholder= | label=Web | value=on
+6: type=checkbox | placeholder= | label=De oficina | value=on
+7: type=checkbox | placeholder= | label=Androide | value=on
+8: type=checkbox | placeholder= | label=iOS | value=on
+9: type=textarea | placeholder= | label= | value=
+10: type=file | placeholder= | label= | value=
+11: type=checkbox | placeholder= | label= | value=on
+12: type=text | placeholder=Search | label= | value=
+13: type=text | placeholder= | label= | value=
+14: type=text | placeholder= | label= | value=
+15: type=text | placeholder= | label= | value=
+16: type=text | placeholder= | label= | value=
+17: type=text | placeholder= | label= | value=
+18: type=textarea | placeholder=Mensaje... | label= | value=
