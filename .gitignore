@@ -72,3 +72,8 @@ chrome-curioclip/
 # Subs temporales generados por ffmpeg
 subs_v5.srt
 subs_v5.ass
+
+# Diagnosticos / screenshots locales (no son codigo fuente)
+sandbox_*.jpg
+sandbox_*.png
+produce_*_output.txt

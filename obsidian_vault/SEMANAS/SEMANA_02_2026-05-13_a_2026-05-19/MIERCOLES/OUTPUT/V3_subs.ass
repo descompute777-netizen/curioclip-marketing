@@ -1,0 +1,24 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Arial,50,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,3,1,2,80,80,220,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:03.02,Default,,0,0,0,,Esta señal lleva sonando 50\Naños sin nadie sabe por qué.
+Dialogue: 0,0:00:04.26,0:00:08.28,Default,,0,0,0,,Desde 1973, una estación de\Nradio rusa transmite un fumbido constante.
+Dialogue: 0,0:00:09.36,0:00:10.62,Default,,0,0,0,,24 horas al día.
+Dialogue: 0,0:00:11.78,0:00:12.66,Default,,0,0,0,,7 días a la semana.
+Dialogue: 0,0:00:13.76,0:00:14.24,Default,,0,0,0,,Sin parar.
+Dialogue: 0,0:00:15.18,0:00:19.78,Default,,0,0,0,,Se llama UBB a 76 y está\Nen un edificio militar abandonado cerca de Moscú.
+Dialogue: 0,0:00:20.66,0:00:25.82,Default,,0,0,0,,Pero lo más perturbadores que a veces, el fumbido se\Ndetiene y una voz dice código sin hombres en ruso.
+Dialogue: 0,0:00:26.60,0:00:29.46,Default,,0,0,0,,Nadie sabe quién transmite,\Npara quién, ni por qué.
+Dialogue: 0,0:00:30.58,0:00:33.82,Default,,0,0,0,,Las teorías van desde comunicación\Ncon submarinos nucleares hasta un sistema,
+Dialogue: 0,0:00:34.22,0:00:38.24,Default,,0,0,0,,de Man switch, de diseñado para activarse\Nsi Rusia es atacada con bombas nucleares.
+Dialogue: 0,0:00:39.20,0:00:40.20,Default,,0,0,0,,¿Tú qué crees que es?

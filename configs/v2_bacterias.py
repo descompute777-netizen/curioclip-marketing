@@ -1,6 +1,6 @@
 """
 Config V2 — "Tu cuerpo tiene más bacterias que estrellas en la galaxia"
-Sub-nicho: Comparación imposible | Hook score: 9/10 | Duración: 18s
+Sub-nicho: Comparación imposible | Hook score: 9/10 | Duración: 45s
 Horario: Lunes 12:00 CDMX
 """
 from pathlib import Path
@@ -13,30 +13,48 @@ VIDEO_CONFIG = {
     "voiceover": "V2_Bacterias.mp3",
     "output_dir": str(SEMANA / "LUNES" / "OUTPUT"),
 
-    # B-roll CC0 — términos: galaxy milky way, bacteria microscope, human body cells
+    # Caption para TikTok (incluye hashtags)
+    "caption_tiktok": (
+        "Sabias que tu cuerpo tiene MAS bacterias que estrellas en la Via Lactea? "
+        "38 billones de bacterias te hacen quien eres. Tu microbioma te supera por mucho. "
+        "#curiosidades #datoscuriosos #sabiasque #ciencia #bacteria #galaxia #cuerpohumano "
+        "#biologia #mente #CurioClip #viral #aprender"
+    ),
+
+    # B-roll CC0 extendido a 45s — loopea segmentos para cubrir el voiceover completo
     "broll_plan": [
-        {"seg": "0-3",  "id": "3129671",  "duration": 3.0, "desc": "Vía Láctea — hook visual"},
-        {"seg": "3-7",  "id": "5377700",  "duration": 4.0, "desc": "Bacteria microscópio animación"},
-        {"seg": "7-12", "id": "3214460",  "duration": 5.0, "desc": "Cuerpo humano células"},
-        {"seg": "12-15","id": "3129671",  "duration": 3.0, "desc": "Galaxia zoom dramático"},
-        {"seg": "15-18","id": "5377700",  "duration": 3.0, "desc": "Cierre + CTA"},
+        {"seg": "0-4",   "id": "3129671",  "duration": 4.0, "desc": "Via Lactea — hook visual impactante"},
+        {"seg": "4-8",   "id": "5377700",  "duration": 4.0, "desc": "Bacteria microscopio animacion"},
+        {"seg": "8-13",  "id": "3214460",  "duration": 5.0, "desc": "Cuerpo humano celulas"},
+        {"seg": "13-18", "id": "3129671",  "duration": 5.0, "desc": "Galaxia zoom dramatico"},
+        {"seg": "18-22", "id": "5377700",  "duration": 4.0, "desc": "Bacteria comparacion"},
+        {"seg": "22-27", "id": "3571264",  "duration": 5.0, "desc": "Laboratorio cientifico — dato"},
+        {"seg": "27-31", "id": "3214460",  "duration": 4.0, "desc": "Cuerpo humano interior"},
+        {"seg": "31-36", "id": "3129671",  "duration": 5.0, "desc": "Cosmos expansion — impacto"},
+        {"seg": "36-40", "id": "5377700",  "duration": 4.0, "desc": "Bacteria final — reflexion"},
+        {"seg": "40-45", "id": "3571264",  "duration": 5.0, "desc": "Cierre cientifico — CTA"},
     ],
 
     "overlays": [
         {
             "text": "Tu cuerpo vs la GALAXIA",
             "fontsize": 82, "color": "white", "bordercolor": "black", "borderw": 5,
-            "y": 180, "t_start": 0, "t_end": 3,
+            "y": 180, "t_start": 0, "t_end": 4,
         },
         {
             "text": "38 BILLONES de bacterias",
             "fontsize": 72, "color": "yellow", "bordercolor": "black", "borderw": 4,
-            "y": 300, "t_start": 3, "t_end": 7,
+            "y": 300, "t_start": 4, "t_end": 10,
         },
         {
-            "text": "Que otro dato quieres saber?",
-            "fontsize": 56, "color": "white", "bordercolor": "black", "borderw": 3,
-            "y": "h/2+100", "t_start": 14, "t_end": 18,
+            "text": "MAS que estrellas en la Via Lactea",
+            "fontsize": 58, "color": "cyan", "bordercolor": "black", "borderw": 4,
+            "y": "h/3", "t_start": 13, "t_end": 20,
+        },
+        {
+            "text": "Sigues para mas datos increibles",
+            "fontsize": 62, "color": "yellow", "bordercolor": "black", "borderw": 4,
+            "y": "h/2+80", "t_start": 38, "t_end": 45,
         },
     ],
 
@@ -46,5 +64,5 @@ VIDEO_CONFIG = {
         {"text": "38 BILLONES de bacterias", "fontsize": 52, "color": "red", "y": 460},
     ],
 
-    "subtitle_fontsize": 50,
+    "subtitle_fontsize": 52,
 }

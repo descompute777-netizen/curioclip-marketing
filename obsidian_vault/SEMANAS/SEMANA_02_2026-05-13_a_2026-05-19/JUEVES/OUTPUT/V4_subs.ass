@@ -1,0 +1,24 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Arial,52,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,3,1,2,80,80,220,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.98,Default,,0,0,0,,En este país te\Nmultan si no son ryes.
+Dialogue: 0,0:00:02.90,0:00:07.42,Default,,0,0,0,,En Pocatello, Aidajo, existe una ley que dice\Nque es ilegal no son reír en público.
+Dialogue: 0,0:00:08.34,0:00:10.20,Default,,0,0,0,,Y no es la\Núnica ley absurda del mundo.
+Dialogue: 0,0:00:11.26,0:00:13.00,Default,,0,0,0,,En Singapur es\Nilegal masticar chicle.
+Dialogue: 0,0:00:14.12,0:00:16.88,Default,,0,0,0,,La multa puede ser\Nde hasta 1,0,0 dólares.
+Dialogue: 0,0:00:17.94,0:00:20.36,Default,,0,0,0,,En Australia es ilegal\Nvestirse de Batman o Robin.
+Dialogue: 0,0:00:21.34,0:00:24.30,Default,,0,0,0,,En Francia, es ilegal\Nllamar a un cerdo, Napoleon.
+Dialogue: 0,0:00:25.22,0:00:27.50,Default,,0,0,0,,En Tailandia puede ser a\Nla cárcel por pisar dinero.
+Dialogue: 0,0:00:28.34,0:00:30.38,Default,,0,0,0,,Porque los billetes tienen\Nla cara del rey.
+Dialogue: 0,0:00:31.12,0:00:32.32,Default,,0,0,0,,¿Cuál es la más ridícula?
+Dialogue: 0,0:00:33.30,0:00:35.02,Default,,0,0,0,,Parte 2 si\Nllegamos a 10 calaics.

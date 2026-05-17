@@ -13,13 +13,25 @@ VIDEO_CONFIG = {
     "voiceover": "V1_Medusa.mp3",
     "output_dir": str(SEMANA / "MARTES" / "OUTPUT"),
 
-    # B-roll CC0 de Pexels — términos: jellyfish, ocean deep, marine life, bioluminescence
+    # Caption para TikTok
+    "caption_tiktok": (
+        "Este animal puede REVERTIR su envejecimiento y volver a ser joven infinitamente. "
+        "La Turritopsis dohrnii es el unico ser vivo biologicamente inmortal conocido. "
+        "La ciencia aun no sabe como replicarlo en humanos. "
+        "#curiosidades #datoscuriosos #sabiasque #ciencia #biologia #inmortal #medusa "
+        "#naturaleza #animal #CurioClip #viral #increible"
+    ),
+
+    # B-roll CC0 extendido a 38s — IDs: medusa (con setsar=1 para JPEGs), laboratorio
     "broll_plan": [
-        {"seg": "0-3",  "id": "4666749",  "duration": 3.0, "desc": "Medusa glowing — hook"},
-        {"seg": "3-8",  "id": "6981032",  "duration": 5.0, "desc": "Medusa ciclo de vida"},
-        {"seg": "8-13", "id": "4666752",  "duration": 5.0, "desc": "Comparación viejo→joven"},
-        {"seg": "13-18","id": "3571264",  "duration": 5.0, "desc": "Laboratorio científico"},
-        {"seg": "18-22","id": "4666749",  "duration": 4.0, "desc": "Medusa flotando + CTA"},
+        {"seg": "0-4",   "id": "4666749",  "duration": 4.0, "desc": "Medusa glowing — hook impacto"},
+        {"seg": "4-9",   "id": "6981032",  "duration": 5.0, "desc": "Medusa ciclo de vida"},
+        {"seg": "9-14",  "id": "4666752",  "duration": 5.0, "desc": "Comparacion viejo a joven"},
+        {"seg": "14-20", "id": "3571264",  "duration": 6.0, "desc": "Laboratorio cientifico — dato"},
+        {"seg": "20-25", "id": "4666749",  "duration": 5.0, "desc": "Medusa flotando"},
+        {"seg": "25-30", "id": "6981032",  "duration": 5.0, "desc": "Ciclo vital invertido"},
+        {"seg": "30-35", "id": "3571264",  "duration": 5.0, "desc": "Investigacion cientifica"},
+        {"seg": "35-38", "id": "4666752",  "duration": 3.0, "desc": "Cierre + CTA"},
     ],
 
     # Overlays de texto (hook 0-3s + CTA 17-22s)

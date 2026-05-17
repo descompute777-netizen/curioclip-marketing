@@ -1,7 +1,7 @@
 """
 Config V3 — "La señal de radio que NADIE puede explicar" (UVB-76)
-Sub-nicho: Misterio sin resolver | Hook score: 9/10 | Duración: 28s
-Horario: Miércoles 20:00 CDMX
+Sub-nicho: Misterio sin resolver | Hook score: 9/10 | Duracion: 50s (voiceover 40s + buffer)
+Horario: Miercoles 20:00 CDMX
 """
 from pathlib import Path
 
@@ -13,37 +13,52 @@ VIDEO_CONFIG = {
     "voiceover": "V3_RadioRusa.mp3",
     "output_dir": str(SEMANA / "MIERCOLES" / "OUTPUT"),
 
-    # B-roll CC0 — fix analytics-scientist: frame 0 debe ser edificio misterioso,
-    # NO pantalla de radio estática (discrepancia visual-textual reduce VE_attention)
+    "caption_tiktok": (
+        "Esta senal de radio suena desde 1973 y NADIE sabe que es ni para que sirve. "
+        "La UVB-76 transmite desde Rusia y de vez en cuando da codigos misteriosos. "
+        "La CIA, ex agentes, y radioaficionados llevan 50 anos sin explicarla. "
+        "#curiosidades #misterio #datoscuriosos #sabiasque #rusia #enigma #conspiracion "
+        "#historia #radiomisterio #CurioClip #viral #increible #ovni"
+    ),
+
+    # B-roll extendido a 50s — loopea 4666752 (edificio) ya que los 404s se omiten
     "broll_plan": [
-        {"seg": "0-4",  "id": "4666752",  "duration": 4.0, "desc": "Edificio abandonado oscuro — hook visual fuerte"},
-        {"seg": "4-9",  "id": "3178847",  "duration": 5.0, "desc": "Mapa Rusia edificio"},
-        {"seg": "9-15", "id": "4666752",  "duration": 6.0, "desc": "Edificio abandonado misterioso"},
-        {"seg": "15-21","id": "5177397",  "duration": 6.0, "desc": "Interceptación de voz"},
-        {"seg": "21-25","id": "3178847",  "duration": 4.0, "desc": "Imagen satelital"},
-        {"seg": "25-28","id": "5177397",  "duration": 3.0, "desc": "Pantalla negra + buzzer + CTA"},
+        {"seg": "0-5",   "id": "4666752",  "duration": 5.0, "desc": "Edificio abandonado oscuro — hook"},
+        {"seg": "5-10",  "id": "3571264",  "duration": 5.0, "desc": "Laboratorio misterioso"},
+        {"seg": "10-16", "id": "4666752",  "duration": 6.0, "desc": "Edificio misterioso 2"},
+        {"seg": "16-22", "id": "3129671",  "duration": 6.0, "desc": "Espacio cosmico — escala"},
+        {"seg": "22-28", "id": "4666752",  "duration": 6.0, "desc": "Edificio nocturno"},
+        {"seg": "28-34", "id": "3571264",  "duration": 6.0, "desc": "Investigacion tecnica"},
+        {"seg": "34-40", "id": "4666752",  "duration": 6.0, "desc": "Misterio persiste"},
+        {"seg": "40-45", "id": "3129671",  "duration": 5.0, "desc": "Cosmos — reflexion final"},
+        {"seg": "45-50", "id": "3571264",  "duration": 5.0, "desc": "Cierre CTA — comenta"},
     ],
 
     "overlays": [
         {
             "text": "Esta senal suena hace 50 ANOS",
             "fontsize": 72, "color": "white", "bordercolor": "black", "borderw": 5,
-            "y": 180, "t_start": 0, "t_end": 4,
+            "y": 180, "t_start": 0, "t_end": 5,
         },
         {
             "text": "y nadie sabe por que",
             "fontsize": 64, "color": "red", "bordercolor": "white", "borderw": 3,
-            "y": 290, "t_start": 0, "t_end": 4,
+            "y": 290, "t_start": 0, "t_end": 5,
         },
         {
             "text": "UVB-76 — Rusia — 1973",
             "fontsize": 52, "color": "yellow", "bordercolor": "black", "borderw": 3,
-            "y": "h/2", "t_start": 9, "t_end": 15,
+            "y": "h/2", "t_start": 10, "t_end": 18,
+        },
+        {
+            "text": "Incluso la CIA no pudo explicarlo",
+            "fontsize": 56, "color": "cyan", "bordercolor": "black", "borderw": 4,
+            "y": "h/3", "t_start": 25, "t_end": 33,
         },
         {
             "text": "Tu que crees que es? Comenta",
             "fontsize": 60, "color": "white", "bordercolor": "black", "borderw": 4,
-            "y": "h/2+60", "t_start": 24, "t_end": 28,
+            "y": "h/2+60", "t_start": 43, "t_end": 50,
         },
     ],
 
@@ -53,5 +68,5 @@ VIDEO_CONFIG = {
         {"text": "y NADIE sabe que es", "fontsize": 62, "color": "yellow", "y": 450},
     ],
 
-    "subtitle_fontsize": 48,
+    "subtitle_fontsize": 50,
 }
