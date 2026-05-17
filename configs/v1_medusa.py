@@ -22,29 +22,34 @@ VIDEO_CONFIG = {
         "#naturaleza #animal #CurioClip #viral #increible"
     ),
 
-    # B-roll CC0 extendido a 38s — IDs: medusa (con setsar=1 para JPEGs), laboratorio
+    # B-roll CC0 — solo IDs verificados como videos reales (>10MB, duracion confirmada)
+    # 5377700=microscopia celular 26s | 3571264=laboratorio 33s | 3129671=cosmos 40s
+    # IDs 4666749/4666752/6981032 eran fotos Pexels, no videos — REEMPLAZADOS
     "broll_plan": [
-        {"seg": "0-4",   "id": "4666749",  "duration": 4.0, "desc": "Medusa glowing — hook impacto"},
-        {"seg": "4-9",   "id": "6981032",  "duration": 5.0, "desc": "Medusa ciclo de vida"},
-        {"seg": "9-14",  "id": "4666752",  "duration": 5.0, "desc": "Comparacion viejo a joven"},
-        {"seg": "14-20", "id": "3571264",  "duration": 6.0, "desc": "Laboratorio cientifico — dato"},
-        {"seg": "20-25", "id": "4666749",  "duration": 5.0, "desc": "Medusa flotando"},
-        {"seg": "25-30", "id": "6981032",  "duration": 5.0, "desc": "Ciclo vital invertido"},
-        {"seg": "30-35", "id": "3571264",  "duration": 5.0, "desc": "Investigacion cientifica"},
-        {"seg": "35-38", "id": "4666752",  "duration": 3.0, "desc": "Cierre + CTA"},
+        {"seg": "0-5",   "id": "5377700",  "duration": 5.0, "desc": "Microscopia celular — vida invisible (hook biologia)"},
+        {"seg": "5-11",  "id": "3571264",  "duration": 6.0, "desc": "Laboratorio cientifico — investigacion ADN"},
+        {"seg": "11-17", "id": "3129671",  "duration": 6.0, "desc": "Cosmos — escala del tiempo inmortal"},
+        {"seg": "17-23", "id": "3571264",  "duration": 6.0, "desc": "Laboratorio — estudio Turritopsis"},
+        {"seg": "23-29", "id": "3129671",  "duration": 6.0, "desc": "Universo — reflexion vida eterna"},
+        {"seg": "29-32", "id": "5377700",  "duration": 3.0, "desc": "Celulas — cierre biologico CTA"},
     ],
 
-    # Overlays de texto (hook 0-3s + CTA 17-22s)
+    # Overlays ajustados a duracion real del voiceover (29.45s)
     "overlays": [
         {
             "text": "Este animal NO puede MORIR",
             "fontsize": 78, "color": "white", "bordercolor": "black", "borderw": 5,
-            "y": 200, "t_start": 0, "t_end": 3,
+            "y": 200, "t_start": 0, "t_end": 5,
         },
         {
-            "text": "Sigues para mas datos increibles",
-            "fontsize": 56, "color": "yellow", "bordercolor": "black", "borderw": 4,
-            "y": "h/2+80", "t_start": 17, "t_end": 22,
+            "text": "Inmortalidad biologica REAL",
+            "fontsize": 62, "color": "yellow", "bordercolor": "black", "borderw": 4,
+            "y": "h/3", "t_start": 11, "t_end": 19,
+        },
+        {
+            "text": "Sigueme para mas datos increibles",
+            "fontsize": 56, "color": "white", "bordercolor": "black", "borderw": 4,
+            "y": "h/2+100", "t_start": 25, "t_end": 29,
         },
     ],
 
@@ -53,5 +58,5 @@ VIDEO_CONFIG = {
         {"text": "Turritopsis dohrnii", "fontsize": 52, "color": "yellow", "y": 380},
     ],
 
-    "subtitle_fontsize": 50,
+    "subtitle_fontsize": 58,
 }

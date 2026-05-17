@@ -21,17 +21,19 @@ VIDEO_CONFIG = {
         "#historia #radiomisterio #CurioClip #viral #increible #ovni"
     ),
 
-    # B-roll extendido a 50s — loopea 4666752 (edificio) ya que los 404s se omiten
+    # B-roll — solo IDs verificados como videos reales
+    # 3571264=laboratorio 33s | 3129671=cosmos 40s
+    # 4666752 era foto Pexels, no video — REEMPLAZADO
+    # Voiceover V3=41.09s → broll total 44s (buffer 3s con -shortest)
     "broll_plan": [
-        {"seg": "0-5",   "id": "4666752",  "duration": 5.0, "desc": "Edificio abandonado oscuro — hook"},
-        {"seg": "5-10",  "id": "3571264",  "duration": 5.0, "desc": "Laboratorio misterioso"},
-        {"seg": "10-16", "id": "4666752",  "duration": 6.0, "desc": "Edificio misterioso 2"},
-        {"seg": "16-22", "id": "3129671",  "duration": 6.0, "desc": "Espacio cosmico — escala"},
-        {"seg": "22-28", "id": "4666752",  "duration": 6.0, "desc": "Edificio nocturno"},
-        {"seg": "28-34", "id": "3571264",  "duration": 6.0, "desc": "Investigacion tecnica"},
-        {"seg": "34-40", "id": "4666752",  "duration": 6.0, "desc": "Misterio persiste"},
-        {"seg": "40-45", "id": "3129671",  "duration": 5.0, "desc": "Cosmos — reflexion final"},
-        {"seg": "45-50", "id": "3571264",  "duration": 5.0, "desc": "Cierre CTA — comenta"},
+        {"seg": "0-6",   "id": "3571264",  "duration": 6.0, "desc": "Laboratorio oscuro — hook misterio transmision"},
+        {"seg": "6-12",  "id": "3129671",  "duration": 6.0, "desc": "Cosmos — escala del misterio"},
+        {"seg": "12-18", "id": "3571264",  "duration": 6.0, "desc": "Investigacion tecnica — datos UVB-76"},
+        {"seg": "18-24", "id": "3129671",  "duration": 6.0, "desc": "Espacio profundo — desconocido"},
+        {"seg": "24-30", "id": "3571264",  "duration": 6.0, "desc": "Lab — analisis de la senal"},
+        {"seg": "30-36", "id": "3129671",  "duration": 6.0, "desc": "Cosmos expansion — 50 anos de misterio"},
+        {"seg": "36-42", "id": "3571264",  "duration": 6.0, "desc": "Cierre laboratorio — nadie lo explica"},
+        {"seg": "42-44", "id": "3129671",  "duration": 2.0, "desc": "Buffer cosmos — CTA comenta"},
     ],
 
     "overlays": [
@@ -58,7 +60,7 @@ VIDEO_CONFIG = {
         {
             "text": "Tu que crees que es? Comenta",
             "fontsize": 60, "color": "white", "bordercolor": "black", "borderw": 4,
-            "y": "h/2+60", "t_start": 43, "t_end": 50,
+            "y": "h/2+60", "t_start": 37, "t_end": 41,
         },
     ],
 
@@ -68,5 +70,5 @@ VIDEO_CONFIG = {
         {"text": "y NADIE sabe que es", "fontsize": 62, "color": "yellow", "y": 450},
     ],
 
-    "subtitle_fontsize": 50,
+    "subtitle_fontsize": 58,
 }

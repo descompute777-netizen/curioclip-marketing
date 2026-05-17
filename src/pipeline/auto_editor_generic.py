@@ -50,11 +50,12 @@ def download_pexels_video(video_id: str, dest: Path) -> Path | None:
         return None
 
 
-def srt_to_ass(srt_path: Path, ass_path: Path, fontsize: int = 52):
-    """Convierte SRT → ASS con PlayRes 1080x1920 y estilo TikTok."""
-    margin_v = 220
-    margin_lr = 80
-    outline = 3
+def srt_to_ass(srt_path: Path, ass_path: Path, fontsize: int = 58):
+    """Convierte SRT → ASS con estilo TikTok optimizado: negrita, borde grueso, posicion baja."""
+    margin_v = 180   # px desde el fondo — mas visible en TikTok
+    margin_lr = 60
+    outline = 4      # borde mas grueso para legibilidad en cualquier fondo
+    shadow = 2
 
     header = (
         f"[Script Info]\nScriptType: v4.00+\n"
@@ -63,8 +64,8 @@ def srt_to_ass(srt_path: Path, ass_path: Path, fontsize: int = 52):
         f"Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, "
         f"BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, "
         f"BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\n"
-        f"Style: Default,Arial,{fontsize},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,"
-        f"-1,0,0,0,100,100,0,0,1,{outline},1,2,{margin_lr},{margin_lr},{margin_v},1\n\n"
+        f"Style: Default,Arial,{fontsize},&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,"
+        f"-1,0,0,0,100,100,1,0,1,{outline},{shadow},2,{margin_lr},{margin_lr},{margin_v},1\n\n"
         f"[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
     )
 
