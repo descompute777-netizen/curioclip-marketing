@@ -30,28 +30,48 @@ NOW_UTC = datetime.datetime.utcnow()
 
 # ─── Composio TikTok ────────────────────────────────────────────────────────
 
-def get_composio_toolset():
+def get_composio_client():
+    """Composio SDK v0.13+ usa la clase Composio directamente."""
     api_key = os.environ.get("COMPOSIO_API_KEY")
     if not api_key:
         sys.exit("[ERROR] COMPOSIO_API_KEY no configurada en GitHub Secrets.")
     try:
-        from composio_openai import ComposioToolSet
-        return ComposioToolSet(api_key=api_key)
+        from composio import Composio
+        return Composio(api_key=api_key)
     except ImportError:
-        subprocess.run([sys.executable, "-m", "pip", "install", "composio-openai", "-q"], check=True)
-        from composio_openai import ComposioToolSet
-        return ComposioToolSet(api_key=api_key)
+        subprocess.run([sys.executable, "-m", "pip", "install", "composio", "composio-openai", "-q"], check=True)
+        from composio import Composio
+        return Composio(api_key=api_key)
 
 
-def publish_video(video_url: str, caption: str, entity_id: str = "default") -> str | None:
-    """Publica video en TikTok vía Composio. Retorna publish_id o None si falla."""
-    toolset = get_composio_toolset()
+def verify_oauth_active(user_id: str = "curioclip") -> bool:
+    """Verifica que existe una connected account ACTIVE de TikTok para user_id."""
+    c = get_composio_client()
+    accounts = c.connected_accounts.list()
+    for a in accounts.items:
+        tk = a.toolkit.slug if hasattr(a, "toolkit") and a.toolkit else ""
+        uid = a.user_id if hasattr(a, "user_id") else ""
+        st = a.status if hasattr(a, "status") else ""
+        if tk == "tiktok" and uid == user_id and st == "ACTIVE":
+            print(f"[OK] OAuth TikTok ACTIVE: {a.id}")
+            return True
+    print(f"[FAIL] No hay OAuth ACTIVE para user_id={user_id}.")
+    print(f"  Accounts existentes: {[(a.id, a.status if hasattr(a,'status') else '?') for a in accounts.items[:5]]}")
+    return False
+
+
+def publish_video(video_url: str, caption: str, user_id: str = "curioclip") -> str | None:
+    """Publica video en TikTok via Composio. Retorna publish_id o None si falla."""
+    if not verify_oauth_active(user_id):
+        print("[FALLBACK] OAuth no activo. Saltando a Playwright MCP manual.")
+        return None
+
+    c = get_composio_client()
     try:
-        from composio import Action
         print(f"[COMPOSIO] Publicando: {video_url[:60]}...")
-        result = toolset.execute_action(
-            action=Action.TIKTOK_PUBLISH_VIDEO,
-            params={
+        result = c.tools.execute(
+            slug="TIKTOK_PUBLISH_VIDEO",
+            arguments={
                 "video_url": video_url,
                 "caption": caption,
                 "privacy_level": "PUBLIC_TO_EVERYONE",
@@ -59,7 +79,7 @@ def publish_video(video_url: str, caption: str, entity_id: str = "default") -> s
                 "disable_stitch": False,
                 "disable_comment": False,
             },
-            entity_id=entity_id
+            user_id=user_id,
         )
         publish_id = result.get("data", {}).get("publish_id") or result.get("publish_id")
         print(f"[OK] publish_id: {publish_id}")
@@ -69,22 +89,17 @@ def publish_video(video_url: str, caption: str, entity_id: str = "default") -> s
         return None
 
 
-def monitor_publish_status(publish_id: str, entity_id: str = "default") -> bool:
-    """Monitorea estado de publicación con backoff exponencial (5s→10s→20s...)."""
-    toolset = get_composio_toolset()
-    try:
-        from composio import Action
-    except ImportError:
-        return False
-
+def monitor_publish_status(publish_id: str, user_id: str = "curioclip") -> bool:
+    """Monitorea estado de publicacion con backoff exponencial (5s→10s→20s...)."""
+    c = get_composio_client()
     delays = [5, 10, 20, 40, 60, 120]
     for delay in delays:
         time.sleep(delay)
         try:
-            result = toolset.execute_action(
-                action=Action.TIKTOK_FETCH_PUBLISH_STATUS,
-                params={"publish_id": publish_id},
-                entity_id=entity_id
+            result = c.tools.execute(
+                slug="TIKTOK_FETCH_PUBLISH_STATUS",
+                arguments={"publish_id": publish_id},
+                user_id=user_id,
             )
             status = result.get("data", {}).get("status") or result.get("status", "")
             print(f"  [STATUS] {status} (esperando {delay}s)")
@@ -92,12 +107,11 @@ def monitor_publish_status(publish_id: str, entity_id: str = "default") -> bool:
                 print("[OK] Video publicado exitosamente en TikTok.")
                 return True
             elif status in ("FAILED", "ERROR"):
-                print(f"[FAIL] TikTok rechazó la publicación: {result}")
+                print(f"[FAIL] TikTok rechazo la publicacion: {result}")
                 return False
         except Exception as e:
-            print(f"  [WARN] Status check falló: {e}")
-
-    print("[TIMEOUT] No se pudo confirmar publicación después de 5 intentos.")
+            print(f"  [WARN] Status check fallo: {e}")
+    print("[TIMEOUT] No se pudo confirmar publicacion despues de 5 intentos.")
     return False
 
 
