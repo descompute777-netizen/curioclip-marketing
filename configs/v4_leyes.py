@@ -21,16 +21,20 @@ VIDEO_CONFIG = {
         "#culturawow #WTF #CurioClip #increible #gracioso"
     ),
 
-    # B-roll extendido a 45s — usa 3571264 (lab/ciudad) y 3129671 (galaxia/plano) ya descargados
+    # B-roll TEMATICO de Pexels — bandera USA, courthouse, law books, small town
+    # 8847274=american flag 17s | 7175146=american flag 60s | 7704860=flag 25s
+    # 28122932=courthouse 15s | 16935891=courthouse 13s | 29188239=courthouse 20s
+    # 8731590=law books 11s vertical | 8731589=law books 11s | 8731441=law books 14s
+    # 13357730=small town america 45s
+    # Voiceover V4=35.95s → broll total 36s
     "broll_plan": [
-        {"seg": "0-5",   "id": "3571264",  "duration": 5.0, "desc": "Ciudad personas — hook visual"},
-        {"seg": "5-10",  "id": "3129671",  "duration": 5.0, "desc": "Plano amplio ciudad"},
-        {"seg": "10-16", "id": "3571264",  "duration": 6.0, "desc": "Personas reaccionando ley"},
-        {"seg": "16-21", "id": "3129671",  "duration": 5.0, "desc": "Mundo mapa WTF"},
-        {"seg": "21-27", "id": "3571264",  "duration": 6.0, "desc": "Ley absurda Alaska"},
-        {"seg": "27-32", "id": "3129671",  "duration": 5.0, "desc": "Florida cocodrilo"},
-        {"seg": "32-38", "id": "3571264",  "duration": 6.0, "desc": "Mas leyes absurdas"},
-        {"seg": "38-45", "id": "3129671",  "duration": 7.0, "desc": "Cierre CTA Parte 2"},
+        {"seg": "0-5",   "id": "8847274",  "duration": 5.0, "desc": "Bandera USA — hook patriotico"},
+        {"seg": "5-11",  "id": "28122932", "duration": 6.0, "desc": "Courthouse justicia americana"},
+        {"seg": "11-17", "id": "7175146",  "duration": 6.0, "desc": "Bandera USA ondeando — leyes"},
+        {"seg": "17-23", "id": "8731590",  "duration": 6.0, "desc": "Libros de leyes — Pocatello 1948"},
+        {"seg": "23-29", "id": "13357730", "duration": 6.0, "desc": "Small town America — donde aplica"},
+        {"seg": "29-35", "id": "16935891", "duration": 6.0, "desc": "Courthouse — cierre legal"},
+        {"seg": "35-36", "id": "7704860",  "duration": 1.0, "desc": "Bandera cierre rapido"},
     ],
 
     "overlays": [
@@ -57,7 +61,7 @@ VIDEO_CONFIG = {
         {
             "text": "Parte 2 si llegamos a 10K likes",
             "fontsize": 60, "color": "yellow", "bordercolor": "black", "borderw": 4,
-            "y": "h/2+80", "t_start": 38, "t_end": 45,
+            "y": "h/2+80", "t_start": 31, "t_end": 36,
         },
     ],
 
@@ -67,5 +71,5 @@ VIDEO_CONFIG = {
         {"text": "Pocatello, Idaho, USA", "fontsize": 50, "color": "yellow", "y": 470},
     ],
 
-    "subtitle_fontsize": 52,
+    "subtitle_fontsize": 58,
 }

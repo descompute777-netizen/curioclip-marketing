@@ -51,12 +51,23 @@ def download_pexels_video(video_id: str, dest: Path) -> Path | None:
 
 
 def srt_to_ass(srt_path: Path, ass_path: Path, fontsize: int = 58):
-    """Convierte SRT → ASS con estilo TikTok optimizado: negrita, borde grueso, posicion baja."""
-    margin_v = 180   # px desde el fondo — mas visible en TikTok
-    margin_lr = 60
-    outline = 4      # borde mas grueso para legibilidad en cualquier fondo
-    shadow = 2
+    """Convierte SRT → ASS optimizado para SAFE ZONE de TikTok.
 
+    Safe zone TikTok (1080x1920):
+      - Top UI (header/sound): 0–250px
+      - Bottom UI (avatar/desc/comments): 1480–1920px (~440px)
+      - Right UI (interaction buttons): x>950
+      - Safe area central: ~250–1480 vertical, 60–950 horizontal
+    Subtitulos: Alignment=2 (bottom-center) + MarginV=420 → quedan ENCIMA
+    de la UI bottom de TikTok, ~Y=1500 en el video 1920 alto.
+    """
+    margin_v = 420   # px desde el FONDO — encima del UI overlay de TikTok
+    margin_lr = 80   # margen lateral, evita right UI (botones)
+    outline = 5      # borde mas grueso para legibilidad maxima
+    shadow = 3
+
+    # BorderStyle 3 = caja opaca (background box detras del texto) — maxima legibilidad
+    # BackColour 0xB0000000 = negro con 70% opacidad
     header = (
         f"[Script Info]\nScriptType: v4.00+\n"
         f"PlayResX: {W}\nPlayResY: {H}\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\n"
@@ -64,7 +75,7 @@ def srt_to_ass(srt_path: Path, ass_path: Path, fontsize: int = 58):
         f"Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, "
         f"BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, "
         f"BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\n"
-        f"Style: Default,Arial,{fontsize},&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,"
+        f"Style: Default,Arial,{fontsize},&H00FFFFFF,&H00FFFFFF,&H00000000,&HB0000000,"
         f"-1,0,0,0,100,100,1,0,1,{outline},{shadow},2,{margin_lr},{margin_lr},{margin_v},1\n\n"
         f"[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
     )

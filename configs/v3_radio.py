@@ -21,19 +21,20 @@ VIDEO_CONFIG = {
         "#historia #radiomisterio #CurioClip #viral #increible #ovni"
     ),
 
-    # B-roll — solo IDs verificados como videos reales
-    # 3571264=laboratorio 33s | 3129671=cosmos 40s
-    # 4666752 era foto Pexels, no video — REEMPLAZADO
+    # B-roll TEMATICO de Pexels — antenas radio, edificios sovieticos, lugares misteriosos
+    # 37525184=radio antenna tower 31s | 10354219=radio antenna 54s | 12959226=antena 75s
+    # 18584563=soviet building 20s vertical | 10095265=abandoned facility 25s
+    # 37410541=night city dark 25s | 13188717=soviet building 17s
     # Voiceover V3=41.09s → broll total 44s (buffer 3s con -shortest)
     "broll_plan": [
-        {"seg": "0-6",   "id": "3571264",  "duration": 6.0, "desc": "Laboratorio oscuro — hook misterio transmision"},
-        {"seg": "6-12",  "id": "3129671",  "duration": 6.0, "desc": "Cosmos — escala del misterio"},
-        {"seg": "12-18", "id": "3571264",  "duration": 6.0, "desc": "Investigacion tecnica — datos UVB-76"},
-        {"seg": "18-24", "id": "3129671",  "duration": 6.0, "desc": "Espacio profundo — desconocido"},
-        {"seg": "24-30", "id": "3571264",  "duration": 6.0, "desc": "Lab — analisis de la senal"},
-        {"seg": "30-36", "id": "3129671",  "duration": 6.0, "desc": "Cosmos expansion — 50 anos de misterio"},
-        {"seg": "36-42", "id": "3571264",  "duration": 6.0, "desc": "Cierre laboratorio — nadie lo explica"},
-        {"seg": "42-44", "id": "3129671",  "duration": 2.0, "desc": "Buffer cosmos — CTA comenta"},
+        {"seg": "0-6",   "id": "37525184", "duration": 6.0, "desc": "Antena radio torre — hook UVB-76"},
+        {"seg": "6-12",  "id": "18584563", "duration": 6.0, "desc": "Edificio sovietico abandonado — 1973"},
+        {"seg": "12-18", "id": "10354219", "duration": 6.0, "desc": "Antena transmision — la senal"},
+        {"seg": "18-24", "id": "10095265", "duration": 6.0, "desc": "Facility abandonada — el misterio"},
+        {"seg": "24-30", "id": "12959226", "duration": 6.0, "desc": "Antena noche — CIA no puede explicar"},
+        {"seg": "30-36", "id": "37410541", "duration": 6.0, "desc": "Ciudad oscura — 50 anos"},
+        {"seg": "36-42", "id": "13188717", "duration": 6.0, "desc": "Edificio sovietico — cierre"},
+        {"seg": "42-44", "id": "18584563", "duration": 2.0, "desc": "Buffer — CTA comenta que crees"},
     ],
 
     "overlays": [

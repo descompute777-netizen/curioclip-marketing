@@ -22,16 +22,17 @@ VIDEO_CONFIG = {
         "#naturaleza #animal #CurioClip #viral #increible"
     ),
 
-    # B-roll CC0 — solo IDs verificados como videos reales (>10MB, duracion confirmada)
-    # 5377700=microscopia celular 26s | 3571264=laboratorio 33s | 3129671=cosmos 40s
-    # IDs 4666749/4666752/6981032 eran fotos Pexels, no videos — REEMPLAZADOS
+    # B-roll TEMATICO de Pexels — videos REALES de medusas verificados via broll_finder.py
+    # 28635601=jellyfish ocean 14s | 13320123=medusa bioluminiscente 60s vertical
+    # 16521053=jellyfish ocean 39s | 12210147=deep sea creature 22s
+    # 8950635=jellyfish glowing 11s | 2840467=jellyfish bioluminiscente 18s
     "broll_plan": [
-        {"seg": "0-5",   "id": "5377700",  "duration": 5.0, "desc": "Microscopia celular — vida invisible (hook biologia)"},
-        {"seg": "5-11",  "id": "3571264",  "duration": 6.0, "desc": "Laboratorio cientifico — investigacion ADN"},
-        {"seg": "11-17", "id": "3129671",  "duration": 6.0, "desc": "Cosmos — escala del tiempo inmortal"},
-        {"seg": "17-23", "id": "3571264",  "duration": 6.0, "desc": "Laboratorio — estudio Turritopsis"},
-        {"seg": "23-29", "id": "3129671",  "duration": 6.0, "desc": "Universo — reflexion vida eterna"},
-        {"seg": "29-32", "id": "5377700",  "duration": 3.0, "desc": "Celulas — cierre biologico CTA"},
+        {"seg": "0-5",   "id": "28635601", "duration": 5.0, "desc": "Medusa oceano — hook inmortal"},
+        {"seg": "5-11",  "id": "13320123", "duration": 6.0, "desc": "Medusa bioluminiscente glowing"},
+        {"seg": "11-17", "id": "16521053", "duration": 6.0, "desc": "Medusa flotando ciclo vital"},
+        {"seg": "17-23", "id": "12210147", "duration": 6.0, "desc": "Criatura marina profunda — biologia"},
+        {"seg": "23-29", "id": "8950635",  "duration": 6.0, "desc": "Medusa glowing — investigacion"},
+        {"seg": "29-32", "id": "2840467",  "duration": 3.0, "desc": "Medusa cierre — CTA"},
     ],
 
     # Overlays ajustados a duracion real del voiceover (29.45s)
