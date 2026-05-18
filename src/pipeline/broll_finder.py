@@ -62,6 +62,24 @@ THEMATIC_QUERIES = {
                     "small town america", "judge gavel", "USA city street"],
         "min_videos": 6,
     },
+    "V5": {  # Tunguska 1908 — misterio sin resolver
+        "topic": "Evento Tunguska 1908 — explosion sin explicacion",
+        "queries": ["siberian forest aerial", "explosion night sky", "dense pine forest",
+                    "comet meteor space", "fallen trees forest", "remote wilderness russia"],
+        "min_videos": 6,
+    },
+    "V6": {  # Conan bacterium — resistencia nuclear
+        "topic": "Deinococcus radiodurans — bacteria que sobrevive a bombas nucleares",
+        "queries": ["nuclear explosion mushroom", "petri dish bacteria", "dna helix animation",
+                    "scientist microscope lab", "radiation symbol", "microbiology research"],
+        "min_videos": 5,
+    },
+    "V7": {  # Cosquillas — neurociencia interactivo
+        "topic": "Por que no puedes hacerte cosquillas — prediccion sensorial",
+        "queries": ["person laughing close up", "brain neurons animation", "feather skin macro",
+                    "brain scan medical", "robot hand technology", "neuroscience brain mri"],
+        "min_videos": 5,
+    },
 }
 
 

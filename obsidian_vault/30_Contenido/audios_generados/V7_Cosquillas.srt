@@ -1,0 +1,48 @@
+1
+00:00:00,000 --> 00:00:04,080
+prueba esto ahora mismo, intenta hacerte cosquillas a ti mismo.
+
+2
+00:00:04,080 --> 00:00:05,480
+¿Funciono?
+
+3
+00:00:05,480 --> 00:00:06,640
+No.
+
+4
+00:00:06,640 --> 00:00:08,320
+Nunca funciona.
+
+5
+00:00:08,320 --> 00:00:13,060
+Tu cerebro puede predecir exactamente lo que vas a sentir antes de que los sientas.
+
+6
+00:00:13,060 --> 00:00:15,480
+Se llama predicción sensorial.
+
+7
+00:00:15,480 --> 00:00:20,760
+Tu cerebro tiene un modelo de tu cuerpo tan preciso que sabe lo que vas a tocar antes de tocarlo.
+
+8
+00:00:20,760 --> 00:00:26,920
+Por eso las cosquillas de otra persona si funcionan, ese modelo no puede predecir movimientos externos.
+
+9
+00:00:26,920 --> 00:00:28,600
+Pero hay un truco.
+
+10
+00:00:28,760 --> 00:00:34,200
+Si usas un robot con del edad de 200 milisegundos para hacerte cosquillas, si funcionan.
+
+11
+00:00:34,200 --> 00:00:37,039
+El cerebro no puede predecir el retraso.
+
+12
+00:00:37,039 --> 00:00:39,039
+Guarda esto para probarlo.
+
