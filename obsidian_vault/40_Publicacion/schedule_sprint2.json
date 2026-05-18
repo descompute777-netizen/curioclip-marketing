@@ -1,0 +1,90 @@
+{
+  "sprint": 2,
+  "week_start": "2026-05-25",
+  "videos": [
+    {
+      "day": "lunes",
+      "date": "2026-05-25",
+      "guion_id": "S2_V1",
+      "video_url": "https://github.com/descompute777-netizen/curioclip-marketing/releases/download/sprint-2-2026-05-18/S2_V1_final.mp4",
+      "caption": "",
+      "hashtags": "#datoscuriosos #sabiasque #curioclip #curiosidades",
+      "published": false,
+      "publish_at_utc": "2026-05-25T18:00:00Z",
+      "v_score": 0.0,
+      "local_video_path": "/home/runner/work/curioclip-marketing/curioclip-marketing/obsidian_vault/SEMANAS/SEMANA_02_2026-05-25_auto/LUNES/OUTPUT/S2_V1_final.mp4"
+    },
+    {
+      "day": "martes",
+      "date": "2026-05-26",
+      "guion_id": "S2_V2",
+      "video_url": "https://github.com/descompute777-netizen/curioclip-marketing/releases/download/sprint-2-2026-05-18/S2_V2_final.mp4",
+      "caption": "",
+      "hashtags": "#datoscuriosos #sabiasque #curioclip #curiosidades",
+      "published": false,
+      "publish_at_utc": "2026-05-27T01:00:00Z",
+      "v_score": 0.0,
+      "local_video_path": "/home/runner/work/curioclip-marketing/curioclip-marketing/obsidian_vault/SEMANAS/SEMANA_02_2026-05-25_auto/MARTES/OUTPUT/S2_V2_final.mp4"
+    },
+    {
+      "day": "miercoles",
+      "date": "2026-05-27",
+      "guion_id": "S2_V3",
+      "video_url": "https://github.com/descompute777-netizen/curioclip-marketing/releases/download/sprint-2-2026-05-18/S2_V3_final.mp4",
+      "caption": "",
+      "hashtags": "#datoscuriosos #sabiasque #curioclip #curiosidades",
+      "published": false,
+      "publish_at_utc": "2026-05-28T02:00:00Z",
+      "v_score": 0.0,
+      "local_video_path": "/home/runner/work/curioclip-marketing/curioclip-marketing/obsidian_vault/SEMANAS/SEMANA_02_2026-05-25_auto/MIERCOLES/OUTPUT/S2_V3_final.mp4"
+    },
+    {
+      "day": "jueves",
+      "date": "2026-05-28",
+      "guion_id": "S2_V4",
+      "video_url": "https://github.com/descompute777-netizen/curioclip-marketing/releases/download/sprint-2-2026-05-18/S2_V4_final.mp4",
+      "caption": "",
+      "hashtags": "#datoscuriosos #sabiasque #curioclip #curiosidades",
+      "published": false,
+      "publish_at_utc": "2026-05-28T18:00:00Z",
+      "v_score": 0.0,
+      "local_video_path": "/home/runner/work/curioclip-marketing/curioclip-marketing/obsidian_vault/SEMANAS/SEMANA_02_2026-05-25_auto/JUEVES/OUTPUT/S2_V4_final.mp4"
+    },
+    {
+      "day": "viernes",
+      "date": "2026-05-29",
+      "guion_id": "S2_V5",
+      "video_url": "https://github.com/descompute777-netizen/curioclip-marketing/releases/download/sprint-2-2026-05-18/S2_V5_final.mp4",
+      "caption": "",
+      "hashtags": "#datoscuriosos #sabiasque #curioclip #curiosidades",
+      "published": false,
+      "publish_at_utc": "2026-05-30T02:00:00Z",
+      "v_score": 0.0,
+      "local_video_path": "/home/runner/work/curioclip-marketing/curioclip-marketing/obsidian_vault/SEMANAS/SEMANA_02_2026-05-25_auto/VIERNES/OUTPUT/S2_V5_final.mp4"
+    },
+    {
+      "day": "sabado",
+      "date": "2026-05-30",
+      "guion_id": "S2_V6",
+      "video_url": "https://github.com/descompute777-netizen/curioclip-marketing/releases/download/sprint-2-2026-05-18/S2_V6_final.mp4",
+      "caption": "",
+      "hashtags": "#datoscuriosos #sabiasque #curioclip #curiosidades",
+      "published": false,
+      "publish_at_utc": "2026-05-30T18:00:00Z",
+      "v_score": 0.0,
+      "local_video_path": "/home/runner/work/curioclip-marketing/curioclip-marketing/obsidian_vault/SEMANAS/SEMANA_02_2026-05-25_auto/SABADO/OUTPUT/S2_V6_final.mp4"
+    },
+    {
+      "day": "domingo",
+      "date": "2026-05-31",
+      "guion_id": "S2_V7",
+      "video_url": "https://github.com/descompute777-netizen/curioclip-marketing/releases/download/sprint-2-2026-05-18/S2_V7_final.mp4",
+      "caption": "",
+      "hashtags": "#datoscuriosos #sabiasque #curioclip #curiosidades",
+      "published": false,
+      "publish_at_utc": "2026-06-01T02:00:00Z",
+      "v_score": 0.0,
+      "local_video_path": "/home/runner/work/curioclip-marketing/curioclip-marketing/obsidian_vault/SEMANAS/SEMANA_02_2026-05-25_auto/DOMINGO/OUTPUT/S2_V7_final.mp4"
+    }
+  ]
+}
