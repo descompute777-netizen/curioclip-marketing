@@ -1,0 +1,80 @@
+<!-- APRENDIZAJE -->
+<div class="space-y-6">
+  <div class="flex justify-between items-start">
+    <div>
+      <h2 class="text-xl font-semibold">Aprendizaje · Loop autonomo</h2>
+      <p class="text-sm text-brand-muted">Calibracion del predictor + patrones detectados. Cada publicacion alimenta este ciclo.</p>
+    </div>
+    <div class="flex gap-2">
+      <button hx-post="/api/learn/calibrate" hx-swap="none"
+              class="px-3 py-2 bg-brand-card border border-brand-border rounded hover:border-brand-yellow text-sm">📐 Calibrar</button>
+      <button hx-post="/api/learn/scan_patterns" hx-swap="none"
+              class="px-3 py-2 bg-brand-yellow text-black font-semibold rounded text-sm">🔬 Escanear patrones</button>
+    </div>
+  </div>
+
+  <!-- Calibration status -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    {% set last = calibration[0] if calibration else None %}
+    <div class="bg-brand-card border border-brand-border rounded-lg p-5">
+      <div class="text-xs uppercase text-brand-muted">Estado calibracion</div>
+      {% if last and last.is_calibrated %}
+        <div class="text-2xl font-bold mt-2 text-brand-green">✓ Calibrado</div>
+      {% else %}
+        <div class="text-2xl font-bold mt-2 text-brand-yellow">En curso</div>
+      {% endif %}
+      <div class="text-xs text-brand-muted mt-1">
+        {% if last %}n={{ last.sample_size }} · meta n≥20 y MAE&lt;0.15{% else %}sin muestras{% endif %}
+      </div>
+    </div>
+
+    <div class="bg-brand-card border border-brand-border rounded-lg p-5">
+      <div class="text-xs uppercase text-brand-muted">MAE actual</div>
+      <div class="text-2xl font-bold mt-2 font-mono">
+        {{ "%.3f"|format(last.mae) if last and last.mae else '—' }}
+      </div>
+      <div class="text-xs text-brand-muted mt-1">Error medio absoluto. Menor = mejor.</div>
+    </div>
+
+    <div class="bg-brand-card border border-brand-border rounded-lg p-5">
+      <div class="text-xs uppercase text-brand-muted">Bias</div>
+      <div class="text-2xl font-bold mt-2 font-mono">
+        {{ "%+.3f"|format(last.bias) if last and last.bias is not none else '—' }}
+      </div>
+      <div class="text-xs text-brand-muted mt-1">Positivo = real &gt; predicho (subestima).</div>
+    </div>
+  </div>
+
+  <!-- Patterns -->
+  <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+    <h3 class="text-sm font-semibold mb-3">Patrones detectados</h3>
+    <table class="w-full text-sm">
+      <thead class="text-xs uppercase text-brand-muted">
+        <tr>
+          <th class="text-left py-2">Tipo</th>
+          <th class="text-left">Patron</th>
+          <th class="text-right">Muestras</th>
+          <th class="text-right">Avg views</th>
+          <th class="text-right">Confianza</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in patterns %}
+        <tr class="border-t border-brand-border hover:bg-brand-panel/50">
+          <td class="py-2 text-xs"><span class="bg-brand-panel px-2 py-0.5 rounded">{{ p.pattern_type }}</span></td>
+          <td class="text-sm">{{ p.pattern_value }}</td>
+          <td class="text-right text-xs">{{ p.sample_size }}</td>
+          <td class="text-right text-xs font-mono">{{ p.avg_views | int | money }}</td>
+          <td class="text-right text-xs">
+            <div class="inline-block w-16 h-1.5 bg-brand-panel rounded">
+              <div class="h-full bg-brand-yellow rounded" style="width: {{ (p.confidence * 100) | round(0) }}%"></div>
+            </div>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="text-center py-6 text-brand-muted text-xs">Sin patrones. Run scan_patterns con al menos 5 videos publicados.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>

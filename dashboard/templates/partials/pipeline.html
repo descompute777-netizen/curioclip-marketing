@@ -1,0 +1,49 @@
+<!-- PIPELINE (Kanban M1→M6) -->
+<div class="space-y-4">
+  <div>
+    <h2 class="text-xl font-semibold">Pipeline M1 → M6</h2>
+    <p class="text-sm text-brand-muted">Discover → Analyze → Produce → Predict → Publish → Learn.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-3 min-h-[600px]">
+    {% set stage_meta = {
+      'draft': ('Draft', '#71717a'),
+      'in_production': ('En produccion', '#a855f7'),
+      'produced': ('Producido', '#3b82f6'),
+      'scheduled': ('Agendado', '#fbbf24'),
+      'published': ('Publicado', '#10b981'),
+      'archived': ('Archivado', '#52525b'),
+    } %}
+    {% for stage in stages %}
+      {% set label, color = stage_meta[stage] %}
+      <div class="bg-brand-card border border-brand-border rounded-lg p-3 flex flex-col">
+        <div class="flex justify-between items-center mb-3 pb-2 border-b border-brand-border">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full" style="background: {{ color }}"></span>
+            <span class="text-xs font-semibold uppercase">{{ label }}</span>
+          </div>
+          <span class="text-xs text-brand-muted bg-brand-panel px-1.5 rounded">{{ pipeline[stage] | length }}</span>
+        </div>
+        <div class="space-y-2 overflow-y-auto flex-1">
+          {% for v in pipeline[stage] %}
+          <div class="bg-brand-panel border border-brand-border rounded p-2.5 hover:border-brand-yellow transition cursor-pointer text-xs">
+            <div class="flex justify-between items-start mb-1">
+              <span class="font-mono text-brand-yellow">{{ v.video_code or '—' }}</span>
+              {% if v.vscore_predicted %}
+              <span class="text-brand-muted">V{{ "%.1f"|format(v.vscore_predicted) }}</span>
+              {% endif %}
+            </div>
+            <div class="text-brand-text leading-snug">{{ v.title | short(60) }}</div>
+            <div class="flex items-center gap-1 mt-2 text-brand-muted">
+              <span class="w-1.5 h-1.5 rounded-full" style="background:{{ v.account_color }}"></span>
+              <span>{{ v.account_name }}</span>
+            </div>
+          </div>
+          {% else %}
+          <div class="text-xs text-brand-muted text-center py-4">Vacio</div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

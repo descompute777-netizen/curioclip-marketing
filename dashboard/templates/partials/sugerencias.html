@@ -1,0 +1,86 @@
+<!-- SUGERENCIAS -->
+<div class="space-y-6" x-data="{tab: 'inbox', showForm: false}">
+
+  <div class="flex justify-between items-start">
+    <div>
+      <h2 class="text-xl font-semibold">Sugerencias de contenido</h2>
+      <p class="text-sm text-brand-muted">Inbox de URLs (TikTok / YouTube / IG / FB) y guiones internos. Cada item se puntua y se promueve a produccion.</p>
+    </div>
+    <button @click="showForm = !showForm" class="px-4 py-2 bg-brand-yellow text-black font-semibold rounded">+ Agregar URL</button>
+  </div>
+
+  <!-- Add form -->
+  <div x-show="showForm" x-transition class="bg-brand-card border border-brand-border rounded-lg p-5">
+    <form onsubmit="event.preventDefault(); addSuggestion(this);" class="space-y-3">
+      <input name="source_url" placeholder="https://tiktok.com/@user/video/123..."
+             required class="w-full bg-brand-panel border border-brand-border rounded px-3 py-2 text-sm" />
+      <div class="grid grid-cols-2 gap-3">
+        <input name="title" placeholder="Titulo (opcional)" class="bg-brand-panel border border-brand-border rounded px-3 py-2 text-sm" />
+        <input name="view_count" type="number" placeholder="Vistas (opcional)" class="bg-brand-panel border border-brand-border rounded px-3 py-2 text-sm" />
+      </div>
+      <textarea name="notes" placeholder="Notas / por que es golden" class="w-full bg-brand-panel border border-brand-border rounded px-3 py-2 text-sm" rows="2"></textarea>
+      <div class="flex gap-2">
+        <button type="submit" class="bg-brand-yellow text-black font-semibold rounded px-4 py-2 text-sm">Agregar al inbox</button>
+        <button type="button" @click="showForm = false" class="text-sm text-brand-muted">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Tabs -->
+  <div class="flex gap-1 border-b border-brand-border">
+    {% for t in ['inbox', 'analyzing', 'approved', 'rejected', 'produced'] %}
+    <button @click="tab = '{{ t }}'"
+            :class="tab === '{{ t }}' ? 'border-brand-yellow text-brand-yellow' : 'border-transparent text-brand-muted'"
+            class="px-4 py-2 text-sm capitalize border-b-2 transition">{{ t }}</button>
+    {% endfor %}
+  </div>
+
+  <!-- List -->
+  <div class="space-y-2">
+    {% for s in suggestions %}
+    <div x-show="tab === '{{ s.status }}'" class="bg-brand-card border border-brand-border rounded-lg p-4">
+      <div class="flex justify-between items-start gap-4">
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs bg-brand-panel px-2 py-0.5 rounded text-brand-muted">{{ s.source_platform or 'unknown' }}</span>
+            {% if s.score %}<span class="text-xs text-brand-yellow font-mono">V{{ "%.1f"|format(s.score) }}</span>{% endif %}
+            {% if s.view_count %}<span class="text-xs text-brand-muted">{{ s.view_count | money }} views</span>{% endif %}
+          </div>
+          <div class="text-sm font-semibold">{{ s.title or s.source_url[:80] }}</div>
+          {% if s.hook_extracted %}
+          <div class="text-xs text-brand-muted mt-1 italic">"{{ s.hook_extracted | short(140) }}"</div>
+          {% endif %}
+          {% if s.notes %}<div class="text-xs text-brand-muted mt-1">{{ s.notes | short(160) }}</div>{% endif %}
+        </div>
+        <div class="flex flex-col gap-1 text-xs">
+          {% if s.status == 'inbox' %}
+            <button hx-patch="/api/suggestions/{{ s.id }}/status/approved" hx-swap="none"
+                    class="px-2 py-1 bg-brand-green/20 text-brand-green rounded">Aprobar</button>
+            <button hx-patch="/api/suggestions/{{ s.id }}/status/rejected" hx-swap="none"
+                    class="px-2 py-1 bg-brand-red/20 text-brand-red rounded">Rechazar</button>
+          {% elif s.status == 'approved' %}
+            <button hx-patch="/api/suggestions/{{ s.id }}/status/produced" hx-swap="none"
+                    class="px-2 py-1 bg-brand-blue/20 text-brand-blue rounded">→ Producido</button>
+          {% endif %}
+          <a href="{{ s.source_url }}" target="_blank" class="text-brand-muted hover:text-brand-yellow text-center">Abrir ↗</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+<script>
+async function addSuggestion(form) {
+  const data = Object.fromEntries(new FormData(form));
+  if (data.view_count) data.view_count = parseInt(data.view_count);
+  const r = await fetch('/api/suggestions', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  });
+  if (r.ok) htmx.ajax('GET', '/partial/sugerencias', '#main');
+  else alert('Error: ' + (await r.text()));
+}
+</script>

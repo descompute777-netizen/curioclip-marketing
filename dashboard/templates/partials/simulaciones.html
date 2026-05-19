@@ -1,0 +1,113 @@
+<!-- SIMULACIONES (V-Score vs Real) -->
+<div class="space-y-6">
+  <div class="flex justify-between items-start">
+    <div>
+      <h2 class="text-xl font-semibold">Simulaciones · V-Score</h2>
+      <p class="text-sm text-brand-muted">Prediccion vs. realidad. El predictor se calibra automaticamente con cada nueva muestra.</p>
+    </div>
+    <button hx-post="/api/learn/calibrate" hx-swap="none"
+            class="px-3 py-2 bg-brand-yellow text-black font-semibold text-sm rounded">📐 Recalibrar ahora</button>
+  </div>
+
+  <!-- Scatter plot -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+      <h3 class="text-sm font-semibold mb-2">Prediccion vs Real (scatter)</h3>
+      <canvas id="scatterChart" height="240"></canvas>
+      <p class="text-xs text-brand-muted mt-2">Linea ideal: y=x. Puntos sobre la linea = predicho > real (sobreestimacion).</p>
+    </div>
+    <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+      <h3 class="text-sm font-semibold mb-2">Historial calibracion</h3>
+      <div class="space-y-1 max-h-72 overflow-y-auto">
+        {% for c in calibration %}
+        <div class="flex justify-between items-center text-xs bg-brand-panel rounded px-3 py-2">
+          <span class="text-brand-muted">{{ c.computed_at[:16] }}</span>
+          <span>n={{ c.sample_size }}</span>
+          <span>MAE: <span class="font-mono text-brand-yellow">{{ "%.3f"|format(c.mae or 0) }}</span></span>
+          {% if c.is_calibrated %}
+          <span class="text-brand-green text-xs">✓ calibrado</span>
+          {% else %}
+          <span class="text-brand-muted text-xs">pendiente</span>
+          {% endif %}
+        </div>
+        {% else %}
+        <p class="text-xs text-brand-muted py-4 text-center">Sin calibraciones aun.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-brand-panel text-xs uppercase text-brand-muted">
+        <tr>
+          <th class="px-4 py-2 text-left">Codigo</th>
+          <th class="px-4 py-2 text-left">Cuenta</th>
+          <th class="px-4 py-2 text-left">Titulo</th>
+          <th class="px-4 py-2 text-right">Predicho</th>
+          <th class="px-4 py-2 text-right">Real</th>
+          <th class="px-4 py-2 text-right">Delta</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in sims %}
+        <tr class="border-t border-brand-border hover:bg-brand-panel/50">
+          <td class="px-4 py-2 font-mono text-brand-yellow">{{ s.video_code }}</td>
+          <td class="px-4 py-2 text-xs">{{ s.account_name }}</td>
+          <td class="px-4 py-2 text-xs">{{ s.title | short(50) }}</td>
+          <td class="px-4 py-2 text-right font-mono">{{ "%.2f"|format(s.vscore_predicted or 0) }}</td>
+          <td class="px-4 py-2 text-right font-mono">{% if s.vscore_actual %}{{ "%.2f"|format(s.vscore_actual) }}{% else %}—{% endif %}</td>
+          <td class="px-4 py-2 text-right text-xs">
+            {% if s.vscore_actual %}
+              {% set d = s.vscore_actual - s.vscore_predicted %}
+              <span class="{% if d|abs < 0.5 %}text-brand-green{% elif d|abs < 1.5 %}text-brand-yellow{% else %}text-brand-red{% endif %}">
+                {{ "%+.2f"|format(d) }}
+              </span>
+            {% else %}—{% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+(function() {
+  const data = {{ sims | tojson }};
+  const points = data
+    .filter(d => d.vscore_actual)
+    .map(d => ({x: d.vscore_predicted, y: d.vscore_actual, label: d.video_code}));
+  const ctx = document.getElementById('scatterChart');
+  if (!ctx || ctx._chart) return;
+  ctx._chart = new Chart(ctx.getContext('2d'), {
+    type: 'scatter',
+    data: {
+      datasets: [
+        {
+          label: 'V-Score pred vs real',
+          data: points,
+          backgroundColor: '#fbbf24',
+          pointRadius: 6,
+        },
+        {
+          label: 'Ideal (y=x)',
+          data: [{x:0,y:0},{x:10,y:10}],
+          showLine: true,
+          borderColor: '#10b981',
+          borderDash: [5,5],
+          pointRadius: 0,
+        }
+      ]
+    },
+    options: {
+      scales: {
+        x: {title:{display:true,text:'Predicho', color:'#a1a1aa'}, min:0, max:10, grid:{color:'#27272a'}, ticks:{color:'#71717a'}},
+        y: {title:{display:true,text:'Real', color:'#a1a1aa'}, min:0, max:10, grid:{color:'#27272a'}, ticks:{color:'#71717a'}},
+      },
+      plugins: { legend: {labels:{color:'#fafafa'}} }
+    }
+  });
+})();
+</script>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CurioClip Mission Control</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.13.5/dist/cdn.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              bg:    '#0a0a0a',
+              panel: '#111114',
+              card:  '#18181b',
+              border:'#27272a',
+              text:  '#fafafa',
+              muted: '#71717a',
+              yellow:'#fbbf24',
+              red:   '#ef4444',
+              green: '#10b981',
+              blue:  '#3b82f6',
+              purple:'#a855f7',
+            }
+          },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brand-bg text-brand-text font-sans antialiased">
+
+<div class="flex min-h-screen" x-data="{section: '{{ section or 'overview' }}'}">
+
+  <!-- SIDEBAR -->
+  <aside class="w-64 bg-brand-panel border-r border-brand-border flex flex-col">
+    <div class="p-5 border-b border-brand-border">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-brand-yellow grid place-items-center text-black font-black">C</div>
+        <div>
+          <div class="font-bold text-sm leading-tight">CurioClip</div>
+          <div class="text-xs text-brand-muted">Mission Control</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="flex-1 px-3 py-4 space-y-1 text-sm">
+      {% set links = [
+        ('overview', '🏠', 'Overview'),
+        ('cuentas', '👥', 'Cuentas'),
+        ('calendario', '📅', 'Calendario'),
+        ('pipeline', '🎬', 'Pipeline'),
+        ('simulaciones', '🧠', 'Simulaciones'),
+        ('crecimiento', '📈', 'Crecimiento'),
+        ('sugerencias', '💡', 'Sugerencias'),
+        ('automatizacion', '🤖', 'Automatizacion'),
+        ('aprendizaje', '🎓', 'Aprendizaje'),
+        ('briefings', '📋', 'Briefings'),
+      ] %}
+      {% for slug, ico, label in links %}
+        <a href="#"
+           hx-get="/partial/{{ slug }}"
+           hx-target="#main"
+           hx-swap="innerHTML"
+           hx-push-url="false"
+           @click="section='{{ slug }}'"
+           :class="section==='{{ slug }}' ? 'bg-brand-yellow/10 text-brand-yellow border-l-2 border-brand-yellow' : 'text-brand-muted hover:bg-brand-card hover:text-brand-text'"
+           class="flex items-center gap-3 px-3 py-2 rounded transition">
+          <span class="text-base">{{ ico }}</span>
+          <span>{{ label }}</span>
+        </a>
+      {% endfor %}
+    </nav>
+
+    <div class="p-3 border-t border-brand-border text-xs text-brand-muted space-y-1">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 bg-brand-green rounded-full animate-pulse"></span>
+        <span>Sistema activo</span>
+      </div>
+      <div>v1.0.0 · localhost:8000</div>
+      <button hx-post="/api/seed/run" hx-confirm="Re-poblar desde obsidian_vault?"
+              class="w-full mt-2 px-2 py-1 text-xs bg-brand-card border border-brand-border rounded hover:border-brand-yellow">
+        ♻ Re-seed
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN AREA -->
+  <main class="flex-1 overflow-x-hidden">
+    <header class="border-b border-brand-border bg-brand-panel/60 backdrop-blur sticky top-0 z-10 px-6 py-3 flex items-center justify-between">
+      <div>
+        <h1 class="text-lg font-semibold capitalize" x-text="section"></h1>
+        <p class="text-xs text-brand-muted">{{ now.strftime('%A %d %b %Y · %H:%M UTC') }}</p>
+      </div>
+      <div class="flex items-center gap-3 text-xs">
+        <button hx-post="/api/pipeline/poll_metrics" hx-swap="none"
+                class="px-3 py-1.5 bg-brand-card border border-brand-border rounded hover:border-brand-yellow">
+          ⟳ Refrescar metricas
+        </button>
+        <button hx-post="/api/learn/calibrate" hx-swap="none"
+                class="px-3 py-1.5 bg-brand-card border border-brand-border rounded hover:border-brand-yellow">
+          📐 Calibrar predictor
+        </button>
+        <button hx-post="/api/pipeline/produce_all" hx-swap="none" hx-confirm="Ejecutar produce_all en background?"
+                class="px-3 py-1.5 bg-brand-yellow text-black font-semibold rounded hover:bg-amber-400">
+          ▶ Producir todo
+        </button>
+      </div>
+    </header>
+
+    <div id="main" class="p-6">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

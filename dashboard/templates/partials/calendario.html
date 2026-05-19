@@ -1,0 +1,56 @@
+<!-- CALENDARIO -->
+<div class="space-y-4">
+  <div class="flex justify-between items-center">
+    <div>
+      <h2 class="text-xl font-semibold">Calendario de contenido</h2>
+      <p class="text-sm text-brand-muted">Drag & drop para reagendar. Click para detalles.</p>
+    </div>
+    <div class="flex gap-2 text-xs">
+      <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:#10b981"></span> Publicado</span>
+      <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:#fbbf24"></span> Agendado</span>
+      <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:#3b82f6"></span> Producido</span>
+      <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:#a855f7"></span> En produccion</span>
+    </div>
+  </div>
+  <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+    <div id="calendar" class="text-sm"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const el = document.getElementById('calendar');
+  if (!el || el._init) return;
+  el._init = true;
+  const calendar = new FullCalendar.Calendar(el, {
+    initialView: 'dayGridMonth',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,listWeek'
+    },
+    height: 700,
+    events: '{{ events_url }}',
+    eventColor: '#fbbf24',
+    locale: 'es',
+    firstDay: 1,
+    themeSystem: 'standard',
+  });
+  calendar.render();
+})();
+</script>
+<style>
+  .fc { background: transparent; color: #fafafa; }
+  .fc .fc-toolbar-title { font-size: 1rem; font-weight: 600; }
+  .fc .fc-button {
+    background: #18181b !important;
+    border: 1px solid #27272a !important;
+    color: #fafafa !important;
+    font-size: 0.75rem !important;
+    padding: 4px 10px !important;
+  }
+  .fc .fc-button-active { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
+  .fc-theme-standard td, .fc-theme-standard th { border-color: #27272a !important; }
+  .fc-day-today { background: rgba(251, 191, 36, 0.05) !important; }
+  .fc-event { font-size: 0.7rem !important; padding: 1px 4px !important; cursor: pointer; }
+</style>

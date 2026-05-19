@@ -1,0 +1,92 @@
+<!-- CUENTAS -->
+<div class="space-y-6" x-data="{showForm: false}">
+
+  <div class="flex justify-between items-center">
+    <div>
+      <h2 class="text-xl font-semibold">Cuentas</h2>
+      <p class="text-sm text-brand-muted">Manejo multi-cuenta. Cada cuenta tiene su propio pipeline, KPIs y calibracion.</p>
+    </div>
+    <button @click="showForm = !showForm" class="px-4 py-2 bg-brand-yellow text-black font-semibold rounded hover:bg-amber-400">
+      + Nueva cuenta
+    </button>
+  </div>
+
+  <!-- Add form -->
+  <div x-show="showForm" x-transition class="bg-brand-card border border-brand-border rounded-lg p-5">
+    <form onsubmit="event.preventDefault(); createAccount(this);" class="grid grid-cols-2 gap-3">
+      <input name="name" placeholder="Nombre" required class="bg-brand-panel border border-brand-border rounded px-3 py-2 text-sm" />
+      <input name="handle" placeholder="@handle" required class="bg-brand-panel border border-brand-border rounded px-3 py-2 text-sm" />
+      <select name="platform" class="bg-brand-panel border border-brand-border rounded px-3 py-2 text-sm">
+        <option value="tiktok">TikTok</option>
+        <option value="facebook">Facebook</option>
+        <option value="instagram">Instagram</option>
+        <option value="youtube">YouTube</option>
+      </select>
+      <input name="niche" placeholder="Nicho (ej: curiosidades)" class="bg-brand-panel border border-brand-border rounded px-3 py-2 text-sm" />
+      <input name="followers_current" type="number" placeholder="Followers actuales" value="0" class="bg-brand-panel border border-brand-border rounded px-3 py-2 text-sm" />
+      <input name="followers_goal" type="number" placeholder="Meta followers" value="10000" class="bg-brand-panel border border-brand-border rounded px-3 py-2 text-sm" />
+      <input name="color" type="color" value="#fbbf24" class="bg-brand-panel border border-brand-border rounded h-10 cursor-pointer" />
+      <button type="submit" class="bg-brand-yellow text-black font-semibold rounded px-4 py-2">Crear</button>
+    </form>
+  </div>
+
+  <!-- Account cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {% for a in accounts_rich %}
+    <div class="bg-brand-card border border-brand-border rounded-lg p-5 hover:border-brand-yellow transition">
+      <div class="flex justify-between items-start mb-3">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg grid place-items-center font-black text-black" style="background: {{ a.color }}">
+            {{ a.name[0]|upper }}
+          </div>
+          <div>
+            <div class="font-semibold">{{ a.name }}</div>
+            <div class="text-xs text-brand-muted">@{{ a.handle }} · {{ a.platform }}</div>
+          </div>
+        </div>
+        <span class="text-xs px-2 py-0.5 rounded {% if a.status == 'active' %}bg-brand-green/20 text-brand-green{% else %}bg-brand-muted/20 text-brand-muted{% endif %}">{{ a.status }}</span>
+      </div>
+      <div class="grid grid-cols-3 gap-2 text-center text-xs">
+        <div class="bg-brand-panel rounded p-2">
+          <div class="text-brand-muted">Videos</div>
+          <div class="text-lg font-bold mt-0.5">{{ a.videos_count or 0 }}</div>
+        </div>
+        <div class="bg-brand-panel rounded p-2">
+          <div class="text-brand-muted">Pub.</div>
+          <div class="text-lg font-bold mt-0.5 text-brand-green">{{ a.published_count or 0 }}</div>
+        </div>
+        <div class="bg-brand-panel rounded p-2">
+          <div class="text-brand-muted">Followers</div>
+          <div class="text-lg font-bold mt-0.5 text-brand-yellow">{{ a.followers_current | money }}</div>
+        </div>
+      </div>
+      <div class="mt-3">
+        <div class="text-xs text-brand-muted">Progreso a meta ({{ a.followers_goal | money }})</div>
+        <div class="h-1.5 bg-brand-panel rounded-full mt-1 overflow-hidden">
+          <div class="h-full bg-brand-yellow" style="width: {{ (a.followers_current / (a.followers_goal or 1) * 100) | round(1) }}%"></div>
+        </div>
+      </div>
+      <div class="mt-3 flex gap-2">
+        <button hx-delete="/api/accounts/{{ a.id }}" hx-confirm="Eliminar {{ a.name }}? Borra todos sus videos." hx-swap="none"
+                class="text-xs text-brand-red hover:underline">Eliminar</button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+<script>
+async function createAccount(form) {
+  const data = Object.fromEntries(new FormData(form));
+  data.followers_current = parseInt(data.followers_current || 0);
+  data.followers_goal = parseInt(data.followers_goal || 10000);
+  const r = await fetch('/api/accounts', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  });
+  if (r.ok) htmx.ajax('GET', '/partial/cuentas', '#main');
+  else alert('Error: ' + (await r.text()));
+}
+</script>

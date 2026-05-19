@@ -1,0 +1,67 @@
+<!-- CRECIMIENTO -->
+<div class="space-y-6">
+  <div>
+    <h2 class="text-xl font-semibold">Crecimiento de cuentas</h2>
+    <p class="text-sm text-brand-muted">Followers, views totales y engagement rate por cuenta a lo largo del tiempo.</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+      <h3 class="text-sm font-semibold mb-2">Followers</h3>
+      <canvas id="followersChart" height="220"></canvas>
+    </div>
+    <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+      <h3 class="text-sm font-semibold mb-2">Vistas acumuladas</h3>
+      <canvas id="viewsChart" height="220"></canvas>
+    </div>
+  </div>
+
+  <!-- Account compare cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {% for a in accounts %}
+    <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="w-3 h-3 rounded-full" style="background:{{ a.color }}"></span>
+        <span class="font-semibold">{{ a.name }}</span>
+      </div>
+      <div class="text-3xl font-bold text-brand-yellow">{{ a.followers_current | money }}</div>
+      <div class="text-xs text-brand-muted">followers actuales</div>
+      <div class="mt-2 text-xs">Meta: <span class="text-brand-text">{{ a.followers_goal | money }}</span></div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+(async function() {
+  const r = await fetch('{{ growth_url }}');
+  const data = await r.json();
+
+  function ds(accounts, key) {
+    return accounts.map(a => ({
+      label: a.name,
+      data: (a.series || []).map(s => ({x: s.date, y: s[key]})),
+      borderColor: a.color,
+      backgroundColor: a.color + '20',
+      tension: 0.3,
+      pointRadius: 3,
+    }));
+  }
+
+  const common = {
+    type: 'line',
+    options: {
+      scales: {
+        x: {type: 'category', grid: {color:'#27272a'}, ticks:{color:'#71717a'}},
+        y: {grid:{color:'#27272a'}, ticks:{color:'#71717a'}},
+      },
+      plugins: {legend:{labels:{color:'#fafafa'}}}
+    }
+  };
+
+  const f = document.getElementById('followersChart');
+  if (f && !f._chart) f._chart = new Chart(f, {...common, data: {datasets: ds(data.accounts, 'followers')}});
+  const v = document.getElementById('viewsChart');
+  if (v && !v._chart) v._chart = new Chart(v, {...common, data: {datasets: ds(data.accounts, 'total_views')}});
+})();
+</script>

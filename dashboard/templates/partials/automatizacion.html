@@ -1,0 +1,100 @@
+<!-- AUTOMATIZACION -->
+<div class="space-y-6">
+  <div>
+    <h2 class="text-xl font-semibold">Automatizacion</h2>
+    <p class="text-sm text-brand-muted">Cola de tareas de los 10 agentes. Cada item se ejecuta automatica o manualmente.</p>
+  </div>
+
+  <!-- Quick triggers -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <button hx-post="/api/pipeline/produce_all" hx-swap="none"
+            class="bg-brand-card hover:border-brand-yellow border border-brand-border rounded-lg p-4 text-left transition">
+      <div class="text-2xl mb-1">🎬</div>
+      <div class="font-semibold text-sm">Producir todo</div>
+      <div class="text-xs text-brand-muted">A4 · ejecuta produce_all.py</div>
+    </button>
+    <button hx-post="/api/pipeline/poll_metrics" hx-swap="none"
+            class="bg-brand-card hover:border-brand-yellow border border-brand-border rounded-lg p-4 text-left transition">
+      <div class="text-2xl mb-1">⟳</div>
+      <div class="font-semibold text-sm">Refrescar metricas</div>
+      <div class="text-xs text-brand-muted">A6 · lee TikTok Studio</div>
+    </button>
+    <button hx-post="/api/learn/calibrate" hx-swap="none"
+            class="bg-brand-card hover:border-brand-yellow border border-brand-border rounded-lg p-4 text-left transition">
+      <div class="text-2xl mb-1">📐</div>
+      <div class="font-semibold text-sm">Calibrar predictor</div>
+      <div class="text-xs text-brand-muted">A8 · MAE, RMSE, bias</div>
+    </button>
+    <button hx-post="/api/learn/scan_patterns" hx-swap="none"
+            class="bg-brand-card hover:border-brand-yellow border border-brand-border rounded-lg p-4 text-left transition">
+      <div class="text-2xl mb-1">🔬</div>
+      <div class="font-semibold text-sm">Escanear patrones</div>
+      <div class="text-xs text-brand-muted">A7 · hooks, nichos, horas</div>
+    </button>
+  </div>
+
+  <!-- Queue table -->
+  <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden">
+    <div class="px-4 py-2 border-b border-brand-border text-sm font-semibold">Cola de automatizacion</div>
+    <table class="w-full text-sm">
+      <thead class="bg-brand-panel text-xs uppercase text-brand-muted">
+        <tr>
+          <th class="px-4 py-2 text-left">Agente</th>
+          <th class="px-4 py-2 text-left">Accion</th>
+          <th class="px-4 py-2 text-left">Cuenta</th>
+          <th class="px-4 py-2 text-left">Programado</th>
+          <th class="px-4 py-2 text-left">Estado</th>
+          <th class="px-4 py-2 text-right">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for q in queue %}
+        <tr class="border-t border-brand-border hover:bg-brand-panel/50">
+          <td class="px-4 py-2"><span class="text-xs font-mono bg-brand-panel px-1.5 py-0.5 rounded">{{ q.agent }}</span></td>
+          <td class="px-4 py-2 text-xs">{{ q.action }}</td>
+          <td class="px-4 py-2 text-xs text-brand-muted">{{ q.account_name or '—' }}</td>
+          <td class="px-4 py-2 text-xs text-brand-muted font-mono">{{ q.scheduled_for[:16] if q.scheduled_for else '—' }}</td>
+          <td class="px-4 py-2 text-xs">
+            <span class="px-2 py-0.5 rounded
+              {% if q.status == 'pending' %}bg-brand-yellow/20 text-brand-yellow
+              {% elif q.status == 'in_progress' %}bg-brand-blue/20 text-brand-blue
+              {% elif q.status == 'completed' %}bg-brand-green/20 text-brand-green
+              {% elif q.status == 'failed' %}bg-brand-red/20 text-brand-red
+              {% else %}bg-brand-muted/20 text-brand-muted{% endif %}">
+              {{ q.status }}
+            </span>
+          </td>
+          <td class="px-4 py-2 text-right text-xs">
+            {% if q.status == 'pending' %}
+            <button hx-post="/api/automation/{{ q.id }}/run" hx-swap="none"
+                    class="text-brand-yellow hover:underline">▶ Ejecutar</button>
+            {% endif %}
+            <button hx-delete="/api/automation/{{ q.id }}" hx-confirm="Eliminar tarea?" hx-swap="none"
+                    class="text-brand-red hover:underline ml-2">Borrar</button>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="text-center py-6 text-brand-muted text-xs">Sin tareas pendientes.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Recent runs -->
+  <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+    <h3 class="text-sm font-semibold mb-3">Pipeline runs recientes</h3>
+    <div class="space-y-1 text-xs">
+      {% for r in runs %}
+      <div class="flex justify-between bg-brand-panel rounded px-3 py-2">
+        <span class="font-mono">{{ r.run_type }}</span>
+        <span class="text-brand-muted">{{ r.started_at[:16] }}</span>
+        <span class="{% if r.status == 'failed' %}text-brand-red{% elif r.status == 'completed' %}text-brand-green{% else %}text-brand-yellow{% endif %}">
+          {{ r.status }}
+        </span>
+      </div>
+      {% else %}
+      <p class="text-brand-muted text-center py-3">Sin runs aun.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>

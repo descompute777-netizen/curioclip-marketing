@@ -1,0 +1,111 @@
+<!-- OVERVIEW -->
+<div class="space-y-6">
+
+  <!-- KPI cards -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+      <div class="text-xs text-brand-muted uppercase tracking-wide">Cuentas activas</div>
+      <div class="text-3xl font-bold mt-1">{{ stats.accounts_active }}</div>
+      <div class="text-xs text-brand-green mt-1">▲ multi-account ready</div>
+    </div>
+    <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+      <div class="text-xs text-brand-muted uppercase tracking-wide">Videos publicados</div>
+      <div class="text-3xl font-bold mt-1">{{ stats.videos_published }}</div>
+      <div class="text-xs text-brand-muted mt-1">de {{ stats.videos_total }} totales</div>
+    </div>
+    <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+      <div class="text-xs text-brand-muted uppercase tracking-wide">Vistas 7d</div>
+      <div class="text-3xl font-bold mt-1 text-brand-yellow">{{ stats.views_7d | money }}</div>
+      <div class="text-xs text-brand-muted mt-1">snapshots ultima semana</div>
+    </div>
+    <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+      <div class="text-xs text-brand-muted uppercase tracking-wide">Cola autom.</div>
+      <div class="text-3xl font-bold mt-1">{{ stats.queue_pending }}</div>
+      <div class="text-xs text-brand-blue mt-1">⚡ pendientes</div>
+    </div>
+  </div>
+
+  <!-- Two-column: Recent videos + Next 24h -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <!-- Recent -->
+    <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="font-semibold text-sm">Actividad reciente</h3>
+        <button hx-get="/partial/pipeline" hx-target="#main" class="text-xs text-brand-yellow hover:underline">Ver pipeline →</button>
+      </div>
+      <div class="space-y-2">
+        {% for v in recent_videos %}
+        <div class="flex items-center gap-3 p-2 rounded hover:bg-brand-panel transition">
+          <span class="w-1 h-10 rounded" style="background:{{ v.account_color }}"></span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-mono bg-brand-panel px-1.5 py-0.5 rounded">{{ v.video_code or '—' }}</span>
+              <span class="text-xs text-brand-muted">{{ v.account_name }}</span>
+              <span class="text-xs px-1.5 py-0.5 rounded
+                {% if v.status == 'published' %}bg-brand-green/20 text-brand-green
+                {% elif v.status == 'scheduled' %}bg-brand-yellow/20 text-brand-yellow
+                {% else %}bg-brand-muted/20 text-brand-muted{% endif %}">{{ v.status }}</span>
+            </div>
+            <div class="text-sm truncate mt-0.5">{{ v.title | short(70) }}</div>
+          </div>
+          {% if v.vscore_predicted %}
+          <div class="text-right text-xs">
+            <div class="text-brand-yellow font-mono">V{{ "%.1f"|format(v.vscore_predicted) }}</div>
+          </div>
+          {% endif %}
+        </div>
+        {% else %}
+        <p class="text-sm text-brand-muted">Sin videos aun. Run seed.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Next 24h -->
+    <div class="bg-brand-card border border-brand-border rounded-lg p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="font-semibold text-sm">Proximas 24h</h3>
+        <button hx-get="/partial/calendario" hx-target="#main" class="text-xs text-brand-yellow hover:underline">Calendario →</button>
+      </div>
+      {% if next_24h %}
+      <div class="space-y-2">
+        {% for v in next_24h %}
+        <div class="flex items-center gap-3 p-2 rounded hover:bg-brand-panel">
+          <div class="text-xs font-mono text-brand-muted">{{ v.scheduled_at[:16] }}</div>
+          <span class="text-xs">{{ v.video_code }}</span>
+          <div class="flex-1 truncate text-sm">{{ v.title | short(50) }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-sm text-brand-muted py-8 text-center">No hay nada agendado en las proximas 24h.</p>
+      {% endif %}
+    </div>
+
+  </div>
+
+  <!-- Mission status bar -->
+  <div class="bg-gradient-to-r from-brand-card to-brand-panel border border-brand-border rounded-lg p-5">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <div class="text-xs text-brand-muted uppercase">Mision 90 dias</div>
+        <div class="text-lg font-bold mt-1">10K followers · 100K views</div>
+        <div class="mt-2 h-2 bg-brand-bg rounded-full overflow-hidden">
+          <div class="h-full bg-brand-yellow" style="width: {{ (stats.followers_total / 10000 * 100) | round(1) }}%"></div>
+        </div>
+        <div class="text-xs text-brand-muted mt-1">{{ stats.followers_total }} / 10,000 followers</div>
+      </div>
+      <div>
+        <div class="text-xs text-brand-muted uppercase">Nivel autonomia</div>
+        <div class="text-lg font-bold mt-1 text-brand-green">Nivel 4 · Auto-publish</div>
+        <div class="text-xs text-brand-muted mt-1">Claude publica + tu vetas. Calibracion automatica.</div>
+      </div>
+      <div>
+        <div class="text-xs text-brand-muted uppercase">Loop aprendizaje</div>
+        <div class="text-lg font-bold mt-1 text-brand-blue">Activo</div>
+        <div class="text-xs text-brand-muted mt-1">Metrics 24h/72h post-publish → calibracion → patrones.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
