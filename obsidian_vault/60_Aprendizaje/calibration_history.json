@@ -437,6 +437,12 @@
       "status": "no_real_data_yet",
       "n_simulations": 1,
       "note": "Esperando primeros snapshots reales de TikTok analytics."
+    },
+    {
+      "timestamp": "2026-05-24T13:55:32.738822+00:00",
+      "status": "no_real_data_yet",
+      "n_simulations": 1,
+      "note": "Esperando primeros snapshots reales de TikTok analytics."
     }
   ],
   "weights_history": [],
