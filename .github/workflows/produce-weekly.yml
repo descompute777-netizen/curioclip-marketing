@@ -1,0 +1,84 @@
+name: "Producción Semanal Autónoma — Full Pipeline"
+
+# Produce 7 videos completos sin intervención humana.
+# Lunes: genera guiones + produce videos + sube a GitHub Releases
+# El usuario solo abre su PC 15 min/semana para batch-upload a TikTok.
+
+on:
+  schedule:
+    - cron: '0 10 * * 1'    # Lunes 10:00 UTC (6am AST)
+  workflow_dispatch:
+    inputs:
+      force_produce:
+        description: 'Force re-produce all videos'
+        type: boolean
+        default: false
+
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install edge-tts requests openai anthropic
+          pip install openai-whisper || echo "whisper install failed, using fallback subs"
+          sudo apt-get update -qq && sudo apt-get install -y ffmpeg
+          ffmpeg -version | head -1
+
+      - name: "Step 1: Generate weekly scripts (Gemini FREE)"
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/autonomous/weekly_sprint.py
+
+      - name: "Step 2: Produce all videos (TTS + B-roll + Subs + Compose)"
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: python scripts/autonomous/cloud_full_pipeline.py
+
+      - name: "Step 3: Upload to GitHub Releases"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/autonomous/upload_release.py
+
+      - name: "Step 4: Commit vault updates"
+        run: |
+          git config user.name "CurioClip-Bot"
+          git config user.email "bot@curioclip.ai"
+          git add obsidian_vault/ 2>/dev/null || true
+          git add config/ 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No vault changes"
+          else
+            git commit -m "feat(auto): Weekly production [$(date +%Y-%m-%d)] [skip ci]"
+            git push
+          fi
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: produce
+    if: always()
+    steps:
+      - name: Production summary
+        run: |
+          echo "## Production Complete" >> $GITHUB_STEP_SUMMARY
+          echo "Sprint week: $(date +%Y-%m-%d)" >> $GITHUB_STEP_SUMMARY
+          echo "Status: ${{ needs.produce.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Next: Run batch_schedule_upload.py on your PC (15 min)" >> $GITHUB_STEP_SUMMARY

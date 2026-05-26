@@ -2,22 +2,70 @@
   "mcpServers": {
     "playwright": {
       "command": "cmd",
-      "args": ["/c", "npx", "@playwright/mcp@latest", "--cdp-endpoint", "http://localhost:9222"],
+      "args": [
+        "/c",
+        "npx",
+        "@playwright/mcp@latest",
+        "--cdp-endpoint",
+        "http://localhost:9222"
+      ],
       "description": "Playwright MCP — Browser automation conectado al Chrome con sesiones activas (TikTok, Composio, Pexels). Permite click, fill, navigate, screenshot via accessibility tree."
     },
     "playwright-standalone": {
       "command": "cmd",
-      "args": ["/c", "npx", "@playwright/mcp@latest", "--browser", "chrome", "--user-data-dir", "C:/Users/Nick/AppData/Local/chrome-curioclip"],
+      "args": [
+        "/c",
+        "npx",
+        "@playwright/mcp@latest",
+        "--browser",
+        "chrome",
+        "--user-data-dir",
+        "C:/Users/Nick/AppData/Local/chrome-curioclip"
+      ],
       "description": "Playwright MCP standalone — Chrome con el perfil CurioClip (login guardado). Usar si la sesión CDP cae."
+    },
+    "chrome-devtools": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--browserUrl",
+        "http://127.0.0.1:9222"
+      ],
+      "description": "Chrome DevTools MCP (Google oficial) — Attach al Chrome en :9222. 29 tools: network, performance, debugging, emulation, input, navigation, memory. Mismo Chrome que chrome_bridge.py y playwright — sesiones de TikTok/Composio reutilizadas."
+    },
+    "chrome-devtools-standalone": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--userDataDir",
+        "C:/Users/Nick/AppData/Local/chrome-curioclip"
+      ],
+      "description": "Chrome DevTools MCP standalone — Lanza Chrome con perfil CurioClip si la sesión CDP cae. Fallback de chrome-devtools."
     },
     "sequential-thinking": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
       "description": "Pensamiento Secuencial — razonamiento estructurado paso a paso"
     },
     "context7": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "@upstash/context7-mcp"],
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@upstash/context7-mcp"
+      ],
       "description": "Context7 — documentación actualizada de librerías para LLMs"
     },
     "composio-tiktok": {
@@ -29,6 +77,10 @@
       "type": "sse",
       "url": "https://tiktok-ads.mcp.pipeboard.co/",
       "description": "TikTok Ads MCP via Pipeboard — campañas y analytics de ads"
+    },
+    "higgsfield": {
+      "type": "http",
+      "url": "https://mcp.higgsfield.ai/mcp"
     }
   }
 }
