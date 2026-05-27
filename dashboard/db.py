@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS automation_queue (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   agent TEXT,
   action TEXT,
-  account_id INTEGER REFERENCES accounts(id),
+  account_id INTEGER REFERENCES accounts(id) ON DELETE SET NULL,
   payload TEXT,
   scheduled_for TEXT,
   status TEXT DEFAULT 'pending',
@@ -139,7 +139,7 @@ CREATE INDEX IF NOT EXISTS idx_queue_status ON automation_queue(status, schedule
 CREATE TABLE IF NOT EXISTS pipeline_runs (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   run_type TEXT,
-  account_id INTEGER REFERENCES accounts(id),
+  account_id INTEGER REFERENCES accounts(id) ON DELETE SET NULL,
   status TEXT,
   log_path TEXT,
   metadata TEXT,
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS learn_patterns (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   pattern_type TEXT,
   pattern_value TEXT,
-  account_id INTEGER REFERENCES accounts(id),
+  account_id INTEGER REFERENCES accounts(id) ON DELETE SET NULL,
   sample_size INTEGER,
   avg_views REAL,
   avg_engagement REAL,
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS learn_patterns (
 
 CREATE TABLE IF NOT EXISTS calibration_log (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  account_id INTEGER REFERENCES accounts(id),
+  account_id INTEGER REFERENCES accounts(id) ON DELETE SET NULL,
   sample_size INTEGER,
   mae REAL,
   rmse REAL,
@@ -181,6 +181,59 @@ CREATE TABLE IF NOT EXISTS briefings (
   blockers TEXT,
   created_at TEXT DEFAULT (datetime('now'))
 );
+
+-- ─── M6 LEARN — comparación POR COMPONENTE simulación vs realidad ─────────
+CREATE TABLE IF NOT EXISTS simulations_vs_reality (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  video_id INTEGER NOT NULL REFERENCES videos(id) ON DELETE CASCADE,
+  ve_predicted REAL,            -- VisualEyes_attention (0-10)
+  ve_real REAL,
+  ve_delta REAL,                -- predicted - real
+  mf_spread_predicted REAL,
+  mf_spread_real REAL,
+  mf_spread_delta REAL,
+  mf_sentiment_predicted REAL,
+  mf_sentiment_real REAL,
+  mf_sentiment_delta REAL,
+  hook_predicted REAL,
+  hook_real REAL,
+  hook_delta REAL,
+  vscore_predicted_total REAL,
+  vscore_real_total REAL,
+  weights_version_used INTEGER, -- FK a vscore_weight_history.version
+  sample_at TEXT DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_svr_video ON simulations_vs_reality(video_id);
+
+-- Feedback del usuario (opiniones, sugerencias, peticiones, reclamos)
+CREATE TABLE IF NOT EXISTS user_feedback (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  type TEXT NOT NULL DEFAULT 'sugerencia',   -- opinion, sugerencia, peticion, reclamo
+  priority TEXT DEFAULT 'normal',            -- baja, normal, alta, urgente
+  message TEXT NOT NULL,
+  context TEXT,                              -- optional: related video/sprint/agent
+  status TEXT DEFAULT 'pendiente',           -- pendiente, leido, en_progreso, resuelto, descartado
+  agent_assigned TEXT,                       -- which agent handles it
+  response TEXT,                             -- Claude Code's response
+  responded_at TEXT,
+  created_at TEXT DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_feedback_status ON user_feedback(status, created_at);
+
+-- Versionado de pesos del V-Score (audit trail)
+CREATE TABLE IF NOT EXISTS vscore_weight_history (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  version INTEGER NOT NULL,
+  weights_json TEXT NOT NULL,            -- {ve: 0.35, mf_spread: 0.3, ...}
+  offsets_json TEXT,                     -- correcciones por componente
+  mae_before REAL,                       -- MAE total con pesos viejos
+  mae_after REAL,                        -- MAE total con pesos nuevos (resim)
+  sample_size INTEGER,
+  justification TEXT,
+  committed_at TEXT DEFAULT (datetime('now')),
+  rolled_back INTEGER DEFAULT 0
+);
+CREATE INDEX IF NOT EXISTS idx_wh_version ON vscore_weight_history(version);
 """
 
 

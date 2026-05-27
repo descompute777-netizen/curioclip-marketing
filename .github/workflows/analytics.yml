@@ -1,15 +1,14 @@
-name: Analytics + Métricas Diarias (every 2h)
+name: "Analytics + Evolution Engine (every 6h)"
 
 on:
   schedule:
-    # Cada 2 horas en minuto 7 (evitar pico :00)
-    - cron: '7 */2 * * *'
+    - cron: '7 */6 * * *'
   workflow_dispatch: {}
 
 jobs:
-  analytics:
+  learn:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     permissions:
       contents: write
 
@@ -17,6 +16,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Setup Python 3.11
         uses: actions/setup-python@v5
@@ -25,38 +25,31 @@ jobs:
           cache: 'pip'
 
       - name: Install deps
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests anthropic
+        run: pip install requests anthropic openai
 
-      - name: Calibrate predictor
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - name: "Step 1: Pattern Analysis + Calibration"
         run: |
-          python src/pipeline/calibrate_predictor.py || echo "Calibration skipped"
-        continue-on-error: true
+          python scripts/learn/analyze_patterns.py || echo "[WARN] analyze_patterns failed"
+          python scripts/learn/generate_insights.py || echo "[WARN] generate_insights failed"
 
-      - name: Generate weekly report
+      - name: "Step 2: Evolution Engine (strategy evolution)"
+        run: python scripts/learn/evolution_engine.py
+
+      - name: "Step 3: Verify strategy file"
         run: |
-          python src/pipeline/generate_weekly_report.py || echo "Report skipped"
-        continue-on-error: true
+          echo "=== content_strategy.json ==="
+          python -c "import json; s=json.load(open('config/content_strategy.json')); print(f'v{s[\"version\"]} | growth={s[\"growth\"][\"trajectory\"]} | niches={len(s[\"niche_weights\"])} | restrict={s[\"restrictions\"][\"shadowban_risk\"]}')"
 
-      - name: Daily metrics agent (analytics-scientist)
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          python scripts/autonomous/daily_metrics.py || echo "Daily metrics skipped"
-        continue-on-error: true
-
-      - name: Commit changes
+      - name: Commit evolved strategy + insights
         run: |
           git config user.name "CurioClip-Bot"
           git config user.email "bot@curioclip.ai"
+          git add config/content_strategy.json 2>/dev/null || true
           git add obsidian_vault/50_Analitica/ obsidian_vault/60_Aprendizaje/ 2>/dev/null || true
+          git add obsidian_vault/40_Publicacion/alerts/ 2>/dev/null || true
           if git diff --staged --quiet; then
-            echo "Sin cambios"
+            echo "No changes to commit"
           else
             git commit -m "chore: analytics auto-update [$(date +%Y-%m-%d %H:%M)] [skip ci]"
-            git push || echo "Push skipped"
+            git push || echo "Push failed"
           fi

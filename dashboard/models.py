@@ -68,3 +68,10 @@ class VideoStatusUpdate(BaseModel):
     published_at: Optional[str] = None
     external_url: Optional[str] = None
     outcome: Optional[str] = None
+
+
+class FeedbackIn(BaseModel):
+    type: str = "sugerencia"
+    priority: str = "normal"
+    message: str
+    context: Optional[str] = None

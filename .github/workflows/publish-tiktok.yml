@@ -1,0 +1,50 @@
+name: "Publicar en TikTok (4x/dia cloud)"
+
+# Runs at EXACTLY the 4 LATAM peak posting times
+# Each run publishes 1 video — the one scheduled for this slot
+on:
+  schedule:
+    - cron: '0 13 * * *'     # Slot 1: 13:00 UTC = 7:00 AM CDMX
+    - cron: '30 16 * * *'    # Slot 2: 16:30 UTC = 10:30 AM CDMX
+    - cron: '0 20 * * *'     # Slot 3: 20:00 UTC = 2:00 PM CDMX
+    - cron: '30 0 * * *'     # Slot 4: 00:30 UTC = 6:30 PM CDMX
+  workflow_dispatch: {}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install deps
+        run: pip install composio-openai requests
+
+      - name: "Publish 1 video to TikTok"
+        env:
+          COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/autonomous/cloud_publish.py
+
+      - name: Commit schedule update
+        run: |
+          git config user.name "CurioClip-Bot"
+          git config user.email "bot@curioclip.ai"
+          git add output_week_remaining/upload_schedule.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No schedule changes"
+          else
+            git commit -m "chore: published $(date +%H:%M) UTC [skip ci]"
+            git push || echo "Push failed"
+          fi

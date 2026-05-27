@@ -98,9 +98,71 @@ def read_vault_summary() -> str:
 
 # ─── Generar guiones ────────────────────────────────────────────────────────
 
+def _load_strategy_context() -> str:
+    """Read the evolved content_strategy.json and format as LLM context."""
+    strat_path = ROOT / "config" / "content_strategy.json"
+    if not strat_path.exists():
+        return ""
+    try:
+        s = json.loads(strat_path.read_text(encoding="utf-8"))
+    except Exception:
+        return ""
+
+    parts = []
+
+    # Niche weights (data-driven)
+    nw = s.get("niche_weights", {})
+    if nw:
+        ranked = sorted(nw.items(), key=lambda x: -x[1])
+        niche_str = ", ".join(f"{k} ({v:.0%})" for k, v in ranked if v > 0.05)
+        parts.append(f"DISTRIBUCION DE NICHOS (basada en rendimiento real): {niche_str}")
+
+    # Duration
+    dr = s.get("target_duration_range_s")
+    if dr:
+        parts.append(f"DURACION OBJETIVO: {dr[0]}-{dr[1]} segundos (sweet spot segun datos)")
+
+    # Voice preferences
+    vp = s.get("voice_preferences", {})
+    if vp.get("top_voices"):
+        parts.append(f"VOCES TOP (mayor engagement): {', '.join(vp['top_voices'][:3])}")
+    if vp.get("avoid_voices"):
+        parts.append(f"VOCES A EVITAR (bajo rendimiento): {', '.join(vp['avoid_voices'])}")
+
+    # Hook patterns
+    hp = s.get("hook_patterns", {})
+    if hp.get("preferred_starts"):
+        parts.append(f"HOOKS QUE FUNCIONAN (primera palabra): {', '.join(hp['preferred_starts'][:5])}")
+    if hp.get("avoid_patterns"):
+        parts.append(f"HOOKS A EVITAR: {', '.join(hp['avoid_patterns'])}")
+
+    # Growth status
+    g = s.get("growth", {})
+    if g:
+        parts.append(
+            f"ESTADO DEL CRECIMIENTO: {g.get('trajectory','?').upper()} — "
+            f"{g.get('followers_current',0)}/{g.get('followers_goal',10000)} seguidores, "
+            f"{g.get('days_remaining',0)} dias restantes, "
+            f"necesitamos {g.get('followers_needed_per_day',0):.0f} seg/dia"
+        )
+
+    # Restrictions
+    r = s.get("restrictions", {})
+    if r.get("detected"):
+        codes = [rv["video_code"] for rv in r.get("restricted_videos", [])]
+        parts.append(f"ALERTA RESTRICCIONES: Videos posiblemente restringidos: {', '.join(codes)}")
+    if r.get("shadowban_risk") == "high":
+        parts.append("ALERTA SHADOWBAN: Riesgo alto detectado. Variar hashtags, evitar contenido repetitivo.")
+
+    if not parts:
+        return ""
+    return "\n".join(f"  - {p}" for p in parts)
+
+
 def generate_scripts() -> str:
     print(f"\n[LLM] Generando guiones Sprint {SPRINT_N} con Gemini...")
     vault_state = read_vault_summary()
+    strategy_context = _load_strategy_context()
 
     agent_file = AGENTS_DIR / "weekly-orchestrator.md"
     system = agent_file.read_text(encoding="utf-8").split("---", 2)[-1].strip() \
@@ -110,15 +172,27 @@ def generate_scripts() -> str:
         "Formato 5 bloques: HOOK | IDENTIFICACIÓN | PROMESA | DESARROLLO | CTA."
     )
 
+    strategy_block = ""
+    if strategy_context:
+        strategy_block = (
+            f"\n\nDATOS REALES DEL EVOLUTION ENGINE (usar para optimizar):\n"
+            f"{strategy_context}\n"
+            f"IMPORTANTE: Ajusta la distribucion de sub-nichos y tipos de hooks segun estos datos. "
+            f"Los nichos con mayor peso son los que mejor performan. Prioriza hooks con las "
+            f"primeras palabras que mejor funcionan. Respeta la duracion objetivo.\n"
+        )
+
     user = (
         f"Sprint {SPRINT_N} — {TODAY}\n\n"
-        f"Estado vault:\n{vault_state}\n\n"
+        f"Estado vault:\n{vault_state}\n"
+        f"{strategy_block}\n"
+        f"PRODUCCION: 4 videos por dia = 28 videos por semana.\n"
         f"Genera:\n"
         f"1. Briefing ejecutivo (KPIs, estado, decisiones)\n"
-        f"2. 25 guiones adaptados del nicho (sub-nichos: Ciencia WTF, Misterio, Historia WTF, "
-        f"Comparaciones imposibles, Psicología). Hook LITERAL en cada uno.\n"
-        f"3. TOP 7 para esta semana con V-Score estimado (/10) y horario CDMX\n"
-        f"4. 3 hipótesis de oportunidad\n"
+        f"2. 35+ guiones adaptados del nicho. Distribuye segun los pesos de nicho arriba. "
+        f"Hook LITERAL en cada uno.\n"
+        f"3. TOP 28 para esta semana (4 por dia) con V-Score estimado (/10)\n"
+        f"4. 3 hipótesis de oportunidad basadas en los datos reales\n"
         f"Nicho: CurioClip — curiosidades español LATAM | 13-35 años"
     )
 
@@ -146,8 +220,9 @@ def save_sprint_outputs(content: str):
     )
     print(f"[OK] Guiones: {cola_path.name}")
 
-    # Extraer top-7 y crear schedule.json
-    schedule = extract_schedule(content)
+    # Extraer voiceover scripts via segunda llamada LLM, luego crear schedule
+    scripts = extract_voiceover_scripts(content)
+    schedule = extract_schedule(content, scripts)
     sched_path = VAULT / "40_Publicacion" / f"schedule_sprint{SPRINT_N}.json"
     sched_path.parent.mkdir(exist_ok=True)
     sched_path.write_text(json.dumps(schedule, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -155,46 +230,111 @@ def save_sprint_outputs(content: str):
     return schedule
 
 
-def extract_schedule(content: str) -> dict:
-    """Extrae top-7 del contenido generado para crear el schedule de publicación."""
+VIDEOS_PER_DAY = 4
+
+
+def extract_voiceover_scripts(content: str) -> list[dict]:
+    """Second LLM call: parse generated briefing into 28 structured voiceover scripts."""
+    import re
+    total = VIDEOS_PER_DAY * 7
+    print(f"[LLM] Extracting {total} voiceover scripts from guiones...")
+
+    system = (
+        "You extract voiceover scripts from Spanish curiosity content. "
+        "Return ONLY a valid JSON array — no markdown fences, no explanation."
+    )
+
+    all_scripts = []
+    # Batch in groups of 14 to stay within token limits
+    batch_size = 14
+    for batch_idx in range(0, total, batch_size):
+        batch_n = min(batch_size, total - batch_idx)
+        user = (
+            f"From the following content, extract guiones #{batch_idx+1} to #{batch_idx+batch_n} "
+            f"from the TOP {total} selected for this week.\n"
+            f"For each guion, generate a complete voiceover script in Spanish (30-60 seconds "
+            f"when read aloud, 80-150 words).\n"
+            f"Structure each script as:\n"
+            f"- Hook (0-3s): the exact hook literal from the guion\n"
+            f"- Body (15-40s): expand the topic with 3-4 fascinating facts\n"
+            f"- CTA (3-5s): call to action (seguir, guardar, comentar)\n\n"
+            f"Return a JSON array of exactly {batch_n} objects:\n"
+            '[\n'
+            '  {\n'
+            '    "title": "guion title",\n'
+            '    "voiceover_text": "full voiceover script in Spanish, 80-150 words",\n'
+            '    "caption": "TikTok caption: title + 2-3 topic hashtags + #curioclip #fyp",\n'
+            '    "hashtags": "#topic1 #topic2 #curioclip #datoscuriosos #fyp"\n'
+            '  }\n'
+            ']\n\n'
+            f"Content:\n{content[:12000]}"
+        )
+
+        raw = call_llm(system, user, max_tokens=6144)
+
+        json_match = re.search(r'\[[\s\S]*\]', raw)
+        if json_match:
+            try:
+                batch = json.loads(json_match.group())
+                if isinstance(batch, list):
+                    all_scripts.extend(batch)
+                    print(f"  [OK] Batch {batch_idx//batch_size + 1}: {len(batch)} scripts")
+            except json.JSONDecodeError:
+                print(f"  [WARN] Batch {batch_idx//batch_size + 1}: JSON parse failed")
+
+    if len(all_scripts) >= total:
+        print(f"[OK] Extracted {len(all_scripts)} voiceover scripts total")
+        return all_scripts[:total]
+
+    print(f"[WARN] Only got {len(all_scripts)}/{total} scripts — padding with available")
+    return all_scripts
+
+
+def extract_schedule(content: str, scripts: list[dict] | None = None) -> dict:
+    """Build schedule: 4 videos/day × 7 days = 28 videos/week."""
     week_start = datetime.date.today()
-    # Ajustar al próximo lunes si no es lunes
     days_to_monday = (7 - week_start.weekday()) % 7 or 7
     monday = week_start + datetime.timedelta(days=days_to_monday)
 
-    # Horarios CDMX → UTC (CDMX es UTC-6 en horario estándar)
-    schedule_times = [
-        (0, 18, 0),   # Lun 12:00 CDMX = 18:00 UTC
-        (1, 1, 0),    # Mar 19:00 CDMX = 01:00 UTC +1
-        (2, 2, 0),    # Mié 20:00 CDMX = 02:00 UTC +1
-        (3, 18, 0),   # Jue 12:00 CDMX = 18:00 UTC
-        (4, 2, 0),    # Vie 20:00 CDMX = 02:00 UTC +1
-        (5, 18, 0),   # Sáb 12:00 CDMX = 18:00 UTC
-        (6, 2, 0),    # Dom 20:00 CDMX = 02:00 UTC +1
+    # 4 slots per day (CDMX times → UTC, CDMX is UTC-6)
+    daily_slots_utc = [
+        (15, 0),   # 09:00 CDMX
+        (19, 0),   # 13:00 CDMX
+        (23, 0),   # 17:00 CDMX
+        (3, 0),    # 21:00 CDMX (next day UTC)
     ]
 
-    days_es = ["lunes","martes","miercoles","jueves","viernes","sabado","domingo"]
+    days_es = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
     videos = []
-    for i, (day_offset, hour, minute) in enumerate(schedule_times):
-        pub_date = monday + datetime.timedelta(days=day_offset)
-        pub_dt_utc = datetime.datetime(pub_date.year, pub_date.month, pub_date.day,
-                                       hour, minute, 0)
-        # Ajustar día si hora UTC > 24 del día CDMX
-        if hour < 6:
-            pub_dt_utc = datetime.datetime(pub_date.year, pub_date.month, pub_date.day,
-                                           hour, minute, 0) + datetime.timedelta(days=1)
+    vid_idx = 0
 
-        videos.append({
-            "day": days_es[i],
-            "date": pub_date.isoformat(),
-            "guion_id": f"S{SPRINT_N}_V{i+1}",
-            "video_url": "",            # se llena cuando el video se produce y sube
-            "caption": "",              # se extrae del guión
-            "hashtags": "#datoscuriosos #sabiasque #curioclip #curiosidades",
-            "published": False,
-            "publish_at_utc": pub_dt_utc.strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "v_score": 0.0
-        })
+    for day_offset in range(7):
+        pub_date = monday + datetime.timedelta(days=day_offset)
+        for slot_idx, (hour, minute) in enumerate(daily_slots_utc):
+            pub_dt_utc = datetime.datetime(
+                pub_date.year, pub_date.month, pub_date.day, hour, minute, 0
+            )
+            if hour < 6:
+                pub_dt_utc += datetime.timedelta(days=1)
+
+            script = scripts[vid_idx] if scripts and vid_idx < len(scripts) else {}
+            default_hashtags = "#datoscuriosos #sabiasque #curioclip #curiosidades"
+
+            videos.append({
+                "day": days_es[day_offset],
+                "slot": slot_idx + 1,
+                "date": pub_date.isoformat(),
+                "guion_id": f"S{SPRINT_N}_V{vid_idx+1}",
+                "video_url": "",
+                "voiceover_text": script.get("voiceover_text", ""),
+                "caption": script.get("caption", ""),
+                "hashtags": script.get("hashtags", default_hashtags),
+                "published": False,
+                "publish_at_utc": pub_dt_utc.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "v_score": 0.0,
+            })
+            vid_idx += 1
+
     return {"sprint": SPRINT_N, "week_start": monday.isoformat(), "videos": videos}
 
 

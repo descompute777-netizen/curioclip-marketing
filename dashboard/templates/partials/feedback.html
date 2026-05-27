@@ -1,0 +1,190 @@
+<!-- FEEDBACK — Canal de comunicacion usuario ↔ Claude Code -->
+<div class="space-y-6">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between">
+    <div>
+      <h2 class="text-xl font-bold">Feedback</h2>
+      <p class="text-sm text-brand-muted">Opiniones, sugerencias, peticiones y reclamos — sin abrir la consola</p>
+    </div>
+    <div class="flex gap-2 text-xs">
+      <span class="px-2 py-1 rounded bg-amber-500/20 text-amber-400">{{ feedback_stats.pendiente }} pendientes</span>
+      <span class="px-2 py-1 rounded bg-brand-green/20 text-brand-green">{{ feedback_stats.resuelto }} resueltos</span>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="bg-brand-card border border-brand-border rounded-lg p-5" x-data="{
+    type: 'sugerencia',
+    priority: 'normal',
+    message: '',
+    context: '',
+    sending: false,
+    success: false,
+    async submit() {
+      if (!this.message.trim()) return;
+      this.sending = true;
+      try {
+        const res = await fetch('/api/feedback', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            type: this.type,
+            priority: this.priority,
+            message: this.message,
+            context: this.context || null
+          })
+        });
+        if (res.ok) {
+          this.success = true;
+          this.message = '';
+          this.context = '';
+          setTimeout(() => { this.success = false; htmx.ajax('GET', '/partial/feedback', '#main'); }, 1500);
+        }
+      } finally { this.sending = false; }
+    }
+  }">
+    <h3 class="font-semibold text-sm mb-4">Nuevo mensaje</h3>
+
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <!-- Tipo -->
+      <div>
+        <label class="text-xs text-brand-muted block mb-1">Tipo</label>
+        <div class="flex gap-2">
+          <template x-for="t in ['opinion', 'sugerencia', 'peticion', 'reclamo']">
+            <button @click="type = t"
+                    :class="type === t ? 'bg-brand-yellow text-black' : 'bg-brand-panel text-brand-muted hover:text-brand-text'"
+                    class="px-3 py-1.5 text-xs rounded border border-brand-border capitalize transition"
+                    x-text="t"></button>
+          </template>
+        </div>
+      </div>
+      <!-- Prioridad -->
+      <div>
+        <label class="text-xs text-brand-muted block mb-1">Prioridad</label>
+        <div class="flex gap-2">
+          <template x-for="p in ['baja', 'normal', 'alta', 'urgente']">
+            <button @click="priority = p"
+                    :class="{
+                      'bg-gray-600 text-white': priority === p && p === 'baja',
+                      'bg-blue-600 text-white': priority === p && p === 'normal',
+                      'bg-amber-600 text-white': priority === p && p === 'alta',
+                      'bg-red-600 text-white': priority === p && p === 'urgente',
+                      'bg-brand-panel text-brand-muted hover:text-brand-text': priority !== p
+                    }"
+                    class="px-3 py-1.5 text-xs rounded border border-brand-border capitalize transition"
+                    x-text="p"></button>
+          </template>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensaje -->
+    <div class="mb-3">
+      <label class="text-xs text-brand-muted block mb-1">Mensaje</label>
+      <textarea x-model="message" rows="4" placeholder="Escribe tu opinion, sugerencia, peticion o reclamo..."
+                class="w-full bg-brand-panel border border-brand-border rounded px-3 py-2 text-sm text-brand-text placeholder-brand-muted focus:border-brand-yellow focus:outline-none resize-y"></textarea>
+    </div>
+
+    <!-- Contexto (opcional) -->
+    <div class="mb-4">
+      <label class="text-xs text-brand-muted block mb-1">Contexto (opcional)</label>
+      <input x-model="context" type="text" placeholder="Ej: video S3_V2, sprint 3, agente A4..."
+             class="w-full bg-brand-panel border border-brand-border rounded px-3 py-2 text-sm text-brand-text placeholder-brand-muted focus:border-brand-yellow focus:outline-none">
+    </div>
+
+    <!-- Submit -->
+    <div class="flex items-center gap-3">
+      <button @click="submit()" :disabled="sending || !message.trim()"
+              :class="sending ? 'opacity-50 cursor-wait' : 'hover:bg-amber-400'"
+              class="px-5 py-2 bg-brand-yellow text-black font-semibold text-sm rounded transition">
+        <span x-show="!sending">Enviar</span>
+        <span x-show="sending">Enviando...</span>
+      </button>
+      <span x-show="success" x-transition class="text-brand-green text-sm font-medium">Enviado</span>
+    </div>
+  </div>
+
+  <!-- Historial -->
+  <div class="space-y-3">
+    <h3 class="font-semibold text-sm">Historial</h3>
+
+    {% if not feedback_items %}
+      <p class="text-brand-muted text-sm py-8 text-center">No hay feedback todavia. Usa el formulario de arriba.</p>
+    {% endif %}
+
+    {% for item in feedback_items %}
+    <div class="bg-brand-card border border-brand-border rounded-lg p-4 space-y-2" x-data="{expanded: false}">
+      <div class="flex items-start justify-between">
+        <div class="flex items-center gap-2">
+          <!-- Type badge -->
+          {% if item.type == 'opinion' %}
+            <span class="px-2 py-0.5 text-xs rounded bg-purple-500/20 text-purple-400">opinion</span>
+          {% elif item.type == 'sugerencia' %}
+            <span class="px-2 py-0.5 text-xs rounded bg-blue-500/20 text-blue-400">sugerencia</span>
+          {% elif item.type == 'peticion' %}
+            <span class="px-2 py-0.5 text-xs rounded bg-amber-500/20 text-amber-400">peticion</span>
+          {% elif item.type == 'reclamo' %}
+            <span class="px-2 py-0.5 text-xs rounded bg-red-500/20 text-red-400">reclamo</span>
+          {% endif %}
+
+          <!-- Priority -->
+          {% if item.priority == 'urgente' %}
+            <span class="px-2 py-0.5 text-xs rounded bg-red-600/30 text-red-300">urgente</span>
+          {% elif item.priority == 'alta' %}
+            <span class="px-2 py-0.5 text-xs rounded bg-amber-600/30 text-amber-300">alta</span>
+          {% endif %}
+
+          <!-- Status -->
+          {% if item.status == 'pendiente' %}
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          {% elif item.status == 'resuelto' %}
+            <span class="w-2 h-2 rounded-full bg-brand-green"></span>
+          {% elif item.status == 'en_progreso' %}
+            <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+          {% else %}
+            <span class="w-2 h-2 rounded-full bg-brand-muted"></span>
+          {% endif %}
+          <span class="text-xs text-brand-muted">{{ item.status }}</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-brand-muted">{{ item.created_at[:16] }}</span>
+          <button @click="expanded = !expanded" class="text-brand-muted hover:text-brand-text text-xs">
+            <span x-show="!expanded">ver mas</span>
+            <span x-show="expanded">cerrar</span>
+          </button>
+          {% if item.status == 'pendiente' %}
+          <button hx-patch="/api/feedback/{{ item.id }}/status/descartado" hx-swap="none"
+                  hx-confirm="Descartar este feedback?"
+                  class="text-xs text-brand-muted hover:text-red-400"
+                  onclick="setTimeout(()=>htmx.ajax('GET','/partial/feedback','#main'),300)">x</button>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Message -->
+      <p class="text-sm" :class="expanded ? '' : 'line-clamp-2'">{{ item.message }}</p>
+
+      <!-- Context + Response (expanded) -->
+      <div x-show="expanded" x-transition class="space-y-2 pt-2 border-t border-brand-border">
+        {% if item.context %}
+          <p class="text-xs text-brand-muted"><strong>Contexto:</strong> {{ item.context }}</p>
+        {% endif %}
+        {% if item.agent_assigned %}
+          <p class="text-xs text-brand-muted"><strong>Asignado a:</strong> {{ item.agent_assigned }}</p>
+        {% endif %}
+        {% if item.response %}
+          <div class="bg-brand-panel rounded p-3 text-sm">
+            <p class="text-xs text-brand-green font-semibold mb-1">Respuesta ({{ item.responded_at[:16] if item.responded_at else '?' }})</p>
+            <p>{{ item.response }}</p>
+          </div>
+        {% elif item.status == 'pendiente' %}
+          <p class="text-xs text-brand-muted italic">Claude Code procesara este feedback en la proxima sesion o sprint.</p>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>

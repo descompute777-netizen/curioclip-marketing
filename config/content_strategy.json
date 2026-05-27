@@ -1,0 +1,104 @@
+{
+  "version": 2,
+  "updated_at": "2026-05-27T05:56:44Z",
+  "updated_by": "evolution_engine",
+  "niche_weights": {
+    "misterio": 0.342,
+    "ciencia": 0.199,
+    "curiosidades": 0.171,
+    "psicologia": 0.164,
+    "cosmologia": 0.125
+  },
+  "target_duration_range_s": [
+    28,
+    38
+  ],
+  "optimal_posting_hours_utc": [
+    3,
+    15,
+    17
+  ],
+  "voice_preferences": {
+    "top_voices": [
+      "es-MX-JorgeNeural",
+      "es-CO-GonzaloNeural",
+      "es-AR-ElenaNeural"
+    ],
+    "avoid_voices": [
+      "es-CO-GonzaloNeural",
+      "es-AR-ElenaNeural"
+    ]
+  },
+  "hook_patterns": {
+    "preferred_starts": [
+      "el",
+      "intenta",
+      "existe",
+      "en",
+      "estás"
+    ],
+    "avoid_patterns": [
+      "estás",
+      "cuántos",
+      "no"
+    ],
+    "min_words": 8,
+    "max_words": 18
+  },
+  "restrictions": {
+    "detected": true,
+    "restricted_videos": [
+      {
+        "video_code": "V8",
+        "views": 18,
+        "hours_live": 172.7,
+        "vph": 0.1,
+        "signal": "extremely_low_views"
+      },
+      {
+        "video_code": "V9",
+        "views": 99,
+        "hours_live": 172.5,
+        "vph": 0.57,
+        "signal": "extremely_low_views"
+      },
+      {
+        "video_code": "V10",
+        "views": 74,
+        "hours_live": 172.4,
+        "vph": 0.43,
+        "signal": "extremely_low_views"
+      }
+    ],
+    "last_check": "2026-05-27T05:56:44Z",
+    "shadowban_risk": "high"
+  },
+  "growth": {
+    "followers_current": 0,
+    "followers_goal": 10000,
+    "views_accumulated": 3088,
+    "views_goal": 100000,
+    "followers_per_day_avg": 0.0,
+    "views_per_day_avg": 0.0,
+    "days_elapsed": 21,
+    "days_remaining": 69,
+    "followers_needed_per_day": 144.9,
+    "views_needed_per_day": 1404.5,
+    "on_track": false,
+    "trajectory": "critical"
+  },
+  "evolution_log": [
+    {
+      "version": 1,
+      "date": "2026-05-27",
+      "changes": "Initial strategy — baseline from audit",
+      "trigger": "manual_init"
+    },
+    {
+      "version": 2,
+      "date": "2026-05-27",
+      "changes": "growth=critical, restrict=high, niches=5 adjusted",
+      "trigger": "autonomous_cycle"
+    }
+  ]
+}
