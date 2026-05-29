@@ -1,0 +1,98 @@
+[
+  {
+    "id": "SALUD_01",
+    "niche": "salud",
+    "hook": "¿Por qué cuando tú aguantas la respiración, sientes que te asfixias?",
+    "voiceover_text": "¿Por qué cuando tú aguantas la respiración, sientes que te asfixias? La respuesta te va a sorprender. No es por falta de oxígeno: tu cuerpo todavía tiene de sobra. Lo que dispara esa desesperación es el dióxido de carbono acumulándose en tu sangre. Tus pulmones no gritan dame aire, gritan sácame este gas. Por eso los buzos entrenan para ignorar esa señal y aguantar minutos enteros. Sigue a CurioClip y mira tu cuerpo de otra forma.",
+    "scenes": [
+      {"text": "¿Por qué cuando tú aguantas la respiración, sientes que te asfixias?", "broll_query": "person holding breath underwater"},
+      {"text": "No es por falta de oxígeno, tu cuerpo todavía tiene de sobra.", "broll_query": "human lungs anatomy animation"},
+      {"text": "Lo que dispara esa desesperación es el dióxido de carbono en tu sangre.", "broll_query": "red blood cells flowing vein"},
+      {"text": "Tus pulmones no gritan dame aire, gritan sácame este gas.", "broll_query": "breathing chest close up"},
+      {"text": "Por eso los buzos entrenan para ignorar esa señal.", "broll_query": "freediver deep ocean descent"},
+      {"text": "Sigue a CurioClip y mira tu cuerpo de otra forma.", "broll_query": "person breathing calm sunrise"}
+    ],
+    "caption": "Tu cuerpo te miente cuando aguantas la respiración",
+    "hashtags": ["#salud", "#cuerpohumano", "#datoscuriosos", "#curioclip", "#fyp"]
+  },
+  {
+    "id": "SALUD_02",
+    "niche": "salud",
+    "hook": "¿Qué pasaría si te dijera que tienes un segundo cerebro en la barriga?",
+    "voiceover_text": "¿Qué pasaría si te dijera que tienes un segundo cerebro en la barriga? No es una metáfora. Tu intestino tiene más de cien millones de neuronas, tantas como el cerebro de un gato. Puede tomar decisiones sin preguntarle a tu cabeza. Por eso sientes mariposas cuando estás nervioso, o un presentimiento en el estómago antes de que pase algo. Tu instinto, literalmente, vive en tus tripas. Guarda esto y vuelve a verlo.",
+    "scenes": [
+      {"text": "¿Qué pasaría si te dijera que tienes un segundo cerebro en la barriga?", "broll_query": "human digestive system animation"},
+      {"text": "Tu intestino tiene más de cien millones de neuronas.", "broll_query": "neurons firing network microscope"},
+      {"text": "Tantas como el cerebro de un gato.", "broll_query": "cat curious looking"},
+      {"text": "Puede tomar decisiones sin preguntarle a tu cabeza.", "broll_query": "brain glowing scan"},
+      {"text": "Por eso sientes mariposas cuando estás nervioso.", "broll_query": "butterflies slow motion flight"},
+      {"text": "Tu instinto vive en tus tripas. Guarda esto.", "broll_query": "person hand on stomach calm"}
+    ],
+    "caption": "Tienes un segundo cerebro y no está en tu cabeza",
+    "hashtags": ["#salud", "#cerebro", "#psicologia", "#curioclip", "#fyp"]
+  },
+  {
+    "id": "TERROR_01",
+    "niche": "terror",
+    "hook": "¿Por qué cuando tú despiertas, a veces no puedes moverte y sientes que algo te observa?",
+    "voiceover_text": "¿Por qué cuando tú despiertas, a veces no puedes moverte y sientes que algo te observa? Se llama parálisis del sueño. Tu mente despierta antes que tu cuerpo, que sigue paralizado para que no actúes tus sueños. Pero el cerebro, confundido, inventa una presencia en la habitación. Por eso culturas de todo el mundo describen la misma sombra a los pies de la cama. No es un fantasma: es tu cerebro fallando. ¿Te ha pasado? Cuéntame en los comentarios.",
+    "scenes": [
+      {"text": "¿Por qué cuando tú despiertas, a veces no puedes moverte y sientes que algo te observa?", "broll_query": "dark empty bedroom night eerie"},
+      {"text": "Se llama parálisis del sueño.", "broll_query": "person sleeping bed dark"},
+      {"text": "Tu mente despierta antes que tu cuerpo, que sigue paralizado.", "broll_query": "eye slowly opening close up"},
+      {"text": "Pero el cerebro inventa una presencia en la habitación.", "broll_query": "dark shadow figure silhouette doorway"},
+      {"text": "Culturas de todo el mundo describen la misma sombra.", "broll_query": "old dark painting candle"},
+      {"text": "No es un fantasma: es tu cerebro fallando.", "broll_query": "brain mri scan dark blue"}
+    ],
+    "caption": "Eso que ves al despertar paralizado no es un fantasma",
+    "hashtags": ["#terror", "#paralisisdelsueño", "#miedo", "#curioclip", "#fyp"]
+  },
+  {
+    "id": "TERROR_02",
+    "niche": "terror",
+    "hook": "¿Qué pasaría si existiera un sonido que te llena de terror sin que sepas por qué?",
+    "voiceover_text": "¿Qué pasaría si existiera un sonido que te llena de terror sin que sepas por qué? Existe. Se llama infrasonido: vibraciones tan graves que tu oído no las escucha, pero tu cuerpo sí las siente. A diecinueve hertz hace vibrar tus ojos y te genera pánico, escalofríos, la sensación de no estar solo. Un científico descubrió que su laboratorio embrujado en realidad tenía un ventilador emitiendo esa frecuencia. Muchos fantasmas son solo sonido invisible. Sigue para más.",
+    "scenes": [
+      {"text": "¿Qué pasaría si existiera un sonido que te llena de terror sin que sepas por qué?", "broll_query": "sound waves dark abstract"},
+      {"text": "Se llama infrasonido.", "broll_query": "audio frequency waveform visualization"},
+      {"text": "Vibraciones tan graves que tu oído no las escucha.", "broll_query": "human ear anatomy close up"},
+      {"text": "A diecinueve hertz hace vibrar tus ojos y te genera pánico.", "broll_query": "human eye macro trembling"},
+      {"text": "Su laboratorio embrujado tenía un ventilador con esa frecuencia.", "broll_query": "old industrial fan spinning dark"},
+      {"text": "Muchos fantasmas son solo sonido invisible.", "broll_query": "empty dark corridor haunting"}
+    ],
+    "caption": "Hay un sonido que tu oído no escucha pero te aterra",
+    "hashtags": ["#terror", "#misterio", "#ciencia", "#curioclip", "#fyp"]
+  },
+  {
+    "id": "CIENCIA_MISTERIO_01",
+    "niche": "ciencia_misterio",
+    "hook": "¿Qué pasaría si te dijera que tu cuerpo brilla en la oscuridad?",
+    "voiceover_text": "¿Qué pasaría si te dijera que tu cuerpo brilla en la oscuridad? Es verdad. Los humanos emitimos luz: una bioluminiscencia tan débil que tus ojos nunca podrán verla. Científicos en Japón la fotografiaron con cámaras mil veces más sensibles que el ojo humano. Brillamos más a media tarde y la luz sale sobre todo de las mejillas. Ahora mismo, en una habitación oscura, estás brillando, y jamás lo verás. Guarda esto, es completamente real.",
+    "scenes": [
+      {"text": "¿Qué pasaría si te dijera que tu cuerpo brilla en la oscuridad?", "broll_query": "human silhouette glowing dark"},
+      {"text": "Los humanos emitimos luz.", "broll_query": "bioluminescence glowing blue light"},
+      {"text": "Una luz tan débil que tus ojos nunca podrán verla.", "broll_query": "face in dark low light"},
+      {"text": "Científicos en Japón la fotografiaron con cámaras especiales.", "broll_query": "scientist camera laboratory dark"},
+      {"text": "La luz sale sobre todo de las mejillas.", "broll_query": "human face skin macro close up"},
+      {"text": "Ahora mismo estás brillando y jamás lo verás.", "broll_query": "dark room faint glowing light"}
+    ],
+    "caption": "Tu cuerpo emite luz pero nunca podrás verla",
+    "hashtags": ["#ciencia", "#cuerpohumano", "#misterio", "#curioclip", "#fyp"]
+  },
+  {
+    "id": "CIENCIA_MISTERIO_02",
+    "niche": "ciencia_misterio",
+    "hook": "¿Qué pasaría si una señal del espacio se repitiera cada 16 días y nadie supiera por qué?",
+    "voiceover_text": "¿Qué pasaría si una señal del espacio se repitiera cada dieciséis días y nadie supiera por qué? Está pasando ahora mismo. Se llama F R B uno ocho cero nueve uno seis: un destello de radio que llega desde una galaxia a quinientos millones de años luz. Durante cuatro días dispara señales, y luego calla doce. Un ritmo perfecto, imposible de explicar. ¿Una estrella muerta? ¿Dos astros girando? La ciencia aún no tiene respuesta. Comenta qué crees que es.",
+    "scenes": [
+      {"text": "¿Qué pasaría si una señal del espacio se repitiera cada dieciséis días y nadie supiera por qué?", "broll_query": "radio telescope night sky stars"},
+      {"text": "Está pasando ahora mismo.", "broll_query": "deep space galaxy nebula"},
+      {"text": "Un destello de radio desde una galaxia lejana.", "broll_query": "radio signal waves space"},
+      {"text": "Durante cuatro días dispara señales y luego calla doce.", "broll_query": "pulsar blinking star space"},
+      {"text": "Un ritmo perfecto, imposible de explicar.", "broll_query": "spiral galaxy rotating space"},
+      {"text": "La ciencia aún no tiene respuesta. Comenta qué crees que es.", "broll_query": "astronomer observatory night dome"}
+    ],
+    "caption": "Una señal del espacio se repite cada 16 días y nadie sabe por qué",
+    "hashtags": ["#ciencia", "#espacio", "#misterio", "#curioclip", "#fyp"]
+  }
+]

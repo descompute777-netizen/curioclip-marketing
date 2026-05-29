@@ -10,7 +10,7 @@ Uso:
   python -m src.bridge.cdp_drive jsfile path/to.js    # ejecuta un archivo JS y devuelve el valor
 """
 from __future__ import annotations
-import sys, json, time, base64, urllib.request, websocket
+import os, sys, json, time, base64, urllib.request, websocket
 
 CDP = "http://localhost:9222"
 _ID = [0]
@@ -21,7 +21,9 @@ def _id():
     return _ID[0]
 
 
-def get_ws(url_filter: str = "tiktok"):
+def get_ws(url_filter: str = None):
+    if url_filter is None:
+        url_filter = os.environ.get("CDP_TAB", "tiktok")
     with urllib.request.urlopen(f"{CDP}/json", timeout=5) as r:
         tabs = json.loads(r.read())
     pages = [t for t in tabs if t.get("type") == "page"]
@@ -101,6 +103,15 @@ def main():
         with open(sys.argv[2], encoding="utf-8") as f:
             code = f.read()
         print(json.dumps(js(ws, code), ensure_ascii=False, indent=2))
+    elif cmd == "click":
+        needle = sys.argv[2]
+        expr = ("(function(n){var els=Array.from(document.querySelectorAll("
+                "'button,a,[role=button],div[role=menuitem],span,li'));"
+                "var t=els.find(function(e){return (e.innerText||'').trim().toLowerCase()"
+                ".includes(n.toLowerCase()) && e.offsetParent!==null;});"
+                "if(t){t.click();return 'clicked: '+t.innerText.trim().slice(0,40);}"
+                "return 'NOT FOUND: '+n;})(" + json.dumps(needle) + ")")
+        print(js(ws, expr))
     ws.close()
 
 

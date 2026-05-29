@@ -57,21 +57,27 @@ BROLL_LEDGER = ROOT / "obsidian_vault" / "30_Contenido" / "broll_used.json"
 W, H, FPS = 1080, 1920, 30
 
 
-# ─── TTS: ElevenLabs (cálida/humana) con fallback a edge-tts ──────────────────
-def _synthesize_voice(text: str, out: Path, vid: str) -> Path:
-    """Usa ElevenLabs si TTS_PROVIDER=elevenlabs + key válida; si no, edge-tts."""
+# ─── TTS: ElevenLabs (cálida/humana, voz ROTATIVA) con fallback a edge-tts ─────
+def _synthesize_voice(text: str, out: Path, vid: str, voice_id: str | None = None) -> str:
+    """ElevenLabs con voz rotativa por video (R12). Devuelve el nombre de la voz usada.
+    Prioridad: voice_id explícito (lote) > pool rotativo por guion_id > edge-tts."""
     provider = os.environ.get("TTS_PROVIDER", "").lower()
     key = os.environ.get("ELEVENLABS_API_KEY", "").strip()
-    voice_id = os.environ.get("ELEVENLABS_VOICE_ID", "").strip()
-    if provider == "elevenlabs" and key and not key.startswith("<<<") and voice_id:
+    if provider == "elevenlabs" and key and not key.startswith("<<<"):
         try:
-            from scripts.autonomous.tts_elevenlabs import synth
-            print(f"[TTS] ElevenLabs voice={voice_id}")
-            return synth(text, out, voice_id)
+            from scripts.autonomous.tts_elevenlabs import synth, pick_voice
+            if voice_id:
+                vname = next((n for n, i in __import__("scripts.autonomous.tts_elevenlabs",
+                             fromlist=["VOICE_POOL"]).VOICE_POOL if i == voice_id), "custom")
+            else:
+                vname, voice_id = pick_voice(vid)
+            print(f"[TTS] ElevenLabs voz={vname} ({voice_id})")
+            synth(text, out, voice_id)
+            return vname
         except Exception as e:
-            print(f"[TTS] ElevenLabs falló ({str(e)[:100]}) → fallback edge-tts")
+            print(f"[TTS] ElevenLabs falló ({str(e)[:120]}) → fallback edge-tts")
     generate_voiceover(text, out, guion_id=vid, account="fugamental28")
-    return out
+    return "edge-tts"
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -332,7 +338,8 @@ def _autosegment(voiceover_text: str, niche: str) -> list[dict]:
     sentences = [s.strip() for s in re.split(r"(?<=[\.\?\!])\s+", voiceover_text) if s.strip()]
     return [{"text": s, "broll_query": _derive_query(s, niche)} for s in sentences]
 
-def produce(script: dict, out_dir: Path, used_ids: set | None = None) -> dict:
+def produce(script: dict, out_dir: Path, used_ids: set | None = None,
+            voice_id: str | None = None) -> dict:
     vid = script.get("id", "VX")
     niche = script.get("niche", "curiosidades")
     out_dir = Path(out_dir); out_dir.mkdir(parents=True, exist_ok=True)
@@ -345,7 +352,7 @@ def produce(script: dict, out_dir: Path, used_ids: set | None = None) -> dict:
 
     # 3: voz única por video (R12)
     voiceover = out_dir / "voiceover.mp3"
-    _synthesize_voice(script["voiceover_text"], voiceover, vid)
+    voice_used = _synthesize_voice(script["voiceover_text"], voiceover, vid, voice_id)
 
     # escenas (del guion o autosegmentadas)
     scenes = script.get("scenes") or _autosegment(script["voiceover_text"], niche)
@@ -375,11 +382,37 @@ def produce(script: dict, out_dir: Path, used_ids: set | None = None) -> dict:
     (out_dir / "caption_tiktok.txt").write_text(
         script.get("caption", "") + " " + " ".join(script.get("hashtags", [])),
         encoding="utf-8")
-    report = {"id": vid, "status": status, "qa": asdict(qa),
-              "scenes": len(scenes), "clips": len(clips), "final": str(final)}
+    report = {"id": vid, "niche": niche, "status": status, "voice": voice_used,
+              "qa": asdict(qa), "scenes": len(scenes), "clips": len(clips),
+              "final": str(final)}
     (out_dir / "report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2),
                                          encoding="utf-8")
     return report
+
+
+def produce_batch(scripts: list[dict], out_root: Path) -> list[dict]:
+    """Produce un lote ROTANDO la voz round-robin (R12: ninguna voz consecutiva
+    repetida) y compartiendo el ledger global de b-roll (R10: cero reciclaje)."""
+    from scripts.autonomous.tts_elevenlabs import VOICE_POOL
+    out_root = Path(out_root); out_root.mkdir(parents=True, exist_ok=True)
+    used = _load_ledger()
+    results = []
+    for i, s in enumerate(scripts):
+        vname, vid_voice = VOICE_POOL[i % len(VOICE_POOL)]  # round-robin = alternancia
+        try:
+            rep = produce(s, out_root / s["id"], used_ids=used, voice_id=vid_voice)
+        except (ComplianceError, HookError) as e:
+            rep = {"id": s.get("id"), "niche": s.get("niche"), "status": "RECHAZADO",
+                   "voice": vname, "error": str(e)}
+            print(f"  [GATE] {s.get('id')} RECHAZADO: {e}")
+        results.append(rep)
+        print(f"  → {s.get('id')}: {rep['status']}  (voz {rep.get('voice')})")
+    _save_ledger(used)
+    (out_root / "batch_report.json").write_text(
+        json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
+    ok = sum(1 for r in results if r["status"] == "LISTO")
+    print(f"\n[BATCH] {ok}/{len(results)} LISTO → {out_root}")
+    return results
 
 
 _DEMO_SCRIPT = {
@@ -417,6 +450,11 @@ def main():
         script = json.loads(sp.read_text(encoding="utf-8"))
         out = args[args.index("--out") + 1] if "--out" in args else f"output_pipeline_v2/{script.get('id','VX')}"
         produce(script, ROOT / out)
+    elif "--batch" in args:
+        sp = Path(args[args.index("--batch") + 1])
+        scripts = json.loads(sp.read_text(encoding="utf-8"))
+        out = args[args.index("--out") + 1] if "--out" in args else "output_pipeline_v2/batch"
+        produce_batch(scripts, ROOT / out)
     else:
         print(__doc__)
 

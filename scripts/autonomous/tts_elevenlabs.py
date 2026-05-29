@@ -16,7 +16,7 @@ Uso:
   synth("texto", Path("out.mp3"), voice_id="...")
 """
 from __future__ import annotations
-import os, sys, json, urllib.request
+import os, sys, json, hashlib, urllib.request
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -71,11 +71,28 @@ def synth(text: str, out_path: Path, voice_id: str, model: str = MODEL) -> Path:
 # Voces premade de ElevenLabs que suenan cálidas y rinden bien en español.
 # (Si no están en tu cuenta, --samples usa las que tengas disponibles.)
 PREFERRED = [
-    ("Sarah_f",  "EXAVITQu4vr4xnSDxMaL"),   # cálida femenina
-    ("Antoni_m", "ErXwobaYiN019PkySvjV"),   # cálido masculino
-    ("Charlie_m","IKne3meq5aSn9XLyUdCD"),   # natural, cercano
-    ("Matilda_f","XrExE9yKIg1WjnnlVkGX"),   # suave femenina
+    ("George_storyteller_m", "JBFqnCBsd6RMkjVDRZzb"),  # cálido, narrador cautivador
+    ("Liam_creator_m",       "TX3LPaxmHKxFdv7VOQHJ"),  # energético, social media
+    ("Jessica_warm_f",       "cgSgspJ2msm6clMCkdW9"),  # juguetona, brillante, cálida
+    ("Eric_smooth_m",        "cjVigY5qzO86Huf0OWal"),  # suave, confiable
+    ("Sarah_reassuring_f",   "EXAVITQu4vr4xnSDxMaL"),  # madura, tranquilizadora
 ]
+
+
+# ─── POOL DE VOCES ROTATIVAS (R12: voz distinta por video) ────────────────────
+VOICE_POOL = [
+    ("George",  "JBFqnCBsd6RMkjVDRZzb"),  # cálido narrador (m)
+    ("Jessica", "cgSgspJ2msm6clMCkdW9"),  # brillante cálida (f)
+    ("Eric",    "cjVigY5qzO86Huf0OWal"),  # suave confiable (m)
+    ("Sarah",   "EXAVITQu4vr4xnSDxMaL"),  # madura tranquilizadora (f)
+    ("Liam",    "TX3LPaxmHKxFdv7VOQHJ"),  # energético creador (m)
+]
+
+def pick_voice(seed: str, avoid_id: str | None = None) -> tuple[str, str]:
+    """Voz determinística por seed (guion_id), evitando opcionalmente una voz."""
+    pool = [v for v in VOICE_POOL if v[1] != avoid_id] or VOICE_POOL
+    h = int(hashlib.md5((seed or "x").encode()).hexdigest(), 16)
+    return pool[h % len(pool)]
 
 
 def generate_samples():
