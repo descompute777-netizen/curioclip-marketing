@@ -2,11 +2,13 @@
 Corrige el Client ID duplicado en Composio y guarda.
 python -m src.bridge.fix_client_id
 """
-import sys, json, time, urllib.request, base64, websocket
+import os, sys, json, time, urllib.request, base64, websocket
 sys.stdout.reconfigure(encoding='utf-8')
 
 CDP = "http://localhost:9222"
-CLIENT_KEY = "***REMOVED***"
+CLIENT_KEY = os.environ.get("TIKTOK_CLIENT_KEY", "")
+if not CLIENT_KEY:
+    sys.exit("Define TIKTOK_CLIENT_KEY en el entorno (.env)")
 _ID = [0]
 
 def _id(): _ID[0] += 1; return _ID[0]
@@ -52,7 +54,7 @@ FIX_CLIENT_ID_JS = """
     // Buscar el campo que tiene el valor duplicado
     for (var i=0; i<inputs.length; i++) {
         var val = inputs[i].value || "";
-        if (val.includes("awhmg") || val.toLowerCase().includes("client") || val.length > 15) {
+        if (val.toLowerCase().includes("client") || val.length > 15) {
             // Verificar si es el campo de Client ID (no password)
             if (inputs[i].type !== "password") {
                 target = inputs[i];
@@ -70,7 +72,7 @@ FIX_CLIENT_ID_JS = """
     target.select();
     // Usar setter nativo para limpiar
     var setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-    setter.call(target, "***REMOVED***");
+    setter.call(target, window.__CLIENT_KEY || "");
     target.dispatchEvent(new Event("input", {bubbles:true}));
     target.dispatchEvent(new Event("change", {bubbles:true}));
 

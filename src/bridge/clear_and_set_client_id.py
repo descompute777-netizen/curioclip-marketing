@@ -3,11 +3,13 @@ Limpia completamente el Client ID y lo setea correctamente.
 Usa solo insertText (un solo método, sin native setter).
 python -m src.bridge.clear_and_set_client_id
 """
-import sys, json, time, urllib.request, base64, websocket
+import os, sys, json, time, urllib.request, base64, websocket
 sys.stdout.reconfigure(encoding='utf-8')
 
 CDP = "http://localhost:9222"
-CLIENT_KEY = "***REMOVED***"
+CLIENT_KEY = os.environ.get("TIKTOK_CLIENT_KEY", "")
+if not CLIENT_KEY:
+    sys.exit("Define TIKTOK_CLIENT_KEY en el entorno (.env)")
 _ID = [0]
 
 def _id(): _ID[0] += 1; return _ID[0]

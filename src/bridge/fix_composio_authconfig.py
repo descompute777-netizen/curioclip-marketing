@@ -3,13 +3,15 @@ Actualiza el Auth Config de Composio con el Client Key correcto.
 Los campos estaban invertidos — ahora los ponemos en el orden correcto.
 python -m src.bridge.fix_composio_authconfig
 """
-import sys, json, time, urllib.request, base64, websocket
+import os, sys, json, time, urllib.request, base64, websocket
 sys.stdout.reconfigure(encoding='utf-8')
 
 CDP = "http://localhost:9222"
 AUTH_CONFIG_ID = "ac_zehMCGYPXa3C"
-CLIENT_KEY = "***REMOVED***"
-CLIENT_SECRET = "***REMOVED***"
+CLIENT_KEY = os.environ.get("TIKTOK_CLIENT_KEY", "")
+CLIENT_SECRET = os.environ.get("TIKTOK_CLIENT_SECRET", "")
+if not CLIENT_KEY or not CLIENT_SECRET:
+    sys.exit("Define TIKTOK_CLIENT_KEY y TIKTOK_CLIENT_SECRET en el entorno (.env)")
 COMPOSIO_REDIRECT = "https://backend.composio.dev/api/v1/auth-apps/add"
 _ID = [0]
 

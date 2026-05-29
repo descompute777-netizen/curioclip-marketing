@@ -68,6 +68,20 @@ check_*.py
 # Claude artifacts
 .agents/
 chrome-curioclip/
+.claude/token_state.json
+.claude/scheduled_tasks.lock
+
+# Playwright/CDP session snapshots (pueden contener secretos en pantalla)
+.playwright-mcp/
+
+# Git history backups (bundles con secretos en historia vieja)
+*.bundle
+
+# Credenciales adicionales — NUNCA commitear
+.env.*
+**/secrets.json
+**/credentials.json
+**/token_state.json
 
 # Subs temporales generados por ffmpeg
 subs_v5.srt
