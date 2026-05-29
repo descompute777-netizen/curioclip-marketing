@@ -74,6 +74,10 @@ chrome-curioclip/
 # Playwright/CDP session snapshots (pueden contener secretos en pantalla)
 .playwright-mcp/
 
+# Artefactos pesados de produccion / forense (videos, frames de prueba)
+output_pipeline_v2/
+tmp_forensic/
+
 # Git history backups (bundles con secretos en historia vieja)
 *.bundle
 
