@@ -57,6 +57,23 @@ BROLL_LEDGER = ROOT / "obsidian_vault" / "30_Contenido" / "broll_used.json"
 W, H, FPS = 1080, 1920, 30
 
 
+# ─── TTS: ElevenLabs (cálida/humana) con fallback a edge-tts ──────────────────
+def _synthesize_voice(text: str, out: Path, vid: str) -> Path:
+    """Usa ElevenLabs si TTS_PROVIDER=elevenlabs + key válida; si no, edge-tts."""
+    provider = os.environ.get("TTS_PROVIDER", "").lower()
+    key = os.environ.get("ELEVENLABS_API_KEY", "").strip()
+    voice_id = os.environ.get("ELEVENLABS_VOICE_ID", "").strip()
+    if provider == "elevenlabs" and key and not key.startswith("<<<") and voice_id:
+        try:
+            from scripts.autonomous.tts_elevenlabs import synth
+            print(f"[TTS] ElevenLabs voice={voice_id}")
+            return synth(text, out, voice_id)
+        except Exception as e:
+            print(f"[TTS] ElevenLabs falló ({str(e)[:100]}) → fallback edge-tts")
+    generate_voiceover(text, out, guion_id=vid, account="fugamental28")
+    return out
+
+
 # ═══════════════════════════════════════════════════════════════════════════
 # 1. COMPLIANCE GATE (A9) — la causa #1 de las restricciones de @fugamental28
 # ═══════════════════════════════════════════════════════════════════════════
@@ -328,7 +345,7 @@ def produce(script: dict, out_dir: Path, used_ids: set | None = None) -> dict:
 
     # 3: voz única por video (R12)
     voiceover = out_dir / "voiceover.mp3"
-    generate_voiceover(script["voiceover_text"], voiceover, guion_id=vid, account="fugamental28")
+    _synthesize_voice(script["voiceover_text"], voiceover, vid)
 
     # escenas (del guion o autosegmentadas)
     scenes = script.get("scenes") or _autosegment(script["voiceover_text"], niche)
