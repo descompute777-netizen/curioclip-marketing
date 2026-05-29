@@ -8,14 +8,17 @@ name: TikTok Daily Publisher
 #   Dom 20:00 CDMX = 02:00 UTC (+1d)
 
 on:
-  schedule:
-    - cron: '0 18 * * 1'    # Lunes 12:00 CDMX
-    - cron: '0 1 * * 3'     # Martes 19:00 CDMX
-    - cron: '0 2 * * 4'     # Miércoles 20:00 CDMX
-    - cron: '0 18 * * 4'    # Jueves 12:00 CDMX
-    - cron: '0 2 * * 6'     # Viernes 20:00 CDMX
-    - cron: '0 18 * * 6'    # Sábado 12:00 CDMX
-    - cron: '0 2 * * 0'     # Domingo 20:00 CDMX
+  # ⏸️ CRONS PAUSADOS 2026-05-29 — workflow REDUNDANTE con publish-tiktok.yml y
+  # también falla (misma causa: Composio key muerta + app TikTok in review).
+  # Decidir cuál de los dos publishers conservar antes de reactivar. Ver plan 2026-05-29.
+  # schedule:
+  #   - cron: '0 18 * * 1'    # Lunes 12:00 CDMX
+  #   - cron: '0 1 * * 3'     # Martes 19:00 CDMX
+  #   - cron: '0 2 * * 4'     # Miércoles 20:00 CDMX
+  #   - cron: '0 18 * * 4'    # Jueves 12:00 CDMX
+  #   - cron: '0 2 * * 6'     # Viernes 20:00 CDMX
+  #   - cron: '0 18 * * 6'    # Sábado 12:00 CDMX
+  #   - cron: '0 2 * * 0'     # Domingo 20:00 CDMX
   workflow_dispatch:
     inputs:
       force_guion_id:

@@ -410,8 +410,14 @@ def main() -> int:
     print(f"{'='*60}")
 
     if not DB.exists():
-        print("[SKIP] No database found")
-        return 1
+        # La DB de métricas (dashboard/curioclip.db) es LOCAL y está gitignoreada,
+        # por lo que en el runner cloud no existe: el motor no puede evolucionar sin
+        # datos reales. Salir 0 (no es un fallo de CI) y dejar señal clara.
+        # FIX REAL pendiente: exportar metrics_snapshot.json al repo o correr el
+        # motor localmente donde vive la DB. Ver plan de remediación 2026-05-29.
+        print("[SKIP] No metrics DB in this environment — evolution requires real "
+              "TikTok metrics. Engine is a NO-OP until a data source is wired up.")
+        return 0
 
     strat = load_strategy()
     con = connect()

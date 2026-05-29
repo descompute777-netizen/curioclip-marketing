@@ -3,11 +3,16 @@ name: "Publicar en TikTok (4x/dia cloud)"
 # Runs at EXACTLY the 4 LATAM peak posting times
 # Each run publishes 1 video — the one scheduled for this slot
 on:
-  schedule:
-    - cron: '0 13 * * *'     # Slot 1: 13:00 UTC = 7:00 AM CDMX
-    - cron: '30 16 * * *'    # Slot 2: 16:30 UTC = 10:30 AM CDMX
-    - cron: '0 20 * * *'     # Slot 3: 20:00 UTC = 2:00 PM CDMX
-    - cron: '30 0 * * *'     # Slot 4: 00:30 UTC = 6:30 PM CDMX
+  # ⏸️ CRONS PAUSADOS 2026-05-29 — la publicación cloud falla (401: Composio key
+  # ck_NcIb muerta + app TikTok aún "in review"). Corría cada pocas horas
+  # generando spam de fallos y "success" no-op. Reactivar SOLO cuando:
+  #   (1) COMPOSIO_API_KEY (GitHub Secret) esté rotada y válida, y
+  #   (2) la app TikTok Content Posting API esté aprobada y conectada en Composio.
+  # schedule:
+  #   - cron: '0 13 * * *'     # Slot 1: 13:00 UTC = 7:00 AM CDMX
+  #   - cron: '30 16 * * *'    # Slot 2: 16:30 UTC = 10:30 AM CDMX
+  #   - cron: '0 20 * * *'     # Slot 3: 20:00 UTC = 2:00 PM CDMX
+  #   - cron: '30 0 * * *'     # Slot 4: 00:30 UTC = 6:30 PM CDMX
   workflow_dispatch: {}
 
 jobs:
