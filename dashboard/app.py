@@ -822,42 +822,26 @@ def api_oficina_state():
         agents["A0"]["current_task"] = "supervisando sprint en curso"
         agents["A0"]["status"] = "working"
 
-    # ── compliance always vigilant ──────────────────────────────────────────
-    if agents["A9"]["status"] == "idle":
-        agents["A9"]["status"] = "working"
-        agents["A9"]["current_task"] = "auditando licencias y ToS"
-        agents["A9"]["recent_log"].append("0 strikes · 0 DMCA · sistema OK")
+    # ── A5 logística: pausa REAL por presupuesto $0 (estado verídico del proyecto)
+    agents["A5"]["current_task"] = "en pausa (presupuesto $0)"
+    agents["A5"]["status"] = "idle"
+    # NOTA: los demás agentes reflejan SOLO trabajo real registrado en
+    # automation_queue por el motor (engine.py). Sin tareas inventadas: si un
+    # agente no tiene actividad real, aparece 'idle' honestamente.
 
-    # ── psicologia / algoritmo / logistica baseline tasks ──────────────────
-    if agents["A2"]["status"] == "idle":
-        agents["A2"]["current_task"] = "disenando hooks 0-3s"
-        agents["A2"]["status"] = "working"
-    if agents["A3"]["status"] == "idle":
-        agents["A3"]["current_task"] = "analizando trending sounds"
-        agents["A3"]["status"] = "working"
-    if agents["A5"]["status"] == "idle":
-        agents["A5"]["current_task"] = "en pausa (presupuesto $0)"
-        agents["A5"]["status"] = "idle"
-
-    # ── meeting simulation (rotates every ~90s; idle 20% of the time) ──────
+    # ── reunión REAL: solo si hay un run del motor en curso con varios agentes
+    #    trabajando de verdad (no simulada por reloj).
     now_s = int(time.time())
-    meeting_topics = [
-        ("Revision V-Score sprint", ["A0", "A2", "A4", "A8"]),
-        ("Compliance check pre-publicacion", ["A0", "A6", "A9"]),
-        ("Briefing semanal de planificacion", ["A0", "A1", "A2", "A3", "A6"]),
-        ("Retrospectiva del sprint anterior", ["A0", "A7", "A1", "A4"]),
-        ("Audiencia: arco emocional V-nuevo", ["A2", "A4", "A8"]),
-    ]
-    bucket = (now_s // 90) % len(meeting_topics)
-    meeting_off = (now_s // 45) % 5 == 0  # ~20% idle
-    if meeting_off:
-        meeting = {"active": False, "participants": [], "topic": ""}
+    run_active = db.query_one(
+        "SELECT id FROM pipeline_runs WHERE status='started' ORDER BY id DESC LIMIT 1")
+    working_ids = [a["id"] for a in agents.values() if a["status"] == "working"]
+    if run_active and len(working_ids) >= 2:
+        meeting = {"active": True, "participants": working_ids[:6],
+                   "topic": f"Sprint en producción (motor run #{run_active['id']})"}
+        for aid in working_ids:
+            agents[aid]["status"] = "meeting"
     else:
-        topic, parts = meeting_topics[bucket]
-        meeting = {"active": True, "participants": parts, "topic": topic}
-        for aid in parts:
-            if aid in agents:
-                agents[aid]["status"] = "meeting"
+        meeting = {"active": False, "participants": [], "topic": ""}
 
     # ── recent events (cross-agent ticker) ──────────────────────────────────
     events: list[dict] = []

@@ -21,14 +21,17 @@ from dashboard import db
 # ─── Pipeline triggers ───────────────────────────────────────────────────────
 
 def trigger_produce_all() -> dict:
-    """Launch produce_all.py in background. Returns run id."""
+    """Launch the UNIFIED engine (engine.py) in background. Returns run id.
+    El motor único corre los 6 módulos con los agentes reales y alimenta la DB."""
     rid = db.execute(
         "INSERT INTO pipeline_runs (run_type, status) VALUES (?, ?)",
-        ("m3_produce", "started"),
+        ("engine_full", "started"),
     )
+    guiones = ROOT / "obsidian_vault" / "30_Contenido" / "guiones_2026-05-29.json"
     try:
         proc = subprocess.Popen(
-            [sys.executable, "-m", "src.pipeline.produce_all"],
+            [sys.executable, str(ROOT / "scripts" / "autonomous" / "engine.py"),
+             "--run", str(guiones)],
             cwd=str(ROOT),
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
