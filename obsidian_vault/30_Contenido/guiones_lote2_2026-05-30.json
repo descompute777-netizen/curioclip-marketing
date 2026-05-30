@@ -1,0 +1,128 @@
+[
+  {
+    "id": "SALUD_03",
+    "niche": "salud",
+    "hook": "¿Por qué cuando tú no duermes, tu cerebro empieza a comerse a sí mismo?",
+    "voiceover_text": "¿Por qué cuando tú no duermes, tu cerebro empieza a comerse a sí mismo? Suena a exageración, pero la ciencia lo confirmó. Mientras duermes, unas células llamadas glía limpian tu cerebro: barren los desechos tóxicos que acumulaste durante el día, como un equipo de limpieza nocturno. Pero cuando no duermes lo suficiente, esa limpieza se descontrola. La glía se vuelve hiperactiva y empieza a devorar también conexiones sanas entre tus neuronas. Literalmente, tu cerebro se come partes de sí mismo para sobrevivir. Por eso tras una mala noche te sientes lento, irritable, con la memoria borrosa: tu cerebro está dañado y reparándose a la vez. Y lo más inquietante: la falta crónica de sueño se ha vinculado al Alzheimer. Dormir no es perder el tiempo, es cuando tu cerebro decide qué recuerdos guardar y cuáles borrar para siempre. Dale a tu cerebro lo que merece: ocho horas, y un dato que le vuele la mente cada día. Sígueme, y tu materia gris te lo va a agradecer.",
+    "scenes": [
+      {"text": "¿Por qué cuando tú no duermes, tu cerebro empieza a comerse a sí mismo?", "broll_query": "person awake night bed insomnia"},
+      {"text": "Suena a exageración, pero la ciencia lo confirmó.", "broll_query": "brain research laboratory scan"},
+      {"text": "Unas células llamadas glía limpian tu cerebro mientras duermes.", "broll_query": "brain cells microscope animation"},
+      {"text": "Barren los desechos tóxicos del día, como un equipo de limpieza nocturno.", "broll_query": "cleaning crew night dark"},
+      {"text": "Pero cuando no duermes, esa limpieza se descontrola.", "broll_query": "person tossing turning bed night"},
+      {"text": "La glía empieza a devorar conexiones sanas entre tus neuronas.", "broll_query": "neurons synapses firing macro"},
+      {"text": "Tu cerebro se come partes de sí mismo para sobrevivir.", "broll_query": "brain glowing pulsing dark"},
+      {"text": "Por eso te sientes lento, irritable, con la memoria borrosa.", "broll_query": "tired person rubbing eyes morning"},
+      {"text": "La falta crónica de sueño se ha vinculado al Alzheimer.", "broll_query": "elderly person hands memory"},
+      {"text": "Dormir es cuando tu cerebro decide qué recuerdos guardar.", "broll_query": "person sleeping peaceful night"},
+      {"text": "Dale a tu cerebro lo que merece. Sígueme y tu materia gris te lo agradecerá.", "broll_query": "sunrise person waking refreshed"}
+    ],
+    "caption": "Si no duermes, tu cerebro se devora a sí mismo",
+    "hashtags": ["#salud", "#cerebro", "#sueño", "#curioclip", "#fyp"]
+  },
+  {
+    "id": "SALUD_04",
+    "niche": "salud",
+    "hook": "¿Qué pasaría si te dijera que tienes un esqueleto completamente nuevo cada diez años?",
+    "voiceover_text": "¿Qué pasaría si te dijera que tienes un esqueleto completamente nuevo cada diez años? El cuerpo con el que naciste ya no existe. Ahora mismo, dentro de ti, millones de células están muriendo y naciendo cada segundo. Tu piel se renueva por completo en un mes. El revestimiento de tu estómago, en apenas cuatro días, porque si no, tu propio ácido te disolvería. Tus huesos, célula por célula, se reconstruyen en una década entera. Hasta tus papilas gustativas se reemplazan cada dos semanas. En cierto sentido, no eres un objeto, eres un río: la misma forma, pero hecho de materia que cambia sin parar. El tú de hace siete años está, físicamente, casi por completo muerto. Y aun así, sigues siendo tú. Tu cuerpo se reinventa en silencio mientras lees esto. Sígueme, y reinventa también lo que crees saber del mundo, un video a la vez.",
+    "scenes": [
+      {"text": "¿Qué pasaría si te dijera que tienes un esqueleto nuevo cada diez años?", "broll_query": "human skeleton anatomy rotating"},
+      {"text": "El cuerpo con el que naciste ya no existe.", "broll_query": "baby hands newborn"},
+      {"text": "Millones de células mueren y nacen cada segundo dentro de ti.", "broll_query": "cells dividing microscope"},
+      {"text": "Tu piel se renueva por completo en un mes.", "broll_query": "human skin macro close up"},
+      {"text": "El revestimiento de tu estómago, en cuatro días.", "broll_query": "stomach digestive system animation"},
+      {"text": "Si no, tu propio ácido te disolvería.", "broll_query": "acid bubbling chemical reaction"},
+      {"text": "Tus huesos se reconstruyen en una década entera.", "broll_query": "bone structure micro anatomy"},
+      {"text": "Hasta tus papilas gustativas se reemplazan cada dos semanas.", "broll_query": "tongue taste macro mouth"},
+      {"text": "No eres un objeto, eres un río de materia que cambia sin parar.", "broll_query": "river flowing water motion"},
+      {"text": "El tú de hace siete años está casi por completo muerto. Y sigues siendo tú.", "broll_query": "person reflection mirror thoughtful"},
+      {"text": "Tu cuerpo se reinventa en silencio. Sígueme y reinventa lo que sabes.", "broll_query": "person walking sunrise hopeful"}
+    ],
+    "caption": "Tu cuerpo de hace 7 años ya está muerto",
+    "hashtags": ["#salud", "#cuerpohumano", "#datoscuriosos", "#curioclip", "#fyp"]
+  },
+  {
+    "id": "TERROR_03",
+    "niche": "terror",
+    "hook": "¿Por qué cuando tú entras a una casa vacía, sientes que alguien te observa?",
+    "voiceover_text": "¿Por qué cuando tú entras a una casa vacía, sientes que alguien te observa? No estás loco, y hay una explicación que da más miedo que un fantasma. Durante millones de años, nuestros ancestros que asumían que un ruido era un depredador sobrevivían. Los que lo ignoraban, morían. Así que tu cerebro evolucionó para detectar presencias incluso donde no las hay: prefiere asustarte mil veces en vano que fallar una sola vez de verdad. A eso se suma la pareidolia: tu mente busca caras y figuras humanas en las sombras, en las cortinas, en la oscuridad del pasillo. Por eso ves una silueta donde solo hay un abrigo colgado. Esa sensación de ser vigilado es tu cerebro de cavernícola gritando desde dentro: corre, por si acaso. El monstruo no está en la casa. Está en tu cabeza, y nunca se apaga. Si llegaste hasta aquí sin cerrar el video, eres de los valientes. Sígueme... los próximos son peores. Te lo advierto.",
+    "scenes": [
+      {"text": "¿Por qué cuando tú entras a una casa vacía sientes que alguien te observa?", "broll_query": "empty dark house hallway eerie"},
+      {"text": "Hay una explicación que da más miedo que un fantasma.", "broll_query": "dark room shadows creepy"},
+      {"text": "Nuestros ancestros que asumían que un ruido era un depredador sobrevivían.", "broll_query": "prehistoric cave dark fire"},
+      {"text": "Los que lo ignoraban, morían.", "broll_query": "predator eyes night dark"},
+      {"text": "Tu cerebro evolucionó para detectar presencias donde no las hay.", "broll_query": "brain scan glowing dark"},
+      {"text": "Prefiere asustarte mil veces en vano que fallar una sola vez.", "broll_query": "person scared looking back dark"},
+      {"text": "La pareidolia: tu mente busca caras humanas en las sombras.", "broll_query": "shadow face silhouette curtain"},
+      {"text": "Ves una silueta donde solo hay un abrigo colgado.", "broll_query": "coat hanging dark room dim"},
+      {"text": "Tu cerebro de cavernícola grita desde dentro: corre, por si acaso.", "broll_query": "dark corridor running fear"},
+      {"text": "El monstruo no está en la casa. Está en tu cabeza, y nunca se apaga.", "broll_query": "human eye fear macro dark"},
+      {"text": "Si llegaste sin cerrar el video, eres valiente. Sígueme, los próximos son peores.", "broll_query": "dark ominous doorway light"}
+    ],
+    "caption": "Eso que te observa en la casa vacía no es un fantasma",
+    "hashtags": ["#terror", "#psicologia", "#miedo", "#curioclip", "#fyp"]
+  },
+  {
+    "id": "TERROR_04",
+    "niche": "terror",
+    "hook": "¿Qué pasaría si existiera un color que tu cerebro se niega a dejarte ver?",
+    "voiceover_text": "¿Qué pasaría si existiera un color que tu cerebro se niega a dejarte ver? No es ciencia ficción. Tus ojos tienen receptores para el rojo, el verde y el azul, y normalmente nunca se activan al máximo a la vez de forma contradictoria. Pero los científicos encontraron una manera de forzarlos. Con un experimento de imágenes y un ojo fijo, lograron que el cerebro recibiera señales imposibles: rojo y verde ocupando exactamente el mismo punto, al mismo tiempo. Quienes lo vieron no supieron describirlo. Dijeron que era un color nuevo, que no existe en ningún arcoíris, imposible de imaginar si no lo has visto. Lo llamaron colores prohibidos. Tu cerebro pasa la vida ocultándote lo que no sabe procesar, dibujándote una realidad cómoda y censurada. Lo que ves no es el mundo. Es la versión que tu mente decidió mostrarte. Hay cosas que tu cerebro te esconde a propósito. Yo te las enseño todas. Sígueme y mira el mundo como nadie te lo mostró.",
+    "scenes": [
+      {"text": "¿Qué pasaría si existiera un color que tu cerebro se niega a dejarte ver?", "broll_query": "abstract colorful light swirl"},
+      {"text": "No es ciencia ficción.", "broll_query": "human eye iris macro"},
+      {"text": "Tus ojos tienen receptores para el rojo, el verde y el azul.", "broll_query": "rgb light spectrum colors"},
+      {"text": "Normalmente nunca se activan de forma contradictoria.", "broll_query": "color wheel spinning abstract"},
+      {"text": "Pero los científicos encontraron una manera de forzarlos.", "broll_query": "scientist optics laboratory experiment"},
+      {"text": "Lograron que el cerebro recibiera señales imposibles.", "broll_query": "brain visual cortex animation"},
+      {"text": "Rojo y verde en el mismo punto, al mismo tiempo.", "broll_query": "red green light blending"},
+      {"text": "Quienes lo vieron no supieron describirlo.", "broll_query": "person amazed looking light"},
+      {"text": "Un color nuevo, imposible de imaginar. Lo llamaron colores prohibidos.", "broll_query": "impossible surreal color abstract"},
+      {"text": "Lo que ves no es el mundo, es la versión que tu mente te mostró.", "broll_query": "eye reflection world distorted"},
+      {"text": "Hay cosas que tu cerebro te esconde. Yo te las enseño. Sígueme.", "broll_query": "person opening eyes light reveal"}
+    ],
+    "caption": "Existe un color que tu cerebro te prohíbe ver",
+    "hashtags": ["#ciencia", "#cerebro", "#misterio", "#curioclip", "#fyp"]
+  },
+  {
+    "id": "CIENCIA_MISTERIO_03",
+    "niche": "ciencia_misterio",
+    "hook": "¿Qué pasaría si te dijera que hay un planeta donde llueve vidrio derretido, de lado?",
+    "voiceover_text": "¿Qué pasaría si te dijera que hay un planeta donde llueve vidrio derretido, de lado? Existe, y está a sesenta y tres años luz de aquí. Se llama HD 189733b, y de lejos parece un mundo precioso: un azul profundo, intenso, más bello que la Tierra. Pero ese azul es una trampa mortal. No es agua ni océanos. Su atmósfera está llena de partículas de silicato, es decir, vidrio. Y en ese planeta soplan vientos de más de ocho mil kilómetros por hora, siete veces la velocidad del sonido. Así que el vidrio no cae hacia abajo: vuela de lado, como millones de navajas diminutas a velocidad supersónica. Acercarte sería como entrar a una licuadora de cristal a temperaturas de mil grados. El cielo más hermoso del universo es, en realidad, el lugar más letal que conocemos. El universo es más raro que cualquier ficción, y yo te traigo lo más raro, cada día. Sígueme antes de que el algoritmo nos separe.",
+    "scenes": [
+      {"text": "¿Qué pasaría si te dijera que hay un planeta donde llueve vidrio derretido?", "broll_query": "blue exoplanet space distant"},
+      {"text": "Existe, y está a sesenta y tres años luz de aquí.", "broll_query": "deep space stars travel"},
+      {"text": "Se llama HD 189733b, y de lejos parece un mundo precioso.", "broll_query": "blue planet glowing space"},
+      {"text": "Un azul profundo, más bello que la Tierra.", "broll_query": "earth from space blue"},
+      {"text": "Pero ese azul es una trampa mortal.", "broll_query": "dark storm planet ominous"},
+      {"text": "Su atmósfera está llena de partículas de vidrio.", "broll_query": "glass shards particles abstract"},
+      {"text": "Soplan vientos siete veces la velocidad del sonido.", "broll_query": "powerful storm wind clouds"},
+      {"text": "El vidrio vuela de lado, como navajas a velocidad supersónica.", "broll_query": "fast motion particles streaking"},
+      {"text": "Acercarte sería entrar a una licuadora de cristal a mil grados.", "broll_query": "molten glass heat glowing"},
+      {"text": "El cielo más hermoso del universo es el lugar más letal.", "broll_query": "beautiful nebula space colorful"},
+      {"text": "El universo es más raro que la ficción. Sígueme antes de que el algoritmo nos separe.", "broll_query": "galaxy stars cosmic night"}
+    ],
+    "caption": "El planeta más bello del universo te haría pedazos",
+    "hashtags": ["#espacio", "#ciencia", "#planetas", "#curioclip", "#fyp"]
+  },
+  {
+    "id": "CIENCIA_MISTERIO_04",
+    "niche": "ciencia_misterio",
+    "hook": "¿Por qué cuando tú miras al cielo de noche, en realidad estás viendo el pasado?",
+    "voiceover_text": "¿Por qué cuando tú miras al cielo de noche, en realidad estás viendo el pasado? Porque la luz no es infinitamente rápida. Tarda tiempo en llegar a tus ojos. La luz del Sol que te calienta salió de él hace ocho minutos: si el Sol desapareciera ahora mismo, lo seguirías viendo brillar ocho minutos más. Pero eso no es nada. Las estrellas que ves esta noche están tan lejos que su luz viajó años, siglos, a veces miles de años para alcanzarte. Algunas de esas estrellas ya murieron hace mucho. Estás viendo el fantasma de luz de algo que ya no existe. Cada vez que miras al cielo, tus ojos son una máquina del tiempo: ves el universo no como es, sino como fue. Estás mirando el pasado escrito en luz. Acabas de viajar en el tiempo solo con mirar hacia arriba. Sígueme, y te llevo a un viaje nuevo cada día, sin salir de tu cama.",
+    "scenes": [
+      {"text": "¿Por qué cuando tú miras al cielo de noche estás viendo el pasado?", "broll_query": "night sky stars person looking"},
+      {"text": "Porque la luz no es infinitamente rápida.", "broll_query": "light beam traveling space"},
+      {"text": "Tarda tiempo en llegar a tus ojos.", "broll_query": "human eye reflection stars"},
+      {"text": "La luz del Sol salió de él hace ocho minutos.", "broll_query": "sun solar surface glowing"},
+      {"text": "Si desapareciera ahora, lo verías brillar ocho minutos más.", "broll_query": "sun rays sky bright"},
+      {"text": "Las estrellas que ves viajaron años, siglos, milenios.", "broll_query": "distant stars galaxy deep"},
+      {"text": "Algunas de esas estrellas ya murieron hace mucho.", "broll_query": "dying star supernova space"},
+      {"text": "Estás viendo el fantasma de luz de algo que ya no existe.", "broll_query": "faint glowing star fading"},
+      {"text": "Tus ojos son una máquina del tiempo.", "broll_query": "time lapse stars night sky"},
+      {"text": "Ves el universo no como es, sino como fue.", "broll_query": "milky way galaxy panorama"},
+      {"text": "Acabas de viajar en el tiempo. Sígueme y te llevo a un viaje nuevo cada día.", "broll_query": "person stargazing night peaceful"}
+    ],
+    "caption": "Cuando miras las estrellas, ves fantasmas de luz",
+    "hashtags": ["#espacio", "#ciencia", "#universo", "#curioclip", "#fyp"]
+  }
+]
