@@ -586,6 +586,22 @@ def api_scan_patterns(account_id: Optional[int] = None):
     return scan_patterns(account_id)
 
 
+@app.post("/api/learn/council")
+def api_council():
+    """Dispara el CONSEJO DE AGENTES en background: calibra la simulación contra
+    los resultados reales, cada agente hace consultoría (LLM) y A0 evoluciona la
+    estrategia. Resultados visibles en briefings + oficina + automation_queue."""
+    def _run():
+        try:
+            from scripts.learn.council import run_council
+            run_council()
+        except Exception as e:
+            print(f"[council] {e}")
+    threading.Thread(target=_run, daemon=True).start()
+    return {"ok": True, "status": "started",
+            "message": "Consejo corriendo. Ver /partial/briefings y /partial/oficina."}
+
+
 # ═════════════════════════════════════════════════════════════════════════════
 # API — SEED + PIPELINE TRIGGERS
 # ═════════════════════════════════════════════════════════════════════════════

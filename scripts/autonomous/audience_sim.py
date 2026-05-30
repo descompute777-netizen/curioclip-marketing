@@ -64,9 +64,24 @@ def _gemini_json(prompt: str) -> dict | None:
         return None
 
 
+def _load_calib() -> dict:
+    """Offsets aprendidos por el consejo (council.py) para acercar la simulación
+    a la realidad. Si no existen, identidad (sin corrección)."""
+    p = ROOT / "config" / "sim_calibration.json"
+    if p.exists():
+        try:
+            c = json.loads(p.read_text(encoding="utf-8"))
+            return {"so": c.get("spread_offset", 0.0), "ss": c.get("spread_scale", 1.0),
+                    "eo": c.get("sentiment_offset", 0.0), "es": c.get("sentiment_scale", 1.0)}
+        except Exception:
+            pass
+    return {"so": 0.0, "ss": 1.0, "eo": 0.0, "es": 1.0}
+
+
 def simulate_audience(hook: str, caption: str, niche: str, script: str,
                       n: int = 200) -> dict:
-    """Devuelve métricas de reacción de audiencia (0-1). Fallback neutro si falla."""
+    """Devuelve métricas de reacción de audiencia (0-1), corregidas por la
+    calibración aprendida (simulación vs realidad). Fallback neutro si falla."""
     prompt = _PROMPT.format(n=n, niche=niche or "curiosidades", hook=hook or "",
                             caption=caption or "", script=(script or "")[:1200])
     r = _gemini_json(prompt)
@@ -74,13 +89,16 @@ def simulate_audience(hook: str, caption: str, niche: str, script: str,
         return {"hook_hold": None, "spread": None, "sentiment": None, "n": 0,
                 "verdict": "simulación no disponible (sin LLM)", "source": "unavailable"}
     clamp = lambda x: max(0.0, min(1.0, float(x)))
+    c = _load_calib()
+    spread = clamp(clamp(r.get("spread", 0.3)) * c["ss"] + c["so"])
+    sentiment = clamp(clamp(r.get("sentiment", 0.6)) * c["es"] + c["eo"])
     return {
         "hook_hold": clamp(r.get("hook_hold", 0.5)),
-        "spread": clamp(r.get("spread", 0.3)),
-        "sentiment": clamp(r.get("sentiment", 0.6)),
+        "spread": spread,
+        "sentiment": sentiment,
         "n": n,
         "verdict": str(r.get("verdict", ""))[:200],
-        "source": "gemini_audience_panel",
+        "source": "gemini_audience_panel_calibrated",
     }
 
 

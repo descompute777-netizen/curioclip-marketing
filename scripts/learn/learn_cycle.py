@@ -49,6 +49,8 @@ def main() -> int:
     print(f"╔══ LEARN CYCLE @ {start.strftime('%Y-%m-%d %H:%M UTC')} ══╗")
 
     steps = [
+        # ─── DATOS REALES primero (scrape vivo de TikTok vía CDP) ─────
+        ("scripts/learn/poll_metrics_cdp.py",               "Métricas reales TikTok (live)"),
         ("scripts/learn/ingest_metrics_snapshot.py",       "Ingest snapshot"),
         ("scripts/learn/backfill_video_metadata.py",       "Backfill metadata"),
         ("scripts/learn/analyze_patterns.py",               "Pattern analysis"),
@@ -58,6 +60,8 @@ def main() -> int:
         ("scripts/learn/generate_calibration_report.py",    "Calibration report"),
         # ─── EVOLUTION ENGINE — cerebro autónomo ──────────────────────
         ("scripts/learn/evolution_engine.py",               "Evolution engine (strategy evolution)"),
+        # ─── CONSEJO DE AGENTES — auto-mejora + calibración simulación ─
+        ("scripts/learn/council.py",                        "Consejo de agentes (auto-mejora)"),
     ]
     ok = 0
     for script, name in steps:

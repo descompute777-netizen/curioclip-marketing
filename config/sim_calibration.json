@@ -1,0 +1,16 @@
+{
+  "spread_offset": 0.0,
+  "spread_scale": 1.0,
+  "sentiment_offset": 0.0,
+  "sentiment_scale": 1.0,
+  "weights": {
+    "ve": 0.35,
+    "spread": 0.3,
+    "sentiment": 0.2,
+    "hook": 0.15
+  },
+  "n_samples": 0,
+  "mae": 0.0,
+  "note": "sin pares predicción/realidad",
+  "updated_at": "2026-05-30T14:44:16Z"
+}
