@@ -104,12 +104,18 @@ def poll_tiktok_metrics() -> dict:
         cdp_ok = False
 
     if not cdp_ok:
-        return {"status": "skip", "reason": "chrome_bridge not running (port 9222 unreachable)"}
+        return {"status": "skip", "reason": "chrome_bridge no corre (puerto 9222). "
+                "Arranca: python -m src.bridge.chrome_bridge launch"}
 
-    # Minimal scraping via CDP. We don't fully implement TikTok parsing here —
-    # in production this is delegated to a Playwright session. For now we
-    # register the attempt and let the API endpoint return.
-    return {"status": "ok", "note": "Polling delegated to Playwright MCP session; manual trigger from /automatizacion."}
+    # Scraping REAL vía CDP bridge (sesión logueada del usuario, sin antibot).
+    try:
+        from scripts.learn.poll_metrics_cdp import scrape, write_db
+        rows = scrape()
+        if not rows:
+            return {"status": "no_data", "reason": "0 posts leídos (¿sesión TikTok activa?)"}
+        return {"status": "ok", **write_db(rows)}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
 
 
 # ─── Learn engine ────────────────────────────────────────────────────────────

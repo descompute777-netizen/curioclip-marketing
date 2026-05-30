@@ -225,8 +225,10 @@ def run_engine(scripts: list[dict], out_root: Path, limit: int | None = None) ->
 
     # A7 LEARN: detectar patrones / calibrar con lo que haya
     def _learn():
-        from dashboard.services import scan_patterns, calibrate_predictor
-        return {"patterns": scan_patterns(acc), "calibration": calibrate_predictor(acc)}
+        from dashboard.services import scan_patterns, calibrate_predictor, poll_tiktok_metrics
+        metrics = poll_tiktok_metrics()  # jala métricas reales de TikTok → DB (loop cerrado)
+        return {"live_metrics": metrics, "patterns": scan_patterns(acc),
+                "calibration": calibrate_predictor(acc)}
     learn = agent_run("A7", "learn_cycle", _learn, acc)
 
     # A0 DIRECTOR: briefing + cerrar run
