@@ -26,7 +26,7 @@ Uso:
 from __future__ import annotations
 import os, sys, json, re
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parents[2]
@@ -129,17 +129,31 @@ def _load_schedule() -> list:
             return []
     return []
 
+def _next_free_slot(sched: list) -> str:
+    """Siguiente horario pico FUTURO que no esté ya tomado en el schedule.
+    Devuelve ISO UTC con sufijo Z (compatible con upload_daemon.is_due)."""
+    taken = {s.get("publish_at_utc") for s in sched if s.get("status") != "uploaded"}
+    now = datetime.now(timezone.utc)
+    for d in range(0, 21):
+        day = (now + timedelta(days=d)).date()
+        for hhmm in SLOTS_UTC:
+            h, m = map(int, hhmm.split(":"))
+            dt = datetime(day.year, day.month, day.day, h, m, tzinfo=timezone.utc)
+            iso = dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+            if dt > now + timedelta(minutes=10) and iso not in taken:
+                return iso
+    return (now + timedelta(hours=1)).strftime("%Y-%m-%dT%H:%M:%SZ")
+
 def schedule_for_upload(video_code: str, title: str, caption: str, final: str,
-                        slot_index: int) -> str:
-    """Añade el video al upload_schedule.json que consume upload_daemon.py.
-    Devuelve el publish_at_utc asignado."""
+                        slot_index: int = 0) -> str:
+    """Añade el video al upload_schedule.json que consume upload_daemon.py,
+    en el próximo horario pico libre. Devuelve el publish_at_utc (Z)."""
     sched = _load_schedule()
-    day_offset = slot_index // len(SLOTS_UTC)
-    hhmm = SLOTS_UTC[slot_index % len(SLOTS_UTC)]
-    when = (datetime.utcnow() + timedelta(days=day_offset)).strftime("%Y-%m-%d") + "T" + hhmm + ":00"
     sched = [s for s in sched if s.get("guion_id") != video_code]  # evitar duplicado
+    when = _next_free_slot(sched)
     sched.append({"guion_id": video_code, "title": title, "caption": caption,
-                  "video_path": final, "publish_at_utc": when, "status": "ready"})
+                  "video_path": str(Path(final).resolve()), "publish_at_utc": when,
+                  "status": "ready"})
     SCHEDULE_PATH.parent.mkdir(parents=True, exist_ok=True)
     SCHEDULE_PATH.write_text(json.dumps(sched, ensure_ascii=False, indent=2), encoding="utf-8")
     return when
