@@ -100,12 +100,22 @@ def compute_vscore(script: dict, qa: dict) -> dict:
     ve += 2.0 if checks.get("broll_unico_R10") else 0
     ve += 1.0 if checks.get("duracion_ok") else 0
     ve = min(ve, 10.0)
-    # V-Score parcial (sin MiroFish): renormaliza los pesos disponibles 0.35+0.15
-    avail = 0.35 + 0.15
-    vscore = (0.35 * (ve / 10) + 0.15 * hk) / avail * 100
+    # spread + sentiment REALES vía simulación de audiencia Gemini (función MiroFish)
+    from scripts.autonomous.audience_sim import simulate_audience
+    aud = simulate_audience(script.get("hook", ""), script.get("caption", ""),
+                            script.get("niche", ""), script.get("voiceover_text", ""))
+    spread, sentiment = aud.get("spread"), aud.get("sentiment")
+    if spread is not None and sentiment is not None:
+        # Fórmula V-Score completa (CLAUDE.md): 0.35 VE + 0.30 spread + 0.20 sent + 0.15 hook
+        vscore = (0.35 * (ve / 10) + 0.30 * spread + 0.20 * sentiment + 0.15 * hk) * 100
+        source = "gemini_audience_panel"
+    else:
+        vscore = (0.35 * (ve / 10) + 0.15 * hk) / 0.50 * 100  # fallback sin sim
+        source = "heuristic_no_sim"
     return {"hook_score": round(hk, 3), "ve_attention": round(ve, 2),
-            "mirofish_spread": None, "mirofish_sentiment": None,
-            "vscore_computed": round(vscore, 1), "source": "heuristic_no_mirofish"}
+            "mirofish_spread": spread, "mirofish_sentiment": sentiment,
+            "vscore_computed": round(vscore, 1), "verdict": aud.get("verdict", ""),
+            "source": source}
 
 
 # ─── PUBLISH (A6): registrar en schedule del daemon (modo actual) ────────────
@@ -155,8 +165,9 @@ def register_video(account_id: int, script: dict, report: dict, slot_index: int)
         """INSERT INTO simulations (video_id, source, visualeyes_attention,
                mirofish_spread, mirofish_sentiment, hook_score, vscore_computed, raw_json)
            VALUES (?,?,?,?,?,?,?,?)""",
-        (vid, vs["source"], vs["ve_attention"], None, None, vs["hook_score"],
-         vs["vscore_computed"], db.safe_json({"voice": report.get("voice"), "qa": qa})))
+        (vid, vs["source"], vs["ve_attention"], vs.get("mirofish_spread"),
+         vs.get("mirofish_sentiment"), vs["hook_score"], vs["vscore_computed"],
+         db.safe_json({"voice": report.get("voice"), "verdict": vs.get("verdict"), "qa": qa})))
     # A6: agendar subida (solo si pasó quality gate)
     if status == "produced" and final:
         def _sched():
